@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
 
 const AthletesBox = () => {
   return (
@@ -17,20 +17,27 @@ const AthletesBox = () => {
           sx={{
             borderRadius: "30px",
             backgroundColor: "#F6EDED",
-            display: "flex"
+            display: "flex",
+            justifyContent: "space-around",
           }}
         >
           <Typography
             sx={{
               letterSpacing: "4.32px",
               color: "#675B5B",
-              alignContent: "flex-start",
               marginLeft: "20px",
               font: "Kalam",
             }}
           >
             Athletes Nearby
           </Typography>
+          <SearchIcon
+            sx={{
+              color: "#675B5B",
+              fontSize: "1.3rem",
+              alignItems: "center",
+            }}
+          />
         </Box>
       </Box>
     </>

@@ -4,7 +4,6 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import { CheckCircle } from "@mui/icons-material"; // Import your desired icon from MUI Icons
 import steps from "../constants/Steps";
 import { Box } from "@mui/material";
 
@@ -25,27 +24,55 @@ const HowItWorks2 = () => {
               background: "#E5CFF7",
               color: "#000",
               padding: "10px",
+              borderRadius: "15%",
             }}
             contentArrowStyle={{
-              borderRight: "7px solid  #fff",
+              borderRight: "10px solid #fff",
             }}
-            date={step.date}
-            iconStyle={{ background: "#2E4374", color: "#fff" }}
-            icon={<CheckCircle sx={{ fontSize: "24px" }} />}
+            iconStyle={{
+              background: "#2E4374",
+              color: "#fff",
+            }}
+            icon={
+              <step.icon
+                sx={{
+                  fontSize: "40px",
+                }}
+              />
+            }
           >
-            <Box
-              sx={{
-                border: "2px solid black",
-                padding: "10px",
-              }}
-            >
-              <h2 className="vertical-timeline-element-title">
+            <Box>
+              <h2
+                className="vertical-timeline-element-title"
+                style={{
+                  color: "#053B50",
+                  fontFamily: "Kalam",
+                  fontWeight: "bolder",
+                  fontSize: "1.3rem",
+                }}
+              >
                 Step {step.number}
               </h2>
-              <h3 className="vertical-timeline-element-subtitle">
+              <h3
+                className="vertical-timeline-element-subtitle"
+                style={{
+                  color: "#053B50",
+                  fontFamily: "Kalam",
+                  fontWeight: "bolder",
+                  fontSize: "1.3rem",
+                }}
+              >
                 {step.title}
               </h3>
-              <p>{step.description}</p>
+              <p
+                style={{
+                  fontFamily: "Kalam",
+                  fontWeight: "bold",
+                  color: "#5B0888",
+                }}
+              >
+                {step.description}
+              </p>
             </Box>
           </VerticalTimelineElement>
         ))}

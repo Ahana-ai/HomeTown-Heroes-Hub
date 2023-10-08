@@ -1,8 +1,8 @@
 import PersonIcon from "@mui/icons-material/Person";
-import PinDropIcon from '@mui/icons-material/PinDrop';
-import FindInPageIcon from '@mui/icons-material/FindInPage';
-import ChatIcon from '@mui/icons-material/Chat';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PinDropIcon from "@mui/icons-material/PinDrop";
+import FindInPageIcon from "@mui/icons-material/FindInPage";
+import ChatIcon from "@mui/icons-material/Chat";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const steps = [
   {
@@ -37,8 +37,7 @@ const steps = [
     number: 5,
     icon: CheckCircleIcon,
     title: "Finalize the deal by easy and safe payment",
-    description:
-      "Both finalize their partnership.",
+    description: "Both finalize their partnership.",
   },
 ];
 
