@@ -26,6 +26,7 @@ const AthletesBox = () => {
               color: "#675B5B",
               alignContent: "flex-start",
               marginLeft: "20px",
+              font: "Kalam",
             }}
           >
             Athletes Nearby

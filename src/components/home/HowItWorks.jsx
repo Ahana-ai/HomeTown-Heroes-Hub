@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import steps from '../constants/Steps.js'
 
 const StepTypography = ({ number, title, description }) => (
   <Box
@@ -26,27 +26,23 @@ const StepTypography = ({ number, title, description }) => (
         sx={{
           fontSize: "24px",
           fontWeight: "500",
+          font: "Kalam",
         }}
       >
         {title}
       </Typography>
-      <Typography>{description}</Typography>
+      <Typography
+        sx={{
+          font: "Kalam",
+        }}
+      >
+        {description}
+      </Typography>
     </Box>
   </Box>
 );
 
 const HowItWorks = () => {
-  const steps = [
-    {
-      number: 1,
-      icon: PersonIcon,
-      title: "Sign Up as an Athlete or Business",
-      description:
-        "Create and build a profile that has all your information and also what you are looking for.",
-    },
-    // Add more steps here as needed
-  ];
-
   return (
     <>
       {steps.map((step, index) => (

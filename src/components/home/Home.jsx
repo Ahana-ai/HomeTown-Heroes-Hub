@@ -3,7 +3,7 @@ import Navbar2 from "../navbar/Navbar2";
 import { Typography } from "@mui/material";
 import AthletesBox from "./AthletesBox";
 import BusinessBox from "./BusinessBox";
-import HowItWorks from "./HowItWorks";
+import HowItWorks2 from "./HowItWorks2";
 
 const Home = () => {
   return (
@@ -12,28 +12,41 @@ const Home = () => {
       <Typography
         sx={{
           textAlign: "center",
-          // color: "#FEF6ED",
           color: "black",
-          fontSize: "96px",
+          fontSize: "4rem",
           fontFamily: "kalam",
           fontWeight: "700",
-          // marginTop: "10%"
         }}
       >
         HHH
       </Typography>
-      <Typography>
+      <Typography
+        sx={{
+          fontFamily: "Kalam",
+          textAlign: "center",
+          fontWeight: "bold",
+          color: "#1A265A",
+          fontSize: "1.2rem",
+        }}
+      >
         Hometown Heroes Hub (HHH) is a platform for athletes of all levels and
         local businesses to discover and connect with one another.
       </Typography>
       <AthletesBox />
       <BusinessBox />
-      <Typography 
-        variant="h2"
+      <Typography
+        // variant="h1"
+        sx={{
+          fontFamily: "Kalam",
+          fontSize: "40px",
+          fontWeight: "bold",
+          textAlign: "center",
+          fontStyle: "italic",
+        }}
       >
         How it Works
       </Typography>
-      <HowItWorks />
+      <HowItWorks2 />
     </>
   );
 };

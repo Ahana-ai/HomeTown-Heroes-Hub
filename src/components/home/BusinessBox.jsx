@@ -12,7 +12,7 @@ const BusinessBox = () => {
           borderRadius: "20px",
           border: "1px #1A265A solid",
           padding: "100px",
-          // display: "flex"
+          font: "Kalam",
         }}
       >
         <Box
@@ -25,6 +25,7 @@ const BusinessBox = () => {
             sx={{
               letterSpacing: "4.32px",
               color: "#675B5B",
+              font: "Kalam",
               alignContent: "flex-start",
               marginLeft: "20px",
             }}
