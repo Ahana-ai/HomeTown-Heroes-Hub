@@ -13,6 +13,10 @@ const HowItWorks2 = () => {
       sx={{
         background: "#1A265A",
         textAlign: "center",
+        width: "77%",
+        margin: "auto auto",
+        border: "2px solid black",
+        borderRadius: "30px",
       }}
     >
       <VerticalTimeline>
@@ -24,7 +28,7 @@ const HowItWorks2 = () => {
               background: "#E5CFF7",
               color: "#000",
               padding: "10px",
-              borderRadius: "15%",
+              borderRadius: "15px",
             }}
             contentArrowStyle={{
               borderRight: "10px solid #fff",

@@ -61,7 +61,13 @@ const AthletesBox = () => {
         >
           <Grid container spacing={2}>
             {Athletes.map((details, index) => (
-              <Grid item xs={6} md={4} key={index}>
+              <Grid 
+              item 
+              xs={8} 
+              sm={6} 
+              md={4} 
+              key={index}
+              >
                 <Box
                   sx={{
                     backgroundColor: "#fff",

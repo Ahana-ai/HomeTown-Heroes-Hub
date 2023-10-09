@@ -21,7 +21,7 @@ const AthletesBox = () => {
           border: "1px #1A265A solid",
           padding: "50px",
           width: "70%",
-          margin: " 10px auto 0 auto",
+          margin: "10px auto 0 auto",
         }}
       >
         <Box
@@ -29,7 +29,7 @@ const AthletesBox = () => {
             borderRadius: "30px",
             backgroundColor: "#F6EDED",
             display: "flex",
-            justifyContent: "space-around",
+            justifyContent: "center",
             alignItems: "center",
             width: "50%",
             margin: "0px auto 0 auto",
@@ -61,7 +61,7 @@ const AthletesBox = () => {
         >
           <Grid container spacing={2}>
             {Business.map((details, index) => (
-              <Grid item xs={6} md={4} key={index}>
+              <Grid item xs={8} sm={6} md={4} key={index}>
                 <Box
                   sx={{
                     backgroundColor: "#fff",

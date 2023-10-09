@@ -150,7 +150,7 @@ function ResponsiveAppBar() {
             >
               SignUp
             </Typography>
-            <Typography variant="" sx={{ margin: { sm: "5px", md: "20px" } }}>
+            <Typography variant="" sx={{ margin: { sm: "50px 50px 0 0", md: "20px" } }}>
               LogIn
             </Typography>
           </Box>
