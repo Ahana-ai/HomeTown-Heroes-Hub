@@ -11,7 +11,8 @@ import {
   MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import AdbIcon from "@mui/icons-material/Adb";
+import Logo from "../../images/Logo.png";
+import { styled } from "@mui/system";
 
 const pages = ["Home", "Company", "FAQ"];
 
@@ -26,34 +27,24 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
+  const ImgStyle = styled("img")({
+    height: "100px",
+    display: "flex",
+    justifyContent: "center",
+    margin: "10px",
+  });
+
   return (
     <AppBar
       position="static"
       sx={{
         background: "linear-gradient(180deg, #257A95 37%, #664C9D 100%)",
-        padding: "50px 0 0 0",
+        padding: "10px 0 0 0",
       }}
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "Kalam",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            LOGO
-          </Typography>
+          <ImgStyle src={Logo} alt="HHH" />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -91,7 +82,6 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -108,7 +98,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            <img src={Logo} alt="HHH" />
           </Typography>
           <Box
             sx={{
@@ -150,7 +140,10 @@ function ResponsiveAppBar() {
             >
               SignUp
             </Typography>
-            <Typography variant="" sx={{ margin: { sm: "50px 50px 0 0", md: "20px" } }}>
+            <Typography
+              variant=""
+              sx={{ margin: { sm: "50px 50px 0 0", md: "20px" } }}
+            >
               LogIn
             </Typography>
           </Box>

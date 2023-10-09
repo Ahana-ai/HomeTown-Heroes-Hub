@@ -6,6 +6,7 @@ import BusinessBox from "./BusinessBox";
 import HowItWorks2 from "./HowItWorks2";
 import featuresImg from "../../images/Features.png";
 import Features from "./Features";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
@@ -63,9 +64,8 @@ const Home = () => {
       </Typography>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          // backgroundImage: {featuresImg}
+          textAlign: "center",
+          margin: "20px",
         }}
       >
         <img
@@ -77,6 +77,7 @@ const Home = () => {
         />
         <Features />
       </Box>
+      <Footer />
     </>
   );
 };

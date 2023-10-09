@@ -24,6 +24,7 @@ const HowItWorks2 = () => {
           <VerticalTimelineElement
             key={index}
             className="vertical-timeline-element--work"
+            // position="right" shadowSize="medium"
             contentStyle={{
               background: "#E5CFF7",
               color: "#000",
