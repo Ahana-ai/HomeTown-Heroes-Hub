@@ -1,55 +1,88 @@
-import { Box, Typography } from "@mui/material";
-import steps from '../constants/Steps.js'
+import React from "react";
+import {
+  VerticalTimeline,
+  VerticalTimelineElement,
+} from "react-vertical-timeline-component";
+import "react-vertical-timeline-component/style.min.css";
+import steps from "../constants/Steps";
+import { Box } from "@mui/material";
 
-const StepTypography = ({ number, title, description }) => (
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "center",
-      marginBottom: "16px", // Add spacing between steps
-    }}
-  >
+const HowItWorks2 = () => {
+  return (
     <Box
       sx={{
-        border: "4px solid black",
-        borderRadius: "50%",
-        width: "20px",
-        height: "20px",
+        background: "#1A265A",
         textAlign: "center",
-        marginRight: "16px", // Add spacing between number and text
+        width: "77%",
+        margin: "auto auto",
+        border: "2px solid black",
+        borderRadius: "30px",
       }}
     >
-      {number}
+      <VerticalTimeline>
+        {steps.map((step, index) => (
+          <VerticalTimelineElement
+            key={index}
+            className="vertical-timeline-element--work"
+            contentStyle={{
+              background: "#E5CFF7",
+              color: "#000",
+              padding: "10px",
+              borderRadius: "15px",
+            }}
+            contentArrowStyle={{
+              borderRight: "10px solid #fff",
+            }}
+            iconStyle={{
+              background: "#2E4374",
+              color: "#fff",
+            }}
+            icon={
+              <step.icon
+                sx={{
+                  fontSize: "40px",
+                }}
+              />
+            }
+          >
+            <Box>
+              <h2
+                className="vertical-timeline-element-title"
+                style={{
+                  color: "#053B50",
+                  fontFamily: "Kalam",
+                  fontWeight: "bolder",
+                  fontSize: "1.3rem",
+                }}
+              >
+                Step {step.number}
+              </h2>
+              <h3
+                className="vertical-timeline-element-subtitle"
+                style={{
+                  color: "#053B50",
+                  fontFamily: "Kalam",
+                  fontWeight: "bolder",
+                  fontSize: "1.3rem",
+                }}
+              >
+                {step.title}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "Kalam",
+                  fontWeight: "bold",
+                  color: "#5B0888",
+                }}
+              >
+                {step.description}
+              </p>
+            </Box>
+          </VerticalTimelineElement>
+        ))}
+      </VerticalTimeline>
     </Box>
-    <Box>
-      <Typography
-        sx={{
-          fontSize: "24px",
-          fontWeight: "500",
-          font: "Kalam",
-        }}
-      >
-        {title}
-      </Typography>
-      <Typography
-        sx={{
-          font: "Kalam",
-        }}
-      >
-        {description}
-      </Typography>
-    </Box>
-  </Box>
-);
-
-const HowItWorks = () => {
-  return (
-    <>
-      {steps.map((step, index) => (
-        <StepTypography key={index} {...step} />
-      ))}
-    </>
   );
 };
 
-export default HowItWorks;
+export default HowItWorks2;

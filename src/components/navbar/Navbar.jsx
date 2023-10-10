@@ -1,171 +1,170 @@
+import * as React from "react";
 import {
   AppBar,
   Box,
-  CssBaseline,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
   Toolbar,
+  IconButton,
   Typography,
+  Menu,
+  Container,
   Button,
+  MenuItem,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useState } from "react";
+import Logo from "../../images/Logo.png";
+import { styled } from "@mui/system";
+import { Link } from "react-router-dom";
 
-const drawerWidth = 240;
-const navItems = ["Home", "Company", "FAQ"];
+const pages = ["Home", "Company", "FAQ"];
 
-const Navbar = (props) => {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = useState(false);
+function ResponsiveAppBar() {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
   };
 
-  const drawer = (
-    <Box
-      onClick={handleDrawerToggle}
-      sx={{
-        textAlign: "center",
-        background: "linear-gradient(180deg, #462A7F 22%, #1C2B6B 56%)",
-      }}
-    >
-      <Typography
-        variant="h6"
-        sx={{
-          my: 2,
-          color: "#fef6ed",
-        }}
-      >
-        HHH
-      </Typography>
-      <Divider />
-      <List
-        sx={{
-          background: "linear-gradient(180deg, #462A7F 22%, #1C2B6B 56%)",
-        }}
-      >
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: "center", color: "#fef6ed" }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const ImgStyle = styled("img")({
+    height: "100px",
+    display: "flex",
+    justifyContent: "center",
+    margin: "10px",
+  });
 
   return (
-    <Box
+    <AppBar
+      position="static"
       sx={{
-        display: "flex",
-        position: "static",
+        background: "linear-gradient(180deg, #257A95 37%, #664C9D 100%)",
+        padding: "10px 0 0 0",
       }}
     >
-      <CssBaseline />
-      <AppBar
-        component="nav"
-        sx={{
-          background: "linear-gradient(180deg, #462A7F 22%, #1C2B6B 56%)",
-          padding: "50px 0 0 0",
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ 
-              mr: 2, 
-              display: { 
-                sm: "none",
-              },
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <ImgStyle src={Logo} alt="HHH" />
+
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
+              {pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
           <Typography
-            variant="h6"
-            component="div"
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
             sx={{
+              mr: 2,
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              display: {
-                xs: "none",
-                sm: "block",
-              },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
-            HHH
+            <img src={Logo} alt="HHH" />
           </Typography>
           <Box
             sx={{
-              display: {
-                xs: "none",
-                sm: "block",
-              },
-              // margin: {
-              //   xl: "5% 33% 0 0",
-              //   lg: "5% 30% 0 0",
-              //   md: "5% 25% 0 0",
-              //   sm: "5% 20% 0 0",
-              // },
-              fontSize: "24px",
-              fontFamily: "Kalam",
-              fontWeight: "700",
-              wordWrap: "break-word",
-              justifyContent: "start",
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
             }}
           >
-            {navItems.map((item) => (
-              <Button key={item} 
-              sx={{ 
-                color: "#fff" 
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontFamily: "Kalam",
+                  fontWeight: "bold",
+                  textTransform: "capitalize",
+                  fontSize: "1rem",
+                  margin: "20px",
                 }}
               >
-                {item}
+                {page}
               </Button>
             ))}
           </Box>
+
           <Box
-          // sx={{ margin: "5% 0 0 0" }}
+            sx={{
+              display: "flex",
+            }}
           >
-            <Button sx={{ color: "#fff" }}>SignUp</Button>
-            <Button sx={{ color: "#fff" }}>Login</Button>
+            <Link
+              variant=""
+              style={{
+                margin: "auto auto",
+                textTransform: "capitalize",
+                fontFamily: "Kalam",
+                fontWeight: "bold",
+                color: "#fff",
+                textDecoration: "none",
+              }}
+              to="/Register"
+            >
+              SignUp
+            </Link>
+            <Link
+              variant=""
+              style={{
+                margin: "auto 10px",
+                textTransform: "capitalize",
+                fontFamily: "Kalam",
+                fontWeight: "bold",
+                color: "#fff",
+                textDecoration: "none",
+              }}
+              to="/Login"
+            >
+              LogIn
+            </Link>
           </Box>
         </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-    </Box>
+      </Container>
+    </AppBar>
   );
-};
-
-export default Navbar;
+}
+export default ResponsiveAppBar;

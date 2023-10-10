@@ -1,17 +1,14 @@
 import React from "react";
-import Navbar2 from "../navbar/Navbar2";
 import { Box, Typography } from "@mui/material";
 import AthletesBox from "./AthletesBox";
 import BusinessBox from "./BusinessBox";
-import HowItWorks2 from "./HowItWorks2";
+import HowItWorks from "./HowItWorks";
 import featuresImg from "../../images/Features.png";
 import Features from "./Features";
-import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
     <>
-      <Navbar2 />
       <Typography
         sx={{
           textAlign: "center",
@@ -50,7 +47,7 @@ const Home = () => {
       >
         How it Works
       </Typography>
-      <HowItWorks2 />
+      <HowItWorks />
       <Typography
         sx={{
           fontFamily: "Kalam",
@@ -77,7 +74,6 @@ const Home = () => {
         />
         <Features />
       </Box>
-      <Footer />
     </>
   );
 };
