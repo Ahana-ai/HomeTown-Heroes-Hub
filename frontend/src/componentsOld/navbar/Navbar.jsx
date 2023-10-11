@@ -9,6 +9,8 @@ import {
   Container,
   Button,
   MenuItem,
+  Avatar,
+  Tooltip,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
@@ -16,9 +18,11 @@ import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
 const pages = ["Home", "Company", "FAQ"];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,6 +30,14 @@ function ResponsiveAppBar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   const ImgStyle = styled("img")({
@@ -45,7 +57,18 @@ function ResponsiveAppBar() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ImgStyle src={Logo} alt="HHH" />
+          <Link
+            variant="h6"
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+            }}
+            to="/"
+          >
+            <ImgStyle src={Logo} alt="HHH" />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -85,18 +108,12 @@ function ResponsiveAppBar() {
           </Box>
           <Typography
             variant="h5"
-            noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
             }}
           >
             <img src={Logo} alt="HHH" />
@@ -143,7 +160,7 @@ function ResponsiveAppBar() {
                 color: "#fff",
                 textDecoration: "none",
               }}
-              to="/Register"
+              to="/register"
             >
               SignUp
             </Link>
@@ -157,7 +174,7 @@ function ResponsiveAppBar() {
                 color: "#fff",
                 textDecoration: "none",
               }}
-              to="/Login"
+              to="/login"
             >
               LogIn
             </Link>

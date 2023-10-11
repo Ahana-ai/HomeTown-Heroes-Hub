@@ -9,7 +9,7 @@ import Features from "./Features";
 const Home = () => {
   return (
     <>
-      <Typography
+      {/* <Typography
         sx={{
           textAlign: "center",
           color: "black",
@@ -19,7 +19,7 @@ const Home = () => {
         }}
       >
         HHH
-      </Typography>
+      </Typography> */}
       <Typography
         sx={{
           fontFamily: "Kalam",

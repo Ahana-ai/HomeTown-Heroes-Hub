@@ -5,20 +5,21 @@ import Registration from "./components/register_login/Registration";
 import Login from "./components/register_login/Login";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import AccountProvider from "./components/context/AccountProvider";
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Register" element={<Registration />} />
-          <Route path="/Login" element={<Login />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </div>
+    // <AccountProvider>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <Footer />
+    </Router>
+    // </AccountProvider>
   );
 }
 
