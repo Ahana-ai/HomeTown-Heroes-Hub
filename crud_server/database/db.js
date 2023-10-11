@@ -5,7 +5,6 @@ const Connections = async () => {
   const PASSWORD = process.env.DB_PASSWORD;
 
   const URL = `mongodb+srv://${USER}:${PASSWORD}@cluster0.chmfdvi.mongodb.net/hhh-web-app?retryWrites=true&w=majority`;
-  console.log(URL);
 
   try {
     await mongoose.connect(URL, {

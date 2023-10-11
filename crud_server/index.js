@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import Connections from "./database/db.js";
+import router from "./routers/users-routes.js";
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ app.use(
   })
 );
 app.use(express.json({ extended: true }));
+
+app.use('/', router);
 
 Connections();
 
