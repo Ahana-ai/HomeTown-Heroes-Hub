@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon start index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ahana De",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.3.1",
