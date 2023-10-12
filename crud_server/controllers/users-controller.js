@@ -20,21 +20,34 @@ class UserController {
       // Hashing the Password
       const hashPassword = async (plainPassword) => {
         const saltRounds = 10;
-
         try {
           const hash = await bcrypt.hash(plainPassword, saltRounds);
           return hash;
         } catch (err) {
-          console.error("Error hashing password:", err);
+          console.error("Error hashing password:", err.message);
           throw err;
         }
       };
+
+      console.log("req.body.password:", req.body.password);
 
       const data = {
         name: req.body.name,
         email: req.body.email,
         password: await hashPassword(req.body.password),
+        role: req.body.role,
+        age: req.body.age,
+        location: req.body.location,
+        acheivement: req.body.acheivement,
+        talents: req.body.talents,
+        bio: req.body.bio,
+        profile_image: req.body.profile_image,
+        // profile_image: req.file ? req.file.buffer : undefined,
+        social_media_links: req.body.social_media_links,
+        profile_completion_score: req.body.profile_completion_score,
       };
+
+      console.log("data.picture:", data.profile_image);
 
       const newUser = new user(data);
       await newUser.save();
@@ -52,6 +65,7 @@ class UserController {
    */
   async getUser(req, res) {
     try {
+      // Comparing the hashed password stored in db with the inputted one
       const comparePassword = async (enteredPassword, storedHashedPassword) => {
         try {
           const passwordMatch = await bcrypt.compare(
@@ -60,7 +74,7 @@ class UserController {
           );
           return passwordMatch;
         } catch (error) {
-          console.error("Error comparing passwords:", error);
+          console.error("Error comparing passwords:", error.message);
           throw error;
         }
       };
@@ -74,6 +88,7 @@ class UserController {
         );
 
         if (passwordMatch) {
+          // res.contentType("image/jpeg", "image/jpg", "image/png");
           return res.status(200).json(isUserExists);
         } else {
           return res.status(401).json("Invalid password");

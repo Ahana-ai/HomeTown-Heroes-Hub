@@ -16,7 +16,7 @@ app.use(
 );
 app.use(express.json({ extended: true }));
 
-app.use('/', router);
+app.use("/", router);
 
 Connections();
 
