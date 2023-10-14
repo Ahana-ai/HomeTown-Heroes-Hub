@@ -41,8 +41,7 @@ class UserController {
         acheivement: req.body.acheivement,
         talents: req.body.talents,
         bio: req.body.bio,
-        profile_image: req.body.profile_image,
-        // profile_image: req.file ? req.file.buffer : undefined,
+        profile_image: req.file.filename,
         social_media_links: req.body.social_media_links,
         profile_completion_score: req.body.profile_completion_score,
       };
