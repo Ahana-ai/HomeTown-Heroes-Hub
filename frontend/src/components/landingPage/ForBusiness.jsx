@@ -1,4 +1,11 @@
-import { Box, Grid, IconButton, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  IconButton,
+  Paper,
+  Typography,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import { SiThreads } from "react-icons/si";
@@ -12,6 +19,87 @@ const ForBusiness = () => {
 
   return (
     <Box sx={{ backgroundColor: "#FDE5D4", padding: "20px" }}>
+      <Box
+        sx={{
+          borderRadius: "30px",
+          backgroundColor: "#F6EDED",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          width: "80%",
+          margin: "0px auto 20px auto",
+          padding: "30px",
+          boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            letterSpacing: "4.32px",
+            color: "#675B5B",
+            marginBottom: "20px",
+            fontStyle,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          How It Works?
+        </Typography>
+        <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
+        <Typography
+          sx={{
+            marginTop: "20px",
+            color: "#675B5B",
+            textAlign: "center",
+            lineHeight: "1.6",
+          }}
+        >
+          1. Create a business profile showcasing your products, services, and
+          values.
+        </Typography>
+        <Typography
+          sx={{
+            marginTop: "20px",
+            color: "#675B5B",
+            textAlign: "center",
+            lineHeight: "1.6",
+          }}
+        >
+          2. Manage a product page with detailed descriptions, images, and
+          prices for athlete endorsements.
+        </Typography>
+        <Typography
+          sx={{
+            marginTop: "20px",
+            color: "#675B5B",
+            textAlign: "center",
+            lineHeight: "1.6",
+          }}
+        >
+          3. View athlete portfolios, negotiate endorsement terms, and
+          collaborate seamlessly through the portal.
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Typography
+          variant="h4"
+          sx={{
+            letterSpacing: "4.32px",
+            color: "#675B5B",
+            marginBottom: "20px",
+            fontStyle,
+          }}
+        >
+          How It Will Look?
+        </Typography>
+        <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
+      </Box>
       <Paper
         elevation={6}
         sx={{
