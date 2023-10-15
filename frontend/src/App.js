@@ -7,10 +7,12 @@ import ConnectWithUs from "./components/landingPage/ConnectWithUs";
 import Testimonials from "./components/landingPage/Testimonials";
 import Registration from "./components/register_login/Registration";
 import Login from "./components/register_login/Login";
+import JumpingScrollIcon from "./components/JumpingScrollIcon";
 
 function App() {
   return (
     <Router>
+      <JumpingScrollIcon />
       <Navbar account={true} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
