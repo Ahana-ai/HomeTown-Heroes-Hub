@@ -19,7 +19,7 @@ import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
-const pages = ["Home", "Connect with Us", "Testimonials"];
+const pages = ["Home", "Connect", "Testimonials"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 // Function to hide/show app bar on scroll

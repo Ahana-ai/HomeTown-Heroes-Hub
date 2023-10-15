@@ -77,7 +77,7 @@ const Features = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#F8F8F8",
+        backgroundColor: "#EADBC8",
         py: 5,
         textAlign: "center",
         // maxWidth: "1200px",
@@ -98,6 +98,7 @@ const Features = () => {
                 borderRadius: "12px",
                 height: "230px",
                 backgroundColor: "#F1EFEF",
+                mb: 6,
                 // background:
                 //   "linear-gradient(180deg, rgba(255,255,255,1) 28%, rgba(250,242,211,1) 50%, rgba(20,30,70,1) 100%)",
               }}

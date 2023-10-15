@@ -3,20 +3,24 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./components/landingPage/LandingPage";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
+import ConnectWithUs from "./components/landingPage/ConnectWithUs";
+import Testimonials from "./components/landingPage/Testimonials";
+import Registration from "./components/register_login/Registration";
+import Login from "./components/register_login/Login";
 
 function App() {
   return (
-    // <AccountProvider>
     <Router>
       <Navbar account={true} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/register" element={<Registration />} />
-        <Route path="/login" element={<Login />} /> */}
+        <Route path="/connect" element={<ConnectWithUs />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/register" element={<Registration />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </Router>
-    // </AccountProvider>
   );
 }
 
