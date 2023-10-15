@@ -12,14 +12,14 @@ import {
   Avatar,
   Tooltip,
   useScrollTrigger,
-  Slide, 
+  Slide,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 
-const pages = ["Athletes", "Business", "About Us", "Connect with Us"];
+const pages = ["Home", "Connect with Us", "Testimonials"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 // Function to hide/show app bar on scroll
@@ -130,24 +130,31 @@ function Navbar({ account }) {
               }}
             >
               {pages.map((page) => (
-                <Button
+                <Link
                   key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{
-                    my: 2,
-                    color: "white",
-                    display: "block",
-                    fontWeight: "bold",
-                    fontSize: "1rem",
-                    margin: "20px",
-
-                    "&:hover": {
-                      backgroundColor: "#47A992",
-                    },
-                  }}
+                  to={page === "Home" ? "/" : `/${page.toLowerCase()}`}
+                  style={{ textDecoration: "none" }}
                 >
-                  {page}
-                </Button>
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                      margin: "20px",
+
+                      "&:hover": {
+                        backgroundColor: "#12486B",
+                        border: "1px solid white",
+                      },
+                    }}
+                  >
+                    {page}
+                  </Button>
+                </Link>
               ))}
             </Box>
             {account ? (
@@ -156,7 +163,14 @@ function Navbar({ account }) {
                   display: "flex",
                 }}
               >
-                <Button>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#12486B",
+                      border: "1px solid white",
+                    },
+                  }}
+                >
                   <Link
                     variant=""
                     style={{
@@ -171,7 +185,14 @@ function Navbar({ account }) {
                     SignUp
                   </Link>
                 </Button>
-                <Button>
+                <Button
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "#12486B",
+                      border: "1px solid white",
+                    },
+                  }}
+                >
                   <Link
                     variant=""
                     style={{
@@ -191,7 +212,10 @@ function Navbar({ account }) {
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
                   </IconButton>
                 </Tooltip>
                 <Menu

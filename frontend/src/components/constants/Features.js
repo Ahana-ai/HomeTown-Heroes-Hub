@@ -45,7 +45,8 @@ const FeaturesList = [
     num: 8,
     title: "USER BEHAVIOR & SENTIMENT ANALYSIS",
     description:
-      "AI will analyze user behavior, helping to understand what features are most appreciated and which areas need improvement. Also, it wll analyze comments and reviews, flagging any negative sentiments or potential issues.",
+      "AI will analyze user behavior, helping to understand what features are most appreciated and which areas need improvement.", 
+      // Also, it wll analyze comments and reviews, flagging any negative sentiments or potential issues.",
   },
   {
     num: 9,
