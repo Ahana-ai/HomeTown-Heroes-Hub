@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
-import { addUser } from "../../store/slices/UserSlice";
+import { addUser, loginUser } from "../../store/slices/UserSlice";
 
 const pages = ["Home", "Connect", "Testimonials"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -36,7 +36,7 @@ function HideOnScroll({ children }) {
 }
 
 // To delete later
-const data = {
+const reg_data = {
   name: "B De",
   email: "b@gmail.com",
   password: "bc123",
@@ -51,7 +51,12 @@ const data = {
   profile_completion_score: "",
 };
 
-function Navbar({ account }) {
+const log_data = {
+  email: "a@gmail.com",
+  password: "ad123",
+};
+
+function Navbar({ user }) {
   const dispatch = useDispatch();
 
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -177,7 +182,7 @@ function Navbar({ account }) {
                 </Link>
               ))}
             </Box>
-            {account ? (
+            {user ? (
               <Box
                 sx={{
                   display: "flex",
@@ -192,8 +197,8 @@ function Navbar({ account }) {
                   }}
                   // To delete Later --> Reducer call
                   onClick={() => {
-                    dispatch(addUser(data));
-                    console.log(data);
+                    dispatch(addUser(reg_data));
+                    console.log(reg_data);
                   }}
                 >
                   <Link
@@ -216,6 +221,11 @@ function Navbar({ account }) {
                       backgroundColor: "#12486B",
                       border: "1px solid white",
                     },
+                  }}
+                  // To delete Later --> Reducer call
+                  onClick={() => {
+                    dispatch(loginUser(log_data));
+                    console.log(log_data);
                   }}
                 >
                   <Link

@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <JumpingScrollIcon />
-      <Navbar account={true} />
+      <Navbar user={true} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/connect" element={<ConnectWithUs />} />

@@ -25,6 +25,20 @@ export const addUser = createAsyncThunk(
   }
 );
 
+export const loginUser = createAsyncThunk(
+  "login",
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log(data);
+      const res = await axios.post(`${baseURL}/login`, data);
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response.data));
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -50,6 +64,33 @@ const userSlice = createSlice({
       };
     },
     [addUser.rejected]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "rejected",
+        createUserError: action.payload,
+        getUserStatus: "",
+        getUserError: "",
+      };
+    },
+    [loginUser.pending]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "pending",
+        createUserError: "",
+        getUserStatus: "",
+        getUserError: "",
+      };
+    },
+    [loginUser.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "success",
+        createUserError: "",
+        getUserStatus: "",
+        getUserError: "",
+      };
+    },
+    [loginUser.rejected]: (state, action) => {
       return {
         ...state,
         addUserStatus: "rejected",
