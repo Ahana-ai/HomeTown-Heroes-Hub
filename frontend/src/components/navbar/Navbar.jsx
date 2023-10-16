@@ -182,7 +182,7 @@ function Navbar({ user }) {
                 </Link>
               ))}
             </Box>
-            {user ? (
+            {user.name ? (
               <Box
                 sx={{
                   display: "flex",
@@ -256,8 +256,8 @@ function Navbar({ user }) {
                     wordSpacing: "2px",
                   }}
                 >
-                  Ahana De
-                  {/* { account.name } */}
+                  {/* Ahana De */}
+                  { user.name }
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

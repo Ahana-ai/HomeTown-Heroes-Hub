@@ -1,5 +1,6 @@
 import user from "../models/users-model.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 class UserController {
   constructor() {}
@@ -59,47 +60,45 @@ class UserController {
   }
 
   /**
-   * @method getUser
+   * @method loginUser
    * @description Login Users
    */
-  async getUser(req, res) {
+  async loginUser(req, res) {
     try {
-      // Comparing the hashed password stored in db with the inputted one
-      const comparePassword = async (enteredPassword, storedHashedPassword) => {
-        try {
-          const passwordMatch = await bcrypt.compare(
-            enteredPassword,
-            storedHashedPassword
-          );
-          return passwordMatch;
-        } catch (error) {
-          console.error("Error comparing passwords:", error.message);
-          throw error;
-        }
-      };
+      const isUserExists = await user.findOne({ email: req.body.email });
 
-      let isUserExists = await user.findOne({ email: req.body.email });
-      console.log(isUserExists);
       if (isUserExists) {
-        const passwordMatch = await comparePassword(
+        const passwordMatch = await bcrypt.compare(
           req.body.password,
           isUserExists.password
         );
 
         if (passwordMatch) {
-          // res.contentType("image/jpeg", "image/jpg", "image/png");
-          return res.status(200).json(isUserExists);
+          const token = jwt.sign(
+            {
+              id: isUserExists._id,
+              name: isUserExists.name,
+              email: isUserExists.email,
+              role: isUserExists.role,
+            },
+            "secretKey",
+            { expiresIn: "1hr" }
+          );
+
+          res.cookie("userToken", token, { maxAge: 3600000 }); // Set your cookie
+          console.log();
+          console.log("Logged In...");
+
+          return res.status(200).json({ token, isUserExists });
         } else {
-          return res.status(401).json("Invalid password");
+          return res.status(401).json({ error: "Invalid password" });
         }
       } else {
-        return res.status(404).json("User not found");
+        return res.status(404).json({ error: "User not found" });
       }
     } catch (error) {
-      console.log(error);
-      return res
-        .status(500)
-        .json({ "Server Error! -> getUser": error.message });
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error!" });
     }
   }
 }

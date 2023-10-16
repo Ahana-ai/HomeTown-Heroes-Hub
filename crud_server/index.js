@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import Connections from "./database/db.js";
 import router from "./routers/users-routes.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 
 dotenv.config();
 
@@ -16,6 +18,14 @@ app.use(
   })
 );
 app.use(express.json({ extended: true }));
+
+app.use(cookieParser());
+app.use(session({
+  secret: 'secretKey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }, // Set to true if using HTTPS
+}));
 
 app.use(cors());
 // app.use(

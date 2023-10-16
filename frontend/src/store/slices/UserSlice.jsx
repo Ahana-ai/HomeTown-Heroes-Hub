@@ -4,7 +4,19 @@ import axios from "axios";
 const baseURL = "http://localhost:5000";
 
 const initialState = {
-  user: {},
+  user: {
+    // name: "",
+    // email: "",
+    // age: 0,
+    // location: "",
+    // acheivement: "",
+    // talents: "",
+    // bio: "",
+    // profile_image: "",
+    // social_media_links: "",
+    // profile_completion_score: 0,
+  },
+  // token: "",
   createUserStatus: "",
   createUserError: "",
   getUserStatus: "",
@@ -38,6 +50,8 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+export const selectUser = (state) => state.user;
 
 const userSlice = createSlice({
   name: "user",
@@ -82,8 +96,11 @@ const userSlice = createSlice({
       };
     },
     [loginUser.fulfilled]: (state, action) => {
+      // const { user, token } = action.payload;
       return {
         ...state,
+        user: action.payload,
+        // token: action.payload.token,
         addUserStatus: "success",
         createUserError: "",
         getUserStatus: "",
