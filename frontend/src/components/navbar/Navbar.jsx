@@ -1,4 +1,5 @@
-import * as React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   AppBar,
   Box,
@@ -18,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
+import { addUser } from "../../store/slices/UserSlice";
 
 const pages = ["Home", "Connect", "Testimonials"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -33,9 +35,27 @@ function HideOnScroll({ children }) {
   );
 }
 
+// To delete later
+const data = {
+  name: "B De",
+  email: "b@gmail.com",
+  password: "bc123",
+  role: "business",
+  age: 21,
+  location: "Kolkata",
+  acheivement: "Good",
+  talents: "abc",
+  bio: "abc",
+  // profile_image: { Image },
+  social_media_links: "instagram",
+  profile_completion_score: "",
+};
+
 function Navbar({ account }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const dispatch = useDispatch();
+
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -169,6 +189,11 @@ function Navbar({ account }) {
                       backgroundColor: "#12486B",
                       border: "1px solid white",
                     },
+                  }}
+                  // To delete Later --> Reducer call
+                  onClick={() => {
+                    dispatch(addUser(data));
+                    console.log(data);
                   }}
                 >
                   <Link
