@@ -209,7 +209,21 @@ function Navbar({ account }) {
                 </Button>
               </Box>
             ) : (
-              <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ flexGrow: 0, display: "flex" }}>
+                <Typography
+                  sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    margin: "5px",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                    letterSpacing: "0.8px",
+                    wordSpacing: "2px",
+                  }}
+                >
+                  Ahana De
+                  {/* { account.name } */}
+                </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
