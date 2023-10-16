@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
-import { addUser, loginUser } from "../../store/slices/UserSlice";
+import { addUser, loginUser, logoutUser } from "../../store/slices/UserSlice";
 
 const pages = ["Home", "Connect", "Testimonials"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -58,6 +58,25 @@ const log_data = {
 
 function Navbar({ user }) {
   const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    try {
+      // Dispatch the logoutUser thunk
+      dispatch(logoutUser(null));
+    } catch (error) {
+      console.error("Logout failed:", error.message);
+    }
+  };
+
+  const handleMenuItemClick = (setting) => {
+    handleCloseUserMenu(); // Close the menu when a menu item is clicked
+
+    if (setting === "Logout") {
+      handleLogout();
+    } else {
+      console.log(`Clicked on ${setting}`);
+    }
+  };
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -98,6 +117,7 @@ function Navbar({ user }) {
       >
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* Logo */}
             <Link
               variant="h6"
               component="a"
@@ -111,10 +131,11 @@ function Navbar({ user }) {
               <ImgStyle src={Logo} alt="HHH" />
             </Link>
 
+            {/* Mobile Menu Button */}
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
-                aria-label="account of current user"
+                aria-label="open menu"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
@@ -142,11 +163,18 @@ function Navbar({ user }) {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Link
+                      to={page === "Home" ? "/" : `/${page.toLowerCase()}`}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography textAlign="center">{page}</Typography>
+                    </Link>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
+
+            {/* Desktop Menu */}
             <Box
               sx={{
                 flexGrow: 1,
@@ -162,7 +190,6 @@ function Navbar({ user }) {
                 >
                   <Button
                     key={page}
-                    onClick={handleCloseNavMenu}
                     sx={{
                       my: 2,
                       color: "white",
@@ -182,12 +209,15 @@ function Navbar({ user }) {
                 </Link>
               ))}
             </Box>
-            {user.name ? (
+
+            {/* User Actions */}
+            {user ? (
               <Box
                 sx={{
                   display: "flex",
                 }}
               >
+                {/* Sign Up Button */}
                 <Button
                   sx={{
                     "&:hover": {
@@ -195,7 +225,6 @@ function Navbar({ user }) {
                       border: "1px solid white",
                     },
                   }}
-                  // To delete Later --> Reducer call
                   onClick={() => {
                     dispatch(addUser(reg_data));
                     console.log(reg_data);
@@ -215,6 +244,8 @@ function Navbar({ user }) {
                     SignUp
                   </Link>
                 </Button>
+
+                {/* Log In Button */}
                 <Button
                   sx={{
                     "&:hover": {
@@ -222,10 +253,8 @@ function Navbar({ user }) {
                       border: "1px solid white",
                     },
                   }}
-                  // To delete Later --> Reducer call
                   onClick={() => {
                     dispatch(loginUser(log_data));
-                    console.log(log_data);
                   }}
                 >
                   <Link
@@ -244,6 +273,7 @@ function Navbar({ user }) {
                 </Button>
               </Box>
             ) : (
+              // User is logged in
               <Box sx={{ flexGrow: 0, display: "flex" }}>
                 <Typography
                   sx={{
@@ -256,17 +286,15 @@ function Navbar({ user }) {
                     wordSpacing: "2px",
                   }}
                 >
-                  {/* Ahana De */}
-                  { user.name }
+                  {/* Display User's Name */}
+                  {user.name}
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
+                    <Avatar alt="User Avatar" src="/path/to/user-avatar.jpg" />
                   </IconButton>
                 </Tooltip>
+                {/* User Settings Menu */}
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
@@ -284,8 +312,22 @@ function Navbar({ user }) {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
+                    <MenuItem
+                      key={setting}
+                      onClick={() => handleMenuItemClick(setting)}
+                      // onClick={handleCloseUserMenu}
+                    >
+                      <Link
+                        // to={`/${setting.toLowerCase()}`}
+                        to={
+                          setting === "Logout"
+                            ? `/`
+                            : `/${setting.toLowerCase()}`
+                        }
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        <Typography textAlign="center">{setting}</Typography>
+                      </Link>
                     </MenuItem>
                   ))}
                 </Menu>

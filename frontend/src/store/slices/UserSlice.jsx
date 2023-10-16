@@ -51,6 +51,19 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+export const logoutUser = createAsyncThunk(
+  "logout",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${baseURL}/logout`);
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response));
+    }
+  }
+);
+
 export const selectUser = (state) => state.user;
 
 const userSlice = createSlice({
@@ -97,9 +110,10 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       // const { user, token } = action.payload;
+      console.log(action.payload);
       return {
         ...state,
-        user: action.payload,
+        user: action.payload.isUserExists,
         // token: action.payload.token,
         addUserStatus: "success",
         createUserError: "",

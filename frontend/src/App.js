@@ -13,8 +13,6 @@ import { selectUser } from "./store/slices/UserSlice";
 
 function App() {
   const user = useSelector(selectUser);
-  console.log(user);
-
   // if (!user) {
   //   // Handle the case where user is undefined, e.g., redirect to login
   //   return <Link to="/connect" />;

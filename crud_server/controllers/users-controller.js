@@ -101,6 +101,27 @@ class UserController {
       return res.status(500).json({ error: "Server Error!" });
     }
   }
+
+  /**
+   * @method logout
+   * @description Clear Session and Cookies
+   */
+  async logout(req, res) {
+    try {
+      res.clearCookie("userToken");
+      req.session.destroy((error) => {
+        if (error) {
+          console.error("Error destroying session:", error);
+        } else {
+          console.log("Logged Out....");
+          return res.status(200).json({ msg: "Okay!" });
+        }
+      });
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error!" });
+    }
+  }
 }
 
 export default UserController = new UserController();

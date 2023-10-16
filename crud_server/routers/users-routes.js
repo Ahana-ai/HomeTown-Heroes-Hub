@@ -43,8 +43,12 @@ const upload = multer({
   },
 });
 
-
-router.post("/register", upload.single("profile_image"), UserController.addUser);
+router.post(
+  "/register",
+  upload.single("profile_image"),
+  UserController.addUser
+);
 router.post("/login", UserController.loginUser);
+router.get("/logout", UserController.logout);
 
 export default router;
