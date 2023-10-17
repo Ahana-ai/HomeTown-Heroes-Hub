@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AppBar,
   Box,
@@ -56,8 +56,12 @@ const log_data = {
   password: "ad123",
 };
 
-function Navbar({ user }) {
+function Navbar() {
   const dispatch = useDispatch();
+
+  const userState = useSelector(state => state.user);
+  console.log(userState);
+  // const { userDetails } = userState;
 
   const handleLogout = () => {
     try {
@@ -210,8 +214,9 @@ function Navbar({ user }) {
               ))}
             </Box>
 
+            {console.log(userState.user)}
             {/* User Actions */}
-            {user ? (
+            {userState.user ? (
               <Box
                 sx={{
                   display: "flex",
@@ -227,7 +232,6 @@ function Navbar({ user }) {
                   }}
                   onClick={() => {
                     dispatch(addUser(reg_data));
-                    console.log(reg_data);
                   }}
                 >
                   <Link
@@ -287,7 +291,7 @@ function Navbar({ user }) {
                   }}
                 >
                   {/* Display User's Name */}
-                  {user.name}
+                  {/* {userDetails.name} */}
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

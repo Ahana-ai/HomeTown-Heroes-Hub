@@ -16,11 +16,13 @@ const initialState = {
     // social_media_links: "",
     // profile_completion_score: 0,
   },
-  // token: "",
+  token: "",
   createUserStatus: "",
   createUserError: "",
-  getUserStatus: "",
-  getUserError: "",
+  loginUserStatus: "",
+  loginUserError: "",
+  logoutUserStatus: "",
+  logoutUserError: "",
 };
 
 export const addUser = createAsyncThunk(
@@ -64,20 +66,21 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-export const selectUser = (state) => state.user;
-
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {},
   extraReducers: {
+    // Register ---->
     [addUser.pending]: (state, action) => {
       return {
         ...state,
         addUserStatus: "pending",
         createUserError: "",
-        getUserStatus: "",
-        getUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
       };
     },
     [addUser.fulfilled]: (state, action) => {
@@ -86,8 +89,10 @@ const userSlice = createSlice({
         user: action.payload,
         addUserStatus: "success",
         createUserError: "",
-        getUserStatus: "",
-        getUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
       };
     },
     [addUser.rejected]: (state, action) => {
@@ -95,39 +100,86 @@ const userSlice = createSlice({
         ...state,
         addUserStatus: "rejected",
         createUserError: action.payload,
-        getUserStatus: "",
-        getUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
       };
     },
+    // Login ------>
     [loginUser.pending]: (state, action) => {
       return {
         ...state,
-        addUserStatus: "pending",
+        addUserStatus: "",
         createUserError: "",
-        getUserStatus: "",
-        getUserError: "",
+        loginUserStatus: "pending",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
       };
     },
     [loginUser.fulfilled]: (state, action) => {
-      // const { user, token } = action.payload;
       console.log(action.payload);
+      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         user: action.payload.isUserExists,
-        // token: action.payload.token,
-        addUserStatus: "success",
+        token: action.payload.token,
+        addUserStatus: "",
         createUserError: "",
-        getUserStatus: "",
-        getUserError: "",
+        loginUserStatus: "success",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
       };
     },
     [loginUser.rejected]: (state, action) => {
       return {
         ...state,
-        addUserStatus: "rejected",
-        createUserError: action.payload,
-        getUserStatus: "",
-        getUserError: "",
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "rejected",
+        loginUserError: action.payload,
+        logoutUserStatus: "",
+        logoutUserError: "",
+      };
+    },
+    // Logout ----->
+    [logoutUser.pending]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "pending",
+        logoutUserError: "",
+      };
+    },
+    [logoutUser.fulfilled]: (state, action) => {
+      console.log(action);
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        user: {},
+        token: "",
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "success",
+        logoutUserError: "",
+      };
+    },
+    [logoutUser.rejected]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "rejected",
+        logoutUserError: action.payload,
       };
     },
   },
