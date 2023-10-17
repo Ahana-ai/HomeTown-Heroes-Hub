@@ -66,6 +66,45 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+export const getUserDetails = createAsyncThunk(
+  "details",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${baseURL}/details`);
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response));
+    }
+  }
+);
+
+export const editUser = createAsyncThunk(
+  "edit",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await axios.put(`${baseURL}/edit/${id}`);
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response));
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await axios.put(`${baseURL}/delete/${id}`);
+      console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response));
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
