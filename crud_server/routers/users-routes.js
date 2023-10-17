@@ -50,5 +50,8 @@ router.post(
 );
 router.post("/login", UserController.loginUser);
 router.get("/logout", UserController.logout);
+router.get("/details", UserController.getDetails);
+router.put("/edit/:id", UserController.editUser);
+router.put("/delete/:id", UserController.deleteUser);
 
 export default router;

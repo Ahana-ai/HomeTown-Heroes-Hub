@@ -11,7 +11,10 @@ class UserController {
    */
   async addUser(req, res) {
     try {
-      let isUserExists = await user.findOne({ email: req.body.email });
+      let isUserExists = await user.findOne({
+        email: req.body.email,
+        isDeleted: false,
+      });
 
       if (isUserExists) {
         res.status(200).json({ msg: "User already exists!" });
@@ -65,7 +68,10 @@ class UserController {
    */
   async loginUser(req, res) {
     try {
-      const isUserExists = await user.findOne({ email: req.body.email });
+      const isUserExists = await user.findOne({
+        email: req.body.email,
+        isDeleted: false,
+      });
 
       if (isUserExists) {
         const passwordMatch = await bcrypt.compare(
@@ -98,7 +104,7 @@ class UserController {
       }
     } catch (error) {
       console.error("Error:", error.message);
-      return res.status(500).json({ error: "Server Error!" });
+      return res.status(500).json({ error: "Server Error! --> loginUser" });
     }
   }
 
@@ -119,7 +125,93 @@ class UserController {
       });
     } catch (error) {
       console.error("Error:", error.message);
-      return res.status(500).json({ error: "Server Error!" });
+      return res.status(500).json({ error: "Server Error! -->logout" });
+    }
+  }
+
+  /**
+   * @method getId
+   * @description It will return the id of the object i.e. user
+   */
+  async getDetails(req, res) {
+    try {
+      const isUserExists = await user.findOne({
+        email: req.body.email,
+        // isDeleted: false,
+      });
+
+      if (!isUserExists) {
+        return res.status(404).json({ error: "User Not Found" });
+      }
+
+      console.log(isUserExists._id);
+
+      return res.status(200).json(isUserExists);
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error! --> getId" });
+    }
+  }
+
+  /**
+   * @method editUser
+   * @description Editing the user data
+   */
+  async editUser(req, res) {
+    try {
+      const userId = req.params.id;
+      const updates = req.body;
+
+      // Validate if the user exists
+      const existingUser = await user.findById(userId);
+      if (!existingUser || existingUser.isDeleted == true) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Update user data
+      Object.assign(existingUser, updates);
+      await existingUser.save();
+
+      return res
+        .status(200)
+        .json({ msg: "User updated successfully", user: existingUser });
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error! --> editUser" });
+    }
+  }
+
+  /**
+   * @method deleteUser
+   * @description Editing the user data
+   */
+  async deleteUser(req, res) {
+    try {
+      const userId = req.params.id;
+      console.log(userId);
+
+      // Validate if the user exists
+      const existingUser = await user.findById(userId);
+      if (!existingUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Delete the user --> Soft Delete
+      const updatedData = await user.findOneAndUpdate(
+        { _id: userId },
+        { isDeleted: true },
+        { new: true }
+      );
+      console.log(updatedData);
+
+      if (!updatedData) {
+        return res.status(404).json({ error: "Data not found" });
+      }
+
+      return res.status(200).json({ msg: "User deleted successfully" });
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error! --> deleteUser" });
     }
   }
 }

@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   bio: strReq,
   profile_image: {
     type: String,
-    default: ""
+    default: "",
     // required: true,
   },
   social_media_links: strReq,
@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     // required: true,
     default: 0,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
   },
 });
 
