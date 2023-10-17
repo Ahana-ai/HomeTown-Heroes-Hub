@@ -6,6 +6,7 @@ const strReq = {
 };
 
 const prodSchema = new mongoose.Schema({
+  type: strReq,
   name: strReq,
   description: strReq,
   category: strReq,
@@ -18,6 +19,10 @@ const prodSchema = new mongoose.Schema({
   available_number: {
     type: Number,
     required: true,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
   },
 });
 

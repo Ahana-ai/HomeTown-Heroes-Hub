@@ -1,5 +1,6 @@
 import express from "express";
 import UserController from "../controllers/users-controller.js";
+import ProdController from "../controllers/product-services-controller.js";
 import multer from "multer";
 import path from "path";
 const router = express.Router();
@@ -43,6 +44,8 @@ const upload = multer({
   },
 });
 
+// User Data
+
 router.post(
   "/register",
   upload.single("profile_image"),
@@ -53,5 +56,11 @@ router.get("/logout", UserController.logout);
 router.get("/details", UserController.getDetails);
 router.put("/edit/:id", UserController.editUser);
 router.put("/delete/:id", UserController.deleteUser);
+
+// Product - Services Data
+router.post("/create-product", ProdController.addProduct);
+router.get("/product/:id", ProdController.getDetails);
+router.put("/edit-product/:id", ProdController.editProdServ);
+router.put("/delete-product/:id", ProdController.deleteProdServ);
 
 export default router;

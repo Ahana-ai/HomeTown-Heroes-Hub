@@ -130,7 +130,7 @@ class UserController {
   }
 
   /**
-   * @method getId
+   * @method getDetails
    * @description It will return the id of the object i.e. user
    */
   async getDetails(req, res) {
