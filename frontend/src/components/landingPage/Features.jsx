@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import { Box, Typography, Paper } from "@mui/material";
 import { CheckCircle as CheckCircleIcon } from "@mui/icons-material";
 import FeaturesList from "../constants/Features";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Lottie from "react-lottie";
+import * as Man from "../constants/Animation/Man.json";
 
 const NextArrow = ({ onClick }) => (
   <div
@@ -77,7 +79,9 @@ const Features = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#EADBC8",
+        // backgroundColor: "#2E4374",
+        background:
+          "linear-gradient(180deg, rgba(46,67,116,1) 4%, rgba(252,253,255,1) 97%)",
         py: 5,
         textAlign: "center",
         // maxWidth: "1200px",
@@ -96,7 +100,7 @@ const Features = () => {
                 p: 2,
                 mr: 3,
                 borderRadius: "12px",
-                height: "230px",
+                height: "300px",
                 backgroundColor: "#F1EFEF",
                 mb: 6,
                 // background:
@@ -112,8 +116,15 @@ const Features = () => {
                   mb: 3,
                 }}
               >
-                <CheckCircleIcon
+                {/* <CheckCircleIcon
                   sx={{ color: "#4CAF50", fontSize: 40, mb: 2 }}
+                /> */}
+                <Lottie
+                  options={{
+                    animationData: Man, // Use the animation data for this feature
+                  }}
+                  height={100} // Set the desired height for the animation
+                  width={100} // Set the desired width for the animation
                 />
                 <Typography variant="h6" sx={{ fontWeight: "bold", mb: 2 }}>
                   {feature.title}

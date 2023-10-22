@@ -5,7 +5,12 @@ import Features from "./Features";
 
 const AboutUs = () => {
   return (
-    <Box sx={{ backgroundColor: "#f4f4f4", py: 5 }}>
+    <Box
+      sx={{
+        backgroundColor: "#f4f4f4",
+        // py: 5,
+      }}
+    >
       <Container>
         <Typography
           variant="h4"

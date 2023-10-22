@@ -52,21 +52,22 @@ const reg_data = {
 };
 
 const log_data = {
-  email: "a@gmail.com",
-  password: "ad123",
+  email: "abcd@gmail.com",
+  password: "abcd",
 };
 
 function Navbar() {
   const dispatch = useDispatch();
 
-  const userState = useSelector(state => state.user);
-  console.log(userState);
-  // const { userDetails } = userState;
+  const [user, setUser] = useState(false);
+  const userDetails = useSelector((state) => state.user);
+  console.log(userDetails);
 
   const handleLogout = () => {
     try {
       // Dispatch the logoutUser thunk
       dispatch(logoutUser(null));
+      setUser(false);
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
@@ -214,9 +215,8 @@ function Navbar() {
               ))}
             </Box>
 
-            {console.log(userState.user)}
             {/* User Actions */}
-            {userState.user ? (
+            {!user ? (
               <Box
                 sx={{
                   display: "flex",
@@ -243,7 +243,7 @@ function Navbar() {
                       color: "#fff",
                       textDecoration: "none",
                     }}
-                    to="/register"
+                    // to="/register"
                   >
                     SignUp
                   </Link>
@@ -259,6 +259,7 @@ function Navbar() {
                   }}
                   onClick={() => {
                     dispatch(loginUser(log_data));
+                    setUser(true);
                   }}
                 >
                   <Link
@@ -270,7 +271,7 @@ function Navbar() {
                       color: "#fff",
                       textDecoration: "none",
                     }}
-                    to="/login"
+                    // to="/login"
                   >
                     LogIn
                   </Link>
@@ -291,7 +292,7 @@ function Navbar() {
                   }}
                 >
                   {/* Display User's Name */}
-                  {/* {userDetails.name} */}
+                  {userDetails.user.name}
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

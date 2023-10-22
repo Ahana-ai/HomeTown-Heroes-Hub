@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import React, { useState } from "react";
 import bg_img from "../../images/bg_img.png";
 import bg_img_2 from "../../images/bg_img_2.png";
@@ -75,8 +75,11 @@ const LandingPage = () => {
         <Box
           sx={{
             position: "relative",
-            marginRight: "20%",
-            marginLeft: "20%",
+            margin: "auto auto",
+            width: {
+              lg: "70%",
+              md: "100%",
+            },
           }}
         >
           <Typography
@@ -84,78 +87,90 @@ const LandingPage = () => {
             sx={{
               color: "#fff",
               fontWeight: "bold",
-              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
-              marginBottom: "20px",
-            }}
-          >
-            Hometown Heroes Hub (HHH)
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              color: "#fff",
-              fontWeight: "bold",
               textShadow: "1px 1px 2px rgba(0, 0, 0, 0.8)",
               marginBottom: "30px",
+              margin: "auto auto",
+              textAlign: "center",
             }}
           >
             This is a platform for athletes of all levels and local businesses
             to discover and connect with one another.
           </Typography>
-          <Button
+          <Grid
+            container
             sx={{
-              backgroundColor: activeTab === "about us" ? "#186F65" : "#213555",
-              color: "#fff",
-              fontWeight: "bolder",
-              fontSize: "1.01rem",
-              margin: "10px",
-              border: "2px solid #fff",
-              padding: "10px 40px",
-
-              "&:hover": {
-                backgroundColor: "#186F65",
-              },
+              margin: "auto auto",
+              justifyContent: "space-evenly",
             }}
-            onClick={() => handleTabChange("about us")}
           >
-            About Us
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: activeTab === "athletes" ? "#186F65" : "#213555",
-              color: "#fff",
-              fontWeight: "bolder",
-              fontSize: "1.01rem",
-              margin: "10px",
-              border: "2px solid #fff",
-              padding: "10px 40px",
+            <Grid item sx={12} md={3}>
+              <Button
+                sx={{
+                  backgroundColor:
+                    activeTab === "about us" ? "#186F65" : "#213555",
+                  color: "#fff",
+                  fontWeight: "bolder",
+                  fontSize: "1.01rem",
+                  margin: "10px",
+                  border: "2px solid #fff",
+                  padding: "10px 40px",
+                  minWidth: "250px",
 
-              "&:hover": {
-                backgroundColor: "#186F65",
-              },
-            }}
-            onClick={() => handleTabChange("athletes")}
-          >
-            For Athletes
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: activeTab === "business" ? "#186F65" : "#213555",
-              color: "#fff",
-              fontSize: "1.01rem",
-              fontWeight: "bolder",
-              margin: "10px",
-              border: "2px solid #fff",
-              padding: "10px 40px",
+                  "&:hover": {
+                    backgroundColor: "#186F65",
+                  },
+                }}
+                onClick={() => handleTabChange("about us")}
+              >
+                About Us
+              </Button>
+            </Grid>
+            <Grid item sx={12} md={3}>
+              <Button
+                sx={{
+                  backgroundColor:
+                    activeTab === "athletes" ? "#186F65" : "#213555",
+                  color: "#fff",
+                  fontWeight: "bolder",
+                  fontSize: "1.01rem",
+                  margin: "10px",
+                  border: "2px solid #fff",
+                  padding: "10px 40px",
+                  minWidth: "250px",
 
-              "&:hover": {
-                backgroundColor: "#186F65",
-              },
-            }}
-            onClick={() => handleTabChange("business")}
-          >
-            For Business
-          </Button>
+                  "&:hover": {
+                    backgroundColor: "#186F65",
+                  },
+                }}
+                onClick={() => handleTabChange("athletes")}
+              >
+                For Athletes
+              </Button>
+            </Grid>
+            <Grid item sx={12} md={3}>
+              <Button
+                sx={{
+                  backgroundColor:
+                    activeTab === "business" ? "#186F65" : "#213555",
+                  color: "#fff",
+                  fontSize: "1.01rem",
+                  fontWeight: "bolder",
+                  margin: "10px",
+                  border: "2px solid #fff",
+                  padding: "10px 40px",
+                  minWidth: "250px",
+                  wordWrap: "normal",
+
+                  "&:hover": {
+                    backgroundColor: "#186F65",
+                  },
+                }}
+                onClick={() => handleTabChange("business")}
+              >
+                For Business
+              </Button>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
       <Box>

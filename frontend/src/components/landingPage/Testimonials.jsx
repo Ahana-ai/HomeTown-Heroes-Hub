@@ -1,12 +1,24 @@
 import React from "react";
-import { Box, Typography, Container, Grid, Paper } from "@mui/material";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { Box, Typography, Container, Grid, Paper, Avatar } from "@mui/material";
 import testimonialData from "../constants/Testimonials";
 
 const Testimonials = () => {
+  const settings = {
+    dots: true,
+    autoplay: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+  };
+
   return (
     <Box
       sx={{
-        // backgroundColor: "#F8F8F8",
         background:
           "linear-gradient(180deg, rgba(234,219,200,1) 15%, rgba(252,253,255,1) 95%)",
         py: 5,
@@ -18,24 +30,35 @@ const Testimonials = () => {
         <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
           Testimonials
         </Typography>
-        <Grid container spacing={3}>
+        <Slider {...settings}>
           {testimonialData.map((testimonial) => (
-            <Grid key={testimonial.id} item xs={12} md={4}>
-              <Paper
-                elevation={3}
-                sx={{ p: 3, borderRadius: "12px", minHeight: "200px" }}
-              >
-                <Typography variant="body1">{testimonial.quote}</Typography>
-                <Typography variant="h6" sx={{ mt: 2 }}>
-                  {testimonial.name}
-                </Typography>
-                <Typography color="text.secondary">
-                  {testimonial.position}
-                </Typography>
-              </Paper>
-            </Grid>
+            <Paper
+              key={testimonial.id}
+              sx={{ p: 3, borderRadius: "12px", minHeight: "200px" }}
+            >
+              <Typography variant="body1">{testimonial.quote}</Typography>
+              <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+                <Avatar
+                  sx={{ width: 100, height: 100, borderRadius: "50%", mr: 2 }}
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">{testimonial.name}</Typography>
+                  <Typography color="text.secondary">
+                    {testimonial.position}
+                  </Typography>
+                </Box>
+              </Box>
+            </Paper>
           ))}
-        </Grid>
+        </Slider>
       </Container>
     </Box>
   );
