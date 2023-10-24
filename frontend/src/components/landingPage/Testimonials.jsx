@@ -2,18 +2,91 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Box, Typography, Container, Grid, Paper, Avatar } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Container,
+  Avatar,
+  Card,
+  CardContent,
+} from "@mui/material";
 import testimonialData from "../constants/Testimonials";
+import quoteIcon from "../../images/quoteIcon.jpeg";
 
 const Testimonials = () => {
+  const NextArrow = ({ onClick }) => (
+    <div
+      onClick={onClick}
+      style={{
+        position: "absolute",
+        top: "50%",
+        right: "10px",
+        transform: "translateY(-50%)",
+        cursor: "pointer",
+        fontSize: "50px",
+        color: "#fff",
+        zIndex: "1",
+        backgroundColor: "#141e46",
+        borderRadius: "10%",
+        padding: "5px",
+      }}
+    >
+      {" "}
+      &#10095;
+    </div>
+  );
+
+  const PrevArrow = ({ onClick }) => (
+    <div
+      onClick={onClick}
+      style={{
+        position: "absolute",
+        top: "50%",
+        left: "10px",
+        transform: "translateY(-50%)",
+        cursor: "pointer",
+        fontSize: "50px",
+        color: "#fff",
+        zIndex: "1",
+        backgroundColor: "#141e46",
+        borderRadius: "10%",
+        padding: "5px",
+      }}
+    >
+      {" "}
+      &#10094;
+    </div>
+  );
+
   const settings = {
     dots: true,
-    autoplay: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
     autoplay: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+    ],
   };
 
   return (
@@ -27,36 +100,78 @@ const Testimonials = () => {
       }}
     >
       <Container>
-        <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
-          Testimonials
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: "bold", mb: 4, textTransform: "uppercase", fontFamily: "initial" }}
+        >
+          What people say about us
         </Typography>
-        <Slider {...settings}>
+        <Slider
+          style={{
+            alignSelf: "center",
+          }}
+          {...settings}
+          centerMode
+          centerPadding="60px"
+        >
           {testimonialData.map((testimonial) => (
-            <Paper
-              key={testimonial.id}
-              sx={{ p: 3, borderRadius: "12px", minHeight: "200px" }}
+            <Card
+              sx={{
+                borderRadius: "6px",
+                background:
+                  "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(29,33,127,1) 100%)",
+                // backgroundColor: "#E4F1FF",
+                height: "350px",
+                margin: "0 50px",
+                maxWidth: {
+                  md: "330px",
+                  sm: "300px",
+                  xs: "180px",
+                },
+              }}
+              elevation={4}
             >
-              <Typography variant="body1">{testimonial.quote}</Typography>
-              <Box sx={{ display: "flex", alignItems: "center", mt: 2 }}>
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
                 <Avatar
-                  sx={{ width: 100, height: 100, borderRadius: "50%", mr: 2 }}
-                  src={testimonial.image}
-                  alt={testimonial.name}
+                  alt="Remy Sharp"
+                  // src={dummyImage}
+                  sx={{ width: 70, height: 70, margin: "5px" }}
                 />
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: "bolder", color: "black" }}
+                >
+                  {testimonial.name}
+                </Typography>
+                <Typography sx={{ fontWeight: "bolder", color: "black" }}>
+                  {testimonial.position}
+                </Typography>
                 <Box
                   sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
+                    backgroundColor: "#F5F5F5",
+                    // background: "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(234,219,200,1) 100%)",
+                    padding: "10px",
+                    borderRadius: 1,
+                    margin: "5px",
+                    height: "140px",
                   }}
                 >
-                  <Typography variant="h6">{testimonial.name}</Typography>
-                  <Typography color="text.secondary">
-                    {testimonial.position}
+                  <img src={quoteIcon} alt="" width="30" />
+                  <Typography
+                    sx={{ color: "black", fontStyle: "italic" }}
+                    variant="body1"
+                  >
+                    {testimonial.quote}
                   </Typography>
                 </Box>
-              </Box>
-            </Paper>
+              </CardContent>
+            </Card>
           ))}
         </Slider>
       </Container>

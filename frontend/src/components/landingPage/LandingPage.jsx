@@ -91,6 +91,8 @@ const LandingPage = () => {
               marginBottom: "30px",
               margin: "auto auto",
               textAlign: "center",
+              fontFamily: "serif",
+              fontStyle: "oblique",
             }}
           >
             This is a platform for athletes of all levels and local businesses

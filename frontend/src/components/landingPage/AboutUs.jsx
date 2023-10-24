@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Container, Grid, Paper } from "@mui/material";
-import Image from "../../images/about_us.jpg";
+import Image1 from "../../images/about.jpg";
+import Image2 from "../../images/about2.jpg";
 import Features from "./Features";
 
 const AboutUs = () => {
@@ -15,7 +16,7 @@ const AboutUs = () => {
         <Typography
           variant="h4"
           align="center"
-          sx={{ mb: 4, fontWeight: "bold" }}
+          sx={{ mb: 4, fontWeight: "bold", pt: 4 }}
         >
           About Us
         </Typography>
@@ -24,17 +25,18 @@ const AboutUs = () => {
             <Paper
               elevation={3}
               sx={{
-                p: 3,
+                p: 4,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 height: "100%",
                 background:
-                  "linear-gradient(180deg, rgba(214,212,109,1) 0%, rgba(245,238,200,1) 70%, rgba(255,255,255,1) 100%)",
+                  "linear-gradient(180deg, rgba(46,67,116,1) 3%, rgba(158,221,255,1) 49%, rgba(252,253,255,1) 100%)",
+                borderRadius: "10px",
               }}
             >
               <img
-                src={Image}
+                src={Image1}
                 alt="About Us"
                 style={{
                   width: "100%",
@@ -44,27 +46,6 @@ const AboutUs = () => {
                   mb: 2,
                 }}
               />
-              <Typography variant="body1" align="center">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper
-              elevation={3}
-              sx={{
-                p: 3,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                height: "100%",
-                background:
-                  "linear-gradient(180deg, rgba(214,212,109,1) 0%, rgba(245,238,200,1) 70%, rgba(255,255,255,1) 100%)",
-              }}
-            >
               <Typography
                 variant="h6"
                 sx={{ mb: 2, fontWeight: "bold", fontSize: "1.8rem" }}
@@ -76,6 +57,34 @@ const AboutUs = () => {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam.
               </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Paper
+              elevation={3}
+              sx={{
+                p: 4,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                height: "100%",
+                background:
+                  "linear-gradient(180deg, rgba(46,67,116,1) 3%, rgba(158,221,255,1) 49%, rgba(252,253,255,1) 100%)",
+                borderRadius: "10px",
+              }}
+            >
+              <img
+                src={Image2}
+                alt="About Us"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  maxHeight: "500px",
+                  borderRadius: "8px",
+                  mb: 2,
+                }}
+              />
+              
               <Typography
                 variant="h6"
                 sx={{ mt: 3, mb: 2, fontWeight: "bold", fontSize: "1.8rem" }}

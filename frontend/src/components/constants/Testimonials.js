@@ -8,8 +8,7 @@ const testimonialData = [
   },
   {
     id: 2,
-    quote:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo officia est assumenda nihil quas ex voluptatibus nemo illo provident sint in necessitatibus amet aliquam, ipsum doloribus! Voluptate eaque, asperiores in perspiciatis at porro cumque reiciendis iste dicta odio rerum omnis, voluptates necessitatibus, nemo magnam amet?",
+    quote: "Lorem ipsum dolor sit amet consectetur.",
     name: "Jane Smith",
     position: "Marketing Director, ABC Corp",
   },
@@ -19,6 +18,13 @@ const testimonialData = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, excepturi.",
     name: "Michael Johnson",
     position: "Founder, Tech Innovations",
+  },
+  {
+    id: 4,
+    quote:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat sit dicta dignissimos minima blanditiis!",
+    name: "Tony Stark",
+    position: "Founder, Stark Innovations",
   },
 ];
 
