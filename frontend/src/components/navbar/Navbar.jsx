@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   AppBar,
   Box,
@@ -20,9 +20,6 @@ import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
 import { addUser, loginUser, logoutUser } from "../../store/slices/UserSlice";
-
-const pages = ["Home", "Connect", "Testimonials"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 // Function to hide/show app bar on scroll
 function HideOnScroll({ children }) {
@@ -60,17 +57,45 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState(false);
-  const userDetails = useSelector((state) => state.user);
-  console.log(userDetails);
+  const [userData, setUserData] = useState({});
+
+  // Load the user information from local storage on component mount
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(true);
+      setUserData(parsedUser);
+    }
+  }, []);
+
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const pages = user
+    ? ["Feed", "Network", "Messages", "Notifications"]
+    : ["Home", "Connect", "Testimonials"];
 
   const handleLogout = () => {
     try {
       // Dispatch the logoutUser thunk
       dispatch(logoutUser(null));
       setUser(false);
+      // Remove user information from local storage on logout
+      localStorage.removeItem("user");
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
+  };
+
+  const handleLogin = () => {
+    // Fetch user data from the backend through Redux dispatch
+    dispatch(loginUser(log_data)).then((response) => {
+      const userDetails = response.payload; // Assuming the user data is in the payload
+
+      // Set the user state and store it in local storage
+      setUser(true);
+      setUserData(userDetails);
+      localStorage.setItem("user", JSON.stringify(userDetails));
+    });
   };
 
   const handleMenuItemClick = (setting) => {
@@ -258,8 +283,7 @@ function Navbar() {
                     },
                   }}
                   onClick={() => {
-                    dispatch(loginUser(log_data));
-                    setUser(true);
+                    handleLogin();
                   }}
                 >
                   <Link
@@ -292,11 +316,12 @@ function Navbar() {
                   }}
                 >
                   {/* Display User's Name */}
-                  {userDetails.user.name}
+                  {/* {userDetails.name} */}
+                  {userData.name}
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User Avatar" src="/path/to/user-avatar.jpg" />
+                    <Avatar alt="User Avatar" src="" />
                   </IconButton>
                 </Tooltip>
                 {/* User Settings Menu */}

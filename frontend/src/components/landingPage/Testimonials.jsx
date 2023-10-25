@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import testimonialData from "../constants/Testimonials";
 import quoteIcon from "../../images/quoteIcon.jpeg";
+import dummyFace from "../../images/dummyFace.jpeg";
 
 const Testimonials = () => {
   const NextArrow = ({ onClick }) => (
@@ -102,7 +103,12 @@ const Testimonials = () => {
       <Container>
         <Typography
           variant="h4"
-          sx={{ fontWeight: "bold", mb: 4, textTransform: "uppercase", fontFamily: "initial" }}
+          sx={{
+            fontWeight: "bold",
+            mb: 4,
+            textTransform: "uppercase",
+            fontFamily: "initial",
+          }}
         >
           What people say about us
         </Typography>
@@ -119,7 +125,7 @@ const Testimonials = () => {
               sx={{
                 borderRadius: "6px",
                 background:
-                  "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(29,33,127,1) 100%)",
+                  "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(20,30,70,1) 100%)",
                 // backgroundColor: "#E4F1FF",
                 height: "350px",
                 margin: "0 50px",
@@ -138,20 +144,58 @@ const Testimonials = () => {
                   alignItems: "center",
                 }}
               >
-                <Avatar
-                  alt="Remy Sharp"
-                  // src={dummyImage}
-                  sx={{ width: 70, height: 70, margin: "5px" }}
-                />
-                <Typography
-                  variant="h5"
-                  sx={{ fontWeight: "bolder", color: "black" }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
                 >
-                  {testimonial.name}
-                </Typography>
-                <Typography sx={{ fontWeight: "bolder", color: "black" }}>
-                  {testimonial.position}
-                </Typography>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={dummyFace}
+                    sx={{
+                      width: 90,
+                      height: 90,
+                      margin: "auto auto",
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      ml: 2,
+                      mb: 2,
+                      mt: 2,
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "WindowFrame",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      {testimonial.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "black",
+                      }}
+                    >
+                      {testimonial.position}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "black",
+                      }}
+                    >
+                      {testimonial.company}
+                    </Typography>
+                  </Box>
+                </Box>
                 <Box
                   sx={{
                     backgroundColor: "#F5F5F5",

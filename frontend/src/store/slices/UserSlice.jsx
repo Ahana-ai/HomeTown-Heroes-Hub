@@ -45,8 +45,8 @@ export const loginUser = createAsyncThunk(
     try {
       console.log(data);
       const res = await axios.post(`${baseURL}/login`, data);
-      console.log(res.data);
-      return res.data;
+      console.log(res.data.isUserExists);
+      return res.data.isUserExists;
     } catch (error) {
       console.log(rejectWithValue(error.response.data));
     }
@@ -68,9 +68,9 @@ export const logoutUser = createAsyncThunk(
 
 export const getUserDetails = createAsyncThunk(
   "details",
-  async (data, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${baseURL}/details`);
+      const res = await axios.get(`${baseURL}/details/${id}`);
       console.log(res.data);
       return res.data;
     } catch (error) {
@@ -159,10 +159,9 @@ const userSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       console.log(action.payload);
-      localStorage.setItem("token", action.payload.token);
       return {
         ...state,
-        user: action.payload.isUserExists,
+        user: action.payload,
         token: action.payload.token,
         addUserStatus: "",
         createUserError: "",
@@ -197,7 +196,6 @@ const userSlice = createSlice({
     },
     [logoutUser.fulfilled]: (state, action) => {
       console.log(action);
-      localStorage.removeItem("token");
       return {
         ...state,
         user: {},

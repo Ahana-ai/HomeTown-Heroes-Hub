@@ -8,6 +8,7 @@ import Testimonials from "./components/landingPage/Testimonials";
 import Registration from "./components/register_login/Registration";
 import Login from "./components/register_login/Login";
 import JumpingScrollIcon from "./components/JumpingScrollIcon";
+import ProfileView from "./components/profiles/ProfileView";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<ProfileView />} />
       </Routes>
       <Footer />
     </Router>

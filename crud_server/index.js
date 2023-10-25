@@ -5,12 +5,15 @@ import router from "./routers/users-routes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import AuthJwt from "./auth/authJwt.js";
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+
+app.use(AuthJwt.authJwt);
 
 app.use(
   express.urlencoded({

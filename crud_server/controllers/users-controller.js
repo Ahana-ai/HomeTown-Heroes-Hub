@@ -136,8 +136,8 @@ class UserController {
   async getDetails(req, res) {
     try {
       const isUserExists = await user.findOne({
-        email: req.body.email,
-        // isDeleted: false,
+        id: req.params._id,
+        isDeleted: false,
       });
 
       if (!isUserExists) {
@@ -212,6 +212,22 @@ class UserController {
     } catch (error) {
       console.error("Error:", error.message);
       return res.status(500).json({ error: "Server Error! --> deleteUser" });
+    }
+  }
+
+  /**
+   * @method userAuth
+   * @description To authenticate users
+   */
+  async userAuth(req, res, next) {
+    try {
+      if (req.user) {
+        next();
+      } else {
+        res.status(500).json("User not Found!");
+      }
+    } catch (err) {
+      throw err;
     }
   }
 }
