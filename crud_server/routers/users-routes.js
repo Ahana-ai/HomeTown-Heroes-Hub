@@ -48,7 +48,10 @@ const upload = multer({
 
 router.post(
   "/register",
-  upload.single("profile_image"),
+  upload.fields([
+    { name: "profile_image", maxCount: 1 },
+    { name: "cover_image", maxCount: 1 },
+  ]),
   UserController.addUser
 );
 router.post("/login", UserController.loginUser);

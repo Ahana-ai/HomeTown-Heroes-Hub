@@ -15,12 +15,12 @@ class UserController {
         email: req.body.email,
         isDeleted: false,
       });
-
+  
       if (isUserExists) {
         res.status(200).json({ msg: "User already exists!" });
         return;
       }
-
+  
       // Hashing the Password
       const hashPassword = async (plainPassword) => {
         const saltRounds = 10;
@@ -32,9 +32,10 @@ class UserController {
           throw err;
         }
       };
-
-      console.log("req.body.password:", req.body.password);
-
+  
+      const profileImage = req.files["profile_image"][0];
+      const coverPhoto = req.files["cover_image"][0];
+  
       const data = {
         name: req.body.name,
         email: req.body.email,
@@ -42,25 +43,23 @@ class UserController {
         role: req.body.role,
         age: req.body.age,
         location: req.body.location,
-        acheivement: req.body.acheivement,
+        achievement: req.body.achievement, 
         talents: req.body.talents,
         bio: req.body.bio,
-        // profile_image: req.file.filename,
+        profile_image: profileImage ? profileImage.filename : "",
+        cover_image: coverPhoto ? coverPhoto.filename : "",
         social_media_links: req.body.social_media_links,
         profile_completion_score: req.body.profile_completion_score,
       };
-
-      console.log("data.picture:", data.profile_image);
-
+  
       const newUser = new user(data);
       await newUser.save();
       return res.status(201).json("User created");
     } catch (error) {
-      return res
-        .status(500)
-        .json({ "Server Error! -> addUser": error.message });
+      return res.status(500).json({ "Server Error! -> addUser": error.message });
     }
   }
+  
 
   /**
    * @method loginUser

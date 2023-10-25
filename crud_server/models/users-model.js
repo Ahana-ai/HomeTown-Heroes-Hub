@@ -15,13 +15,16 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   location: strReq,
-  acheivement: strReq,
+  achievement: strReq,
   talents: strReq,
   bio: strReq,
   profile_image: {
     type: String,
     default: "",
-    // required: true,
+  },
+  cover_image: {
+    type: String,
+    default: "",
   },
   social_media_links: strReq,
   profile_completion_score: {

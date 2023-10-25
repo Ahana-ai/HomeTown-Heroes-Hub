@@ -69,7 +69,7 @@ function Navbar() {
     }
   }, []);
 
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = ["Profile", "Settings", "Help", "Analytics", "Logout"];
   const pages = user
     ? ["Feed", "Network", "Messages", "Notifications"]
     : ["Home", "Connect", "Testimonials"];
@@ -156,7 +156,7 @@ function Navbar() {
                 mr: 2,
                 display: { xs: "none", md: "flex" },
               }}
-              to="/"
+              to={user ? `/feed` : `/`}
             >
               <ImgStyle src={Logo} alt="HHH" />
             </Link>
@@ -316,7 +316,6 @@ function Navbar() {
                   }}
                 >
                   {/* Display User's Name */}
-                  {/* {userDetails.name} */}
                   {userData.name}
                 </Typography>
                 <Tooltip title="Open settings">
@@ -345,13 +344,11 @@ function Navbar() {
                     <MenuItem
                       key={setting}
                       onClick={() => handleMenuItemClick(setting)}
-                      // onClick={handleCloseUserMenu}
                     >
                       <Link
-                        // to={`/${setting.toLowerCase()}`}
                         to={
                           setting === "Logout"
-                            ? `/`
+                            ? `/feed`
                             : `/${setting.toLowerCase()}`
                         }
                         style={{ textDecoration: "none", color: "inherit" }}
