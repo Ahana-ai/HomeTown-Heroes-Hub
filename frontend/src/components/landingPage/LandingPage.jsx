@@ -25,6 +25,7 @@ const LandingPage = () => {
           height: "100vh",
           overflow: "hidden",
           position: "relative",
+          backgroundColor: "#141e46"
         }}
       >
         {(() => {

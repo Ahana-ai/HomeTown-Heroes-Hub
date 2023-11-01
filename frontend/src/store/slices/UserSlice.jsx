@@ -219,6 +219,32 @@ const userSlice = createSlice({
         logoutUserError: action.payload,
       };
     },
+    // Fetch user details success
+    [getUserDetails.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        user: action.payload,
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
+      };
+    },
+
+    // Fetch user details failure
+    [getUserDetails.rejected]: (state, action) => {
+      return {
+        ...state,
+        addUserStatus: "",
+        createUserError: "",
+        loginUserStatus: "",
+        loginUserError: "",
+        logoutUserStatus: "",
+        logoutUserError: "",
+      };
+    },
   },
 });
 

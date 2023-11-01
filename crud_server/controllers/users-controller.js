@@ -15,12 +15,12 @@ class UserController {
         email: req.body.email,
         isDeleted: false,
       });
-  
+
       if (isUserExists) {
         res.status(200).json({ msg: "User already exists!" });
         return;
       }
-  
+
       // Hashing the Password
       const hashPassword = async (plainPassword) => {
         const saltRounds = 10;
@@ -32,10 +32,10 @@ class UserController {
           throw err;
         }
       };
-  
+
       const profileImage = req.files["profile_image"][0];
       const coverPhoto = req.files["cover_image"][0];
-  
+
       const data = {
         name: req.body.name,
         email: req.body.email,
@@ -43,7 +43,7 @@ class UserController {
         role: req.body.role,
         age: req.body.age,
         location: req.body.location,
-        achievement: req.body.achievement, 
+        achievement: req.body.achievement,
         talents: req.body.talents,
         bio: req.body.bio,
         profile_image: profileImage ? profileImage.filename : "",
@@ -51,15 +51,16 @@ class UserController {
         social_media_links: req.body.social_media_links,
         profile_completion_score: req.body.profile_completion_score,
       };
-  
+
       const newUser = new user(data);
       await newUser.save();
       return res.status(201).json("User created");
     } catch (error) {
-      return res.status(500).json({ "Server Error! -> addUser": error.message });
+      return res
+        .status(500)
+        .json({ "Server Error! -> addUser": error.message });
     }
   }
-  
 
   /**
    * @method loginUser
@@ -91,7 +92,6 @@ class UserController {
           );
 
           res.cookie("userToken", token, { maxAge: 3600000 }); // Set your cookie
-          console.log();
           console.log("Logged In...");
 
           return res.status(200).json({ token, isUserExists });
@@ -134,8 +134,11 @@ class UserController {
    */
   async getDetails(req, res) {
     try {
+      const { id } = req.params;
+      console.log(id);
+
       const isUserExists = await user.findOne({
-        id: req.params._id,
+        _id: id,
         isDeleted: false,
       });
 
@@ -143,11 +146,11 @@ class UserController {
         return res.status(404).json({ error: "User Not Found" });
       }
 
-      console.log(isUserExists._id);
+      console.log(isUserExists);
 
       return res.status(200).json(isUserExists);
     } catch (error) {
-      console.error("Error:", error.message);
+      console.log("Error:", error.message);
       return res.status(500).json({ error: "Server Error! --> getId" });
     }
   }

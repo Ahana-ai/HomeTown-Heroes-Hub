@@ -56,7 +56,7 @@ router.post(
 );
 router.post("/login", UserController.loginUser);
 router.get("/logout", UserController.logout);
-router.get("/details/:id", UserController.userAuth, UserController.getDetails);
+router.get("/details/:id",  UserController.getDetails);
 router.put("/edit/:id", UserController.userAuth, UserController.editUser);
 router.put("/delete/:id", UserController.deleteUser);
 

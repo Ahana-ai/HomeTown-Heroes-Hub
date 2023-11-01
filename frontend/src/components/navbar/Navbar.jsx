@@ -49,8 +49,8 @@ const reg_data = {
 };
 
 const log_data = {
-  email: "abcd@gmail.com",
-  password: "abcd",
+  email: "abc@gmail.com",
+  password: "abc",
 };
 
 function Navbar() {
@@ -103,6 +103,9 @@ function Navbar() {
 
     if (setting === "Logout") {
       handleLogout();
+    } else if (setting === "Profile") {
+      console.log(userData._id);
+      window.location.href = `/profile/${userData._id}`;
     } else {
       console.log(`Clicked on ${setting}`);
     }
@@ -348,7 +351,7 @@ function Navbar() {
                       <Link
                         to={
                           setting === "Logout"
-                            ? `/feed`
+                            ? `/`
                             : `/${setting.toLowerCase()}`
                         }
                         style={{ textDecoration: "none", color: "inherit" }}

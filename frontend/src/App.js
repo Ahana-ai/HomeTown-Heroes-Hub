@@ -21,7 +21,7 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<ProfileView />} />
+        <Route path="/profile/:id" element={<ProfileView />} />
       </Routes>
       <Footer />
     </Router>
