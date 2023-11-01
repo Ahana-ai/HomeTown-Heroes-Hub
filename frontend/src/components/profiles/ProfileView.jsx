@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Box, Avatar, Typography, Button, Divider, Grid } from "@mui/material";
+import {
+  Box,
+  Avatar,
+  Typography,
+  Button,
+  Divider,
+  Grid,
+  Chip,
+  CircularProgress,
+} from "@mui/material";
 import cover from "../../images/bg_img.png"; // Replace with your cover image URL
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../store/slices/UserSlice";
 import { useParams } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
 
 const ProfileView = () => {
   const dispatch = useDispatch();
@@ -28,17 +38,17 @@ const ProfileView = () => {
         margin: {
           md: "0 10%",
           sm: "0 6%",
-          xs: "0",
+          xs: "5%",
         },
       }}
     >
       <Grid container spacing={5}>
-        <Grid item md={8}>
+        <Grid item md={8} sm={6} xs={12}>
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              mt: 14,
+              mt: 15,
               backgroundColor: "#fff",
               borderRadius: "8px",
               boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
@@ -48,7 +58,7 @@ const ProfileView = () => {
             {/* Cover Photo */}
             <img
               src={cover}
-              alt="cover photo"
+              alt="cover"
               style={{
                 width: "100%",
                 height: "200px",
@@ -70,8 +80,8 @@ const ProfileView = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
-                  width: "50%",
+                  //   alignItems: "center",
+                  width: "100%",
                 }}
               >
                 {/* Profile Picture */}
@@ -88,7 +98,7 @@ const ProfileView = () => {
                 />
 
                 <Typography
-                  variant="h5"
+                  variant="h4"
                   gutterBottom
                   sx={{
                     mt: 8,
@@ -98,30 +108,49 @@ const ProfileView = () => {
                 </Typography>
 
                 <Typography variant="body2" color="textSecondary">
-                  {userData.title}
+                  {/* {userData.bio} */}
+                  BIO : Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dignissimos eos consequatur voluptate magnam fugiat officiis
+                  incidunt debitis expedita commodi. Perferendis!
                 </Typography>
 
                 <Typography variant="body2" color="textSecondary">
                   {userData.location}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {userData.connections}
+                  {/* {userData.connections} */}
+                  500+ connections
                 </Typography>
 
                 <Typography variant="body2" color="textSecondary">
-                  {userData.followers}
+                  {/* {userData.followers} */}
+                  1k followers
                 </Typography>
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  sx={{ marginTop: 2 }}
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
                 >
-                  Connect
-                </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ marginTop: 2, mr: 5 }}
+                  >
+                    Add Post
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ marginTop: 2 }}
+                  >
+                    Share Profile
+                  </Button>
+                </Box>
               </Box>
 
-              {/* University and Connections */}
+              {/* University and Connections*/}
               <Box
                 sx={{
                   flex: 1,
@@ -138,22 +167,58 @@ const ProfileView = () => {
             </Box>
             <Divider sx={{ width: "100%" }} />
 
-            <Typography variant="body1" sx={{ marginLeft: 2 }}>
-              About Me
-            </Typography>
+            <Box
+              sx={{
+                margin: "10px",
+              }}
+            >
+              <Typography
+                variant="h4"
+                sx={{ marginLeft: 2, textAlign: "center" }}
+              >
+                About Me
+              </Typography>
+
+              <Box
+                sx={{
+                  pl: 3,
+                  pr: 3,
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mt: 2,
+                  }}
+                >
+                  EXPERIENCE: Lorem ipsum dolor sit amet consectetur adipisicing
+                  elit. Sapiente ut ipsa laborum excepturi ducimus. Dolore
+                  consequuntur vero cumque doloribus nulla?
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    mt: 2,
+                  }}
+                >
+                  ACHIEVEMENTS: Lorem ipsum dolor sit amet consectetur
+                  adipisicing elit. Sapiente ut ipsa laborum excepturi ducimus.
+                  Dolore consequuntur vero cumque doloribus nulla?
+                </Typography>
+              </Box>
+            </Box>
 
             <Typography variant="body2" sx={{ marginLeft: 2 }}>
               {userData.about}
             </Typography>
-
-            {/* Add more sections for displaying user data, skills, experience, etc. */}
           </Box>
         </Grid>
-        <Grid item md={4} sm={12}>
+        <Grid item md={4} sm={6} xs={12}>
           <Box
             sx={{
               backgroundColor: "#fff",
-              mt: { md: 15, sm: 0 },
+              mt: { md: 15, sm: 15 },
               p: 2,
               borderRadius: "8px",
               boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
@@ -165,10 +230,83 @@ const ProfileView = () => {
             >
               Activity status
             </Typography>
-
             <Divider sx={{ width: "100%" }} />
 
-            {/* Add more content for the right sidebar */}
+            {/* Profile completion status */}
+            {/* Edit profile button */}
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<EditIcon />}
+              sx={{ mb: 2, mt: 3 }}
+            >
+              Edit Profile
+            </Button>
+
+            <Box sx={{ my: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 1 }}
+              >
+                Profile Completion
+              </Typography>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <CircularProgress
+                  variant="determinate"
+                  value={70}
+                  sx={{ width: "120px", height: "120px", mr: 1 }}
+                />
+                <Box>
+                  <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                    70%
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+
+            {/* Suggested changes */}
+            <Box sx={{ my: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 1 }}
+              >
+                Suggested Changes
+              </Typography>
+              <Chip label="Improve experience section" />
+              {/* Add more chips as needed */}
+            </Box>
+
+            {/* Suggested people */}
+            <Box sx={{ my: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 1 }}
+              >
+                Suggested People
+              </Typography>
+              <Chip label="John Doe" />
+              {/* Add more chips as needed */}
+            </Box>
+
+            {/* Success rate */}
+            <Box sx={{ my: 2 }}>
+              <Typography
+                variant="body2"
+                sx={{ color: "text.secondary", mb: 1 }}
+              >
+                Success Rate
+              </Typography>
+              <CircularProgress
+                variant="determinate"
+                value={80}
+                sx={{ width: "120px", height: "120px", mr: 1 }}
+              />
+              <Box>
+                <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                  80%
+                </Typography>
+              </Box>
+            </Box>
           </Box>
         </Grid>
       </Grid>
