@@ -17,7 +17,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [user, setUser] = useState(false);
   const [role, setRole] = useState("");
   const [logData, setLogData] = useState({
     email: "",
@@ -35,7 +34,6 @@ const Login = () => {
       const userDetails = response.payload;
 
       // Set the user state and store it in local storage
-      setUser(true);
       localStorage.setItem("user", JSON.stringify(userDetails));
       navigate("/feed");
       window.location.reload();
@@ -56,7 +54,7 @@ const Login = () => {
         <Grid item md={6}>
           <img
             src={login}
-            alt="Login Image"
+            alt="Login"
             style={{
               height: "430px",
               objectFit: "cover",
@@ -129,6 +127,7 @@ const Login = () => {
                   <TextField
                     label="Password"
                     variant="outlined"
+                    type="password"
                     fullWidth
                     required
                     value={logData.password}

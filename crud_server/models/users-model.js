@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   location: strReq,
-  achievement: strReq,
-  talents: strReq,
-  bio: strReq,
+  achievement: String,
+  talents: String,
+  bio: String,
   profile_image: {
     type: String,
     default: "",
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  social_media_links: strReq,
+  social_media_links: String,
   profile_completion_score: {
     type: Number,
     // required: true,

@@ -18,7 +18,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addUser, logoutUser } from "../../store/slices/UserSlice";
 
 // Function to hide/show app bar on scroll
@@ -32,32 +32,13 @@ function HideOnScroll({ children }) {
   );
 }
 
-// To delete later
-const reg_data = {
-  name: "B De",
-  email: "b@gmail.com",
-  password: "bc123",
-  role: "business",
-  age: 21,
-  location: "Kolkata",
-  acheivement: "Good",
-  talents: "abc",
-  bio: "abc",
-  // profile_image: { Image },
-  social_media_links: "instagram",
-  profile_completion_score: "",
-};
-
-const log_data = {
-  email: "abc@gmail.com",
-  password: "abc",
-};
-
 function Navbar() {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState(false);
   const [userData, setUserData] = useState({});
+
+  const navigate = useNavigate();
 
   // Load the user information from local storage on component mount
   useEffect(() => {
@@ -91,6 +72,7 @@ function Navbar() {
 
     if (setting === "Logout") {
       handleLogout();
+      navigate("/");
     } else if (setting === "Profile") {
       console.log(userData._id);
       window.location.href = `/profile/${userData._id}`;
@@ -247,7 +229,7 @@ function Navbar() {
                     },
                   }}
                   onClick={() => {
-                    dispatch(addUser(reg_data));
+                    // dispatch(addUser(reg_data));
                   }}
                 >
                   <Link
@@ -259,7 +241,7 @@ function Navbar() {
                       color: "#fff",
                       textDecoration: "none",
                     }}
-                    // to="/register"
+                    to="/register"
                   >
                     SignUp
                   </Link>

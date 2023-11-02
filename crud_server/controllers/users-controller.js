@@ -11,11 +11,12 @@ class UserController {
    */
   async addUser(req, res) {
     try {
+      console.log(req);
       let isUserExists = await user.findOne({
         email: req.body.email,
         isDeleted: false,
       });
-
+      console.log(isUserExists);
       if (isUserExists) {
         res.status(200).json({ msg: "User already exists!" });
         return;
@@ -33,8 +34,8 @@ class UserController {
         }
       };
 
-      const profileImage = req.files["profile_image"][0];
-      const coverPhoto = req.files["cover_image"][0];
+      // const profileImage = req.files["profile_image"][0];
+      // const coverPhoto = req.files["cover_image"][0];
 
       const data = {
         name: req.body.name,
@@ -46,8 +47,8 @@ class UserController {
         achievement: req.body.achievement,
         talents: req.body.talents,
         bio: req.body.bio,
-        profile_image: profileImage ? profileImage.filename : "",
-        cover_image: coverPhoto ? coverPhoto.filename : "",
+        //profile_image: profileImage ? profileImage.filename : "",
+        //cover_image: coverPhoto ? coverPhoto.filename : "",
         social_media_links: req.body.social_media_links,
         profile_completion_score: req.body.profile_completion_score,
       };
