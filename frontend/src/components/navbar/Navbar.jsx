@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link } from "react-router-dom";
-import { addUser, loginUser, logoutUser } from "../../store/slices/UserSlice";
+import { addUser, logoutUser } from "../../store/slices/UserSlice";
 
 // Function to hide/show app bar on scroll
 function HideOnScroll({ children }) {
@@ -84,18 +84,6 @@ function Navbar() {
     } catch (error) {
       console.error("Logout failed:", error.message);
     }
-  };
-
-  const handleLogin = () => {
-    // Fetch user data from the backend through Redux dispatch
-    dispatch(loginUser(log_data)).then((response) => {
-      const userDetails = response.payload; // Assuming the user data is in the payload
-
-      // Set the user state and store it in local storage
-      setUser(true);
-      setUserData(userDetails);
-      localStorage.setItem("user", JSON.stringify(userDetails));
-    });
   };
 
   const handleMenuItemClick = (setting) => {
@@ -286,7 +274,7 @@ function Navbar() {
                     },
                   }}
                   onClick={() => {
-                    handleLogin();
+                    // handleLogin();
                   }}
                 >
                   <Link
@@ -298,7 +286,7 @@ function Navbar() {
                       color: "#fff",
                       textDecoration: "none",
                     }}
-                    // to="/login"
+                    to="/login"
                   >
                     LogIn
                   </Link>
