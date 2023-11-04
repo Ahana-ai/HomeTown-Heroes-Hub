@@ -19,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../images/Logo.png";
 import { styled } from "@mui/system";
 import { Link, useNavigate } from "react-router-dom";
-import { addUser, logoutUser } from "../../store/slices/UserSlice";
+import { logoutUser } from "../../store/slices/UserSlice";
 
 // Function to hide/show app bar on scroll
 function HideOnScroll({ children }) {
@@ -75,7 +75,7 @@ function Navbar() {
       navigate("/");
     } else if (setting === "Profile") {
       console.log(userData._id);
-      window.location.href = `/profile/${userData._id}`;
+      navigate(`/profile/${userData._id}`);
     } else {
       console.log(`Clicked on ${setting}`);
     }

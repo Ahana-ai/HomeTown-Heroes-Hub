@@ -60,7 +60,6 @@ const NotificationComponent = () => {
         p: 3,
         borderRadius: "10px",
         width: "60%",
-        margin: "auto"
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>

@@ -2,35 +2,25 @@ import {
   Box,
   Button,
   Container,
-  FormControl,
   Grid,
-  InputLabel,
   MenuItem,
-  Select,
-  TextField,
   Typography,
 } from "@mui/material";
 import login from "../../images/Login.jpg";
-import { useState } from "react";
-import { loginUser } from "../../store/slices/UserSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Form, Formik } from "formik";
+import * as Yup from "yup";
+import TextFieldFormik from "./formikComponents/TextArea";
+import SelectFormik from "./formikComponents/Select";
+import { loginUser } from "../../store/slices/UserSlice";
 
 const Login = () => {
-  const [role, setRole] = useState("");
-  const [logData, setLogData] = useState({
-    email: "",
-    password: "",
-  });
-
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Fetch user data from the backend through Redux dispatch
-    dispatch(loginUser(logData)).then((response) => {
+  const handleSubmit = (values) => {
+    dispatch(loginUser(values)).then((response) => {
       const userDetails = response.payload;
 
       // Set the user state and store it in local storage
@@ -40,16 +30,13 @@ const Login = () => {
     });
   };
 
-  const handleChange = (prop) => (event) => {
-    setLogData({ ...logData, [prop]: event.target.value });
-  };
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
 
   return (
-    <Container
-      sx={{
-        margin: "130px auto 0 auto",
-      }}
-    >
+    <Container sx={{ margin: "130px auto 0 auto" }}>
       <Grid container spacing={2}>
         <Grid item md={6}>
           <img
@@ -77,80 +64,55 @@ const Login = () => {
               <Typography variant="h4" sx={{ fontWeight: "bold", mb: 4 }}>
                 Login
               </Typography>
-              <form onSubmit={handleSubmit}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <FormControl
-                    fullWidth
-                    sx={{
-                      mb: 2,
-                    }}
-                  >
-                    <InputLabel id="demo-simple-select-label">
-                      {" "}
-                      Select Role
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={role}
-                      label="Your Role"
-                      onChange={(event) => {
-                        setRole(event.target.value);
-                      }}
+              <Formik
+                initialValues={{
+                  email: "",
+                  password: "",
+                }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                <Form>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <SelectFormik
+                      label="Select Role"
+                      name="role"
+                      fullWidth
+                      sx={{ mb: 2 }}
                     >
                       <MenuItem value="Athlete">Athlete</MenuItem>
                       <MenuItem value="Business">Business</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <TextField
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    required
-                    type="email"
-                    value={logData.email}
-                    onChange={handleChange("email")}
-                    sx={{
-                      mb: 2,
-                      input: {
-                        "&:focus": {
-                          backgroundColor: "#F1EFEF",
-                        },
-                      },
-                    }}
-                  />
-                  <TextField
-                    label="Password"
-                    variant="outlined"
-                    type="password"
-                    fullWidth
-                    required
-                    value={logData.password}
-                    onChange={handleChange("password")}
-                    sx={{
-                      mb: 2,
-                      input: {
-                        "&:focus": {
-                          backgroundColor: "#F1EFEF",
-                        },
-                      },
-                    }}
-                  />
-                </Box>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="info"
-                  sx={{ mt: 3 }}
-                >
-                  Submit
-                </Button>
-              </form>
+                    </SelectFormik>
+
+                    <TextFieldFormik
+                      label="Email"
+                      name="email"
+                      type="email"
+                      required
+                      fullWidth
+                      sx={{ mb: 2 }}
+                    />
+
+                    <TextFieldFormik
+                      label="Password"
+                      name="password"
+                      type="password"
+                      required
+                      fullWidth
+                      sx={{ mb: 2 }}
+                    />
+
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="info"
+                      sx={{ mt: 3 }}
+                    >
+                      Submit
+                    </Button>
+                  </Box>
+                </Form>
+              </Formik>
             </Container>
           </Box>
         </Grid>
