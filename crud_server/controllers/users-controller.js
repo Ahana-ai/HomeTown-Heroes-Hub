@@ -69,7 +69,7 @@ class UserController {
    */
   async loginUser(req, res) {
     try {
-      const isUserExists = await user.findOne({
+      let isUserExists = await user.findOne({
         email: req.body.email,
         isDeleted: false,
       });
@@ -81,21 +81,26 @@ class UserController {
         );
 
         if (passwordMatch) {
-          const token = jwt.sign(
+          let token = jwt.sign(
             {
               id: isUserExists._id,
               name: isUserExists.name,
               email: isUserExists.email,
               role: isUserExists.role,
             },
-            "secretKey",
-            { expiresIn: "1hr" }
+            process.env.SECRET_KEY,
+            { expiresIn: "24hr" }
           );
+
+          const userWithJwt = {
+            ...isUserExists.toObject(),
+            jwt: token,
+          };
 
           res.cookie("userToken", token, { maxAge: 3600000 }); // Set your cookie
           console.log("Logged In...");
 
-          return res.status(200).json({ token, isUserExists });
+          return res.status(200).json({ userWithJwt });
         } else {
           return res.status(401).json({ error: "Invalid password" });
         }
@@ -215,22 +220,6 @@ class UserController {
     } catch (error) {
       console.error("Error:", error.message);
       return res.status(500).json({ error: "Server Error! --> deleteUser" });
-    }
-  }
-
-  /**
-   * @method userAuth
-   * @description To authenticate users
-   */
-  async userAuth(req, res, next) {
-    try {
-      if (req.user) {
-        next();
-      } else {
-        res.status(500).json("User not Found!");
-      }
-    } catch (err) {
-      throw err;
     }
   }
 }

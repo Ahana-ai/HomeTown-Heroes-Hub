@@ -1,6 +1,7 @@
 import express from "express";
 import UserController from "../controllers/users-controller.js";
 import ProdController from "../controllers/product-services-controller.js";
+import authorize from "../middleware/authorize.js"
 import multer from "multer";
 import path from "path";
 const router = express.Router();
@@ -56,8 +57,8 @@ router.post(
 );
 router.post("/login", UserController.loginUser);
 router.get("/logout", UserController.logout);
-router.get("/details/:id",  UserController.getDetails);
-router.put("/edit/:id", UserController.userAuth, UserController.editUser);
+router.get("/details/:id", authorize, UserController.getDetails);
+router.put("/edit/:id", UserController.editUser);
 router.put("/delete/:id", UserController.deleteUser);
 
 // Product - Services Data

@@ -26,6 +26,7 @@ const ProfileView = () => {
   useEffect(() => {
     // Fetch user details and store them in Redux
     dispatch(getUserDetails(id)).then((response) => {
+      console.log(response);
       const userD = response.payload;
       setUserData(userD);
       console.log(userD);

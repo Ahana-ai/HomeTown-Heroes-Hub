@@ -5,16 +5,16 @@ const baseURL = "http://localhost:5000";
 
 const initialState = {
   user: {
-    // name: "",
-    // email: "",
-    // age: 0,
-    // location: "",
-    // acheivement: "",
-    // talents: "",
-    // bio: "",
-    // profile_image: "",
-    // social_media_links: "",
-    // profile_completion_score: 0,
+    name: "",
+    email: "",
+    age: 0,
+    location: "",
+    acheivement: "",
+    talents: "",
+    bio: "",
+    profile_image: "",
+    social_media_links: "",
+    profile_completion_score: 0,
   },
   token: "",
   createUserStatus: "",
@@ -45,8 +45,8 @@ export const loginUser = createAsyncThunk(
     try {
       console.log(data);
       const res = await axios.post(`${baseURL}/login`, data);
-      console.log(res.data.isUserExists);
-      return res.data.isUserExists;
+      console.log(res.data);
+      return res.data.userWithJwt;
     } catch (error) {
       console.log(rejectWithValue(error.response.data));
     }
@@ -70,7 +70,20 @@ export const getUserDetails = createAsyncThunk(
   "details",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`${baseURL}/details/${id}`);
+      const user = JSON.parse(localStorage.getItem("user"));
+      console.log(user.jwt);
+
+      if (!user.jwt) {
+        return rejectWithValue("Token not found");
+      }
+
+      // axios.defaults.headers.get["Authorization"] = `Bearer ${user.jwt}`;
+
+      const res = await axios.get(`${baseURL}/details/${id}`, {
+        headers: {
+          Authorization: `Bearer ${user.jwt}`,
+        },
+      });
       console.log(res.data);
       return res.data;
     } catch (error) {
@@ -162,7 +175,7 @@ const userSlice = createSlice({
       return {
         ...state,
         user: action.payload,
-        token: action.payload.token,
+        token: action.payload.jwt,
         addUserStatus: "",
         createUserError: "",
         loginUserStatus: "success",
@@ -224,6 +237,7 @@ const userSlice = createSlice({
       return {
         ...state,
         user: action.payload,
+        // token: action.payload.jwt,
         addUserStatus: "",
         createUserError: "",
         loginUserStatus: "",

@@ -26,7 +26,7 @@ const Login = () => {
       // Set the user state and store it in local storage
       localStorage.setItem("user", JSON.stringify(userDetails));
       navigate("/feed");
-      window.location.reload();
+      // window.location.reload();
     });
   };
 
