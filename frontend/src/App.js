@@ -13,6 +13,7 @@ import FeedPost from "./components/feed/Feed";
 import MessagingComponent from "./components/message/Conversations";
 import Network from "./components/networks/Network";
 import Notification from "./components/notifications/Notification";
+import EditForm from "./components/editForm/EditForm";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/messages" element={<MessagingComponent />} />
         <Route path="/network" element={<Network />} />
         <Route path="/notifications" element={<Notification />} />
+        <Route path="/edit/:id" element={<EditForm />} />
       </Routes>
       <Footer />
     </Router>

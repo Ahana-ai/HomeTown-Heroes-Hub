@@ -11,27 +11,31 @@ import {
 } from "@mui/material";
 import cover from "../../images/bg_img.png"; // Replace with your cover image URL
 import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails } from "../../store/slices/UserSlice";
-import { useParams } from "react-router-dom";
+import { editUser, getUserDetails } from "../../store/slices/UserSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 
 const ProfileView = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  console.log(user);
   const [userData, setUserData] = useState({});
 
   const { id } = useParams();
 
   useEffect(() => {
-    // Fetch user details and store them in Redux
     dispatch(getUserDetails(id)).then((response) => {
-      console.log(response);
       const userD = response.payload;
       setUserData(userD);
-      console.log(userD);
     });
   }, [dispatch, id]);
+
+  const handleEditUser = () => {
+    console.log(userData._id);
+    dispatch(editUser(userData._id)).then((response) => {
+      navigate(`/edit/${response.payload.user._id}`);
+    });
+  };
 
   return (
     <Box
@@ -44,7 +48,7 @@ const ProfileView = () => {
       }}
     >
       <Grid container spacing={5}>
-        <Grid item md={8} sm={6} xs={12}>
+        <Grid item md={8} sm={12} xs={12}>
           <Box
             sx={{
               display: "flex",
@@ -54,6 +58,7 @@ const ProfileView = () => {
               borderRadius: "8px",
               boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
               overflow: "hidden",
+              mb: { md: 5, sm: 0 },
             }}
           >
             {/* Cover Photo */}
@@ -61,9 +66,8 @@ const ProfileView = () => {
               src={cover}
               alt="cover"
               style={{
-                width: "100%",
-                height: "200px",
-                objectFit: "fill",
+                height: "350px",
+                objectFit: "cover",
               }}
             />
 
@@ -81,18 +85,17 @@ const ProfileView = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  //   alignItems: "center",
                   width: "100%",
                 }}
               >
                 {/* Profile Picture */}
                 <Avatar
                   alt="Profile Picture"
-                  // src={userData.profile_image} // Use user data for the profile picture URL
+                  src={userData.profile_image} // Use user data for the profile picture URL
                   sx={{
                     width: 120,
                     height: 120,
-                    border: "2px solid #fff",
+                    border: "3px solid #fff",
                     position: "absolute",
                     top: -60,
                   }}
@@ -103,48 +106,80 @@ const ProfileView = () => {
                   gutterBottom
                   sx={{
                     mt: 8,
+                    fontWeight: "700",
+                    fontStyle: "italic",
                   }}
                 >
                   {userData.name}
                 </Typography>
 
-                <Typography variant="body2" color="textSecondary">
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{
+                    fontSize: "1.02rem",
+                    fontStyle: "italic",
+                    fontWeight: "800",
+                    marginTop: { sm: "10px", xs: "20px" },
+                  }}
+                >
                   {/* {userData.bio} */}
-                  BIO : Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Dignissimos eos consequatur voluptate magnam fugiat officiis
                   incidunt debitis expedita commodi. Perferendis!
                 </Typography>
 
-                <Typography variant="body2" color="textSecondary">
-                  {userData.location}
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{
+                    mt: 1,
+                    color: "darkblue",
+                    fontStyle: "italic",
+                    fontWeight: "600",
+                  }}
+                >
+                  {/* {userData.location} */}
+                  Kolkata, West Bengal, India
                 </Typography>
-                <Typography variant="body2" color="textSecondary">
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  sx={{
+                    mt: 1,
+                    color: "darkblue",
+                    fontStyle: "italic",
+                    fontWeight: "600",
+                  }}
+                >
                   {/* {userData.connections} */}
                   500+ connections
-                </Typography>
-
-                <Typography variant="body2" color="textSecondary">
+                  <span style={{ margin: "15px" }}>.</span>
                   {/* {userData.followers} */}
                   1k followers
                 </Typography>
+
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "row",
+                    justifyContent: "space-around",
                   }}
                 >
                   <Button
                     variant="contained"
-                    color="primary"
-                    sx={{ marginTop: 2, mr: 5 }}
+                    sx={{
+                      marginTop: 2,
+                      mr: 5,
+                      backgroundColor: "darkblue",
+                    }}
                   >
                     Add Post
                   </Button>
 
                   <Button
                     variant="contained"
-                    color="primary"
-                    sx={{ marginTop: 2 }}
+                    sx={{ marginTop: 2, backgroundColor: "darkblue" }}
                   >
                     Share Profile
                   </Button>
@@ -154,16 +189,44 @@ const ProfileView = () => {
               {/* University and Connections*/}
               <Box
                 sx={{
-                  flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  marginLeft: 2,
+                  marginRight: 5,
+                  position: "absolute",
+                  top: {
+                    sm: 90,
+                    xs: 120,
+                  },
+                  left: {
+                    sm: 400,
+                    xs: 15,
+                  },
                 }}
               >
-                <Typography variant="body2" color="textSecondary">
-                  {userData.university}
-                </Typography>
+                {userData.role === "Athlete" ? (
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: "1.05rem",
+                      fontStyle: "italic",
+                      color: "darkblue",
+                    }}
+                  >
+                    {/* {userData.university} */}
+                    Mexican University
+                  </Typography>
+                ) : (
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      fontWeight: "bolder",
+                      fontSize: "1.05rem",
+                      fontStyle: "italic",
+                      color: "darkblue",
+                    }}
+                  >
+                    Business
+                  </Typography>
+                )}
               </Box>
             </Box>
             <Divider sx={{ width: "100%" }} />
@@ -175,9 +238,15 @@ const ProfileView = () => {
             >
               <Typography
                 variant="h4"
-                sx={{ marginLeft: 2, textAlign: "center" }}
+                sx={{
+                  marginLeft: 2,
+                  marginBottom: 2,
+                  textAlign: "center",
+                  textTransform: "uppercase",
+                  fontWeight: "bolder",
+                }}
               >
-                About Me
+                About
               </Typography>
 
               <Box
@@ -186,40 +255,204 @@ const ProfileView = () => {
                   pr: 3,
                 }}
               >
+                {userData.role === "Athlete" ? (
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 2,
+                        textTransform: "uppercase",
+                        fontWeight: "700",
+                        color: "darkblue",
+                        textAlign: "center",
+                      }}
+                    >
+                      Talents:
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        color: "#6C5F5B",
+                      }}
+                    >
+                      {/* {userData.talents} */}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolorum deserunt similique consectetur voluptate eum sed
+                      expedita praesentium dolorem eius voluptas alias fugiat
+                      porro dolore consequuntur fuga nam blanditiis ad incidunt
+                      voluptatem facere numquam excepturi, modi aspernatur
+                      culpa? Quaerat.
+                    </Typography>
+
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 2,
+                        textTransform: "uppercase",
+                        fontWeight: "700",
+                        color: "darkblue",
+                        textAlign: "center",
+                      }}
+                    >
+                      Acheivements:
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        color: "#6C5F5B",
+                      }}
+                    >
+                      {/* {userData.acheivements} */}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolorum deserunt similique consectetur voluptate eum sed
+                      expedita praesentium dolorem eius voluptas alias fugiat
+                      porro dolore consequuntur fuga nam blanditiis ad incidunt
+                      voluptatem facere numquam excepturi, modi aspernatur
+                      culpa? Quaerat.
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 2,
+                        textTransform: "uppercase",
+                        fontWeight: "700",
+                        color: "darkblue",
+                        textAlign: "center",
+                      }}
+                    >
+                      Products & Services:
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        color: "#6C5F5B",
+                      }}
+                    >
+                      {/* {userData.prod_services} */}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolorum deserunt similique consectetur voluptate eum sed
+                      expedita praesentium dolorem eius voluptas alias fugiat
+                      porro dolore consequuntur fuga nam blanditiis ad incidunt
+                      voluptatem facere numquam excepturi, modi aspernatur
+                      culpa? Quaerat.
+                    </Typography>
+
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 2,
+                        textTransform: "uppercase",
+                        fontWeight: "700",
+                        color: "darkblue",
+                        textAlign: "center",
+                      }}
+                    >
+                      Acheivements:
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        color: "#6C5F5B",
+                      }}
+                    >
+                      {/* {userData.acheivements} */}
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolorum deserunt similique consectetur voluptate eum sed
+                      expedita praesentium dolorem eius voluptas alias fugiat
+                      porro dolore consequuntur fuga nam blanditiis ad incidunt
+                      voluptatem facere numquam excepturi, modi aspernatur
+                      culpa? Quaerat.
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+
+              <Divider sx={{ width: "100%", margin: "30px 0px" }} />
+
+              <Box
+                sx={{
+                  margin: "10px",
+                }}
+              >
                 <Typography
-                  variant="body1"
+                  variant="h5"
                   sx={{
-                    mt: 2,
+                    marginLeft: 2,
+                    textAlign: "center",
+                    textTransform: "uppercase",
+                    fontWeight: "bolder",
                   }}
                 >
-                  EXPERIENCE: Lorem ipsum dolor sit amet consectetur adipisicing
-                  elit. Sapiente ut ipsa laborum excepturi ducimus. Dolore
-                  consequuntur vero cumque doloribus nulla?
+                  Contact Information
                 </Typography>
 
-                <Typography
-                  variant="body2"
+                <Box
                   sx={{
-                    mt: 2,
+                    pl: 3,
+                    pr: 3,
                   }}
                 >
-                  ACHIEVEMENTS: Lorem ipsum dolor sit amet consectetur
-                  adipisicing elit. Sapiente ut ipsa laborum excepturi ducimus.
-                  Dolore consequuntur vero cumque doloribus nulla?
-                </Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mt: 2,
+                      textTransform: "uppercase",
+                      fontWeight: "700",
+                      color: "darkblue",
+                      textAlign: "center",
+                    }}
+                  >
+                    Email:
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      color: "#6C5F5B",
+                      textAlign: "center",
+                    }}
+                  >
+                    {/* {userData.email} */}
+                    Lorem ipsum dolor sit amet.
+                  </Typography>
+
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mt: 2,
+                      textTransform: "uppercase",
+                      fontWeight: "700",
+                      color: "darkblue",
+                      textAlign: "center",
+                    }}
+                  >
+                    Social Media Links:
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      color: "#6C5F5B",
+                      textAlign: "center",
+                    }}
+                  >
+                    {/* {userData.social_media_links} */}
+                  </Typography>
+                </Box>
               </Box>
             </Box>
-
-            <Typography variant="body2" sx={{ marginLeft: 2 }}>
-              {userData.about}
-            </Typography>
           </Box>
         </Grid>
-        <Grid item md={4} sm={6} xs={12}>
+        <Grid item md={4} sm={12} xs={12}>
           <Box
             sx={{
               backgroundColor: "#fff",
-              mt: { md: 15, sm: 15 },
+              mt: {
+                md: 15,
+                sm: 0,
+              },
+              mb: 5,
               p: 2,
               borderRadius: "8px",
               boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
@@ -227,23 +460,39 @@ const ProfileView = () => {
           >
             <Typography
               variant="h5"
-              sx={{ fontWeight: "bolder", marginBottom: 2 }}
+              sx={{
+                fontWeight: "bolder",
+                marginBottom: 2,
+                textAlign: "center",
+              }}
             >
               Activity status
             </Typography>
+
             <Divider sx={{ width: "100%" }} />
 
-            {/* Profile completion status */}
             {/* Edit profile button */}
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<EditIcon />}
-              sx={{ mb: 2, mt: 3 }}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              Edit Profile
-            </Button>
+              <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+                sx={{
+                  mb: 2,
+                  mt: 3,
+                  backgroundColor: "darkblue",
+                }}
+                onClick={handleEditUser}
+              >
+                Edit Profile
+              </Button>
+            </Box>
 
+            {/* Profile completion status */}
             <Box sx={{ my: 2 }}>
               <Typography
                 variant="body2"
@@ -285,8 +534,15 @@ const ProfileView = () => {
               >
                 Suggested People
               </Typography>
-              <Chip label="John Doe" />
-              {/* Add more chips as needed */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Chip label="John Doe" sx={{ mb: 2 }} />
+                <Chip label="Alice Twinkle" />
+              </Box>
             </Box>
 
             {/* Success rate */}

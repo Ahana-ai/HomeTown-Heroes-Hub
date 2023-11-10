@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  prod_services: String,
+  school_university_name: String,
   social_media_links: String,
   profile_completion_score: {
     type: Number,

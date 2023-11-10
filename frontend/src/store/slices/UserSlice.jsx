@@ -77,8 +77,6 @@ export const getUserDetails = createAsyncThunk(
         return rejectWithValue("Token not found");
       }
 
-      // axios.defaults.headers.get["Authorization"] = `Bearer ${user.jwt}`;
-
       const res = await axios.get(`${baseURL}/details/${id}`, {
         headers: {
           Authorization: `Bearer ${user.jwt}`,
