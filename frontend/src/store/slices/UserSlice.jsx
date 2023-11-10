@@ -71,7 +71,6 @@ export const getUserDetails = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      console.log(user.jwt);
 
       if (!user.jwt) {
         return rejectWithValue("Token not found");

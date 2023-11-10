@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import cover from "../../images/bg_img.png"; // Replace with your cover image URL
 import { useDispatch, useSelector } from "react-redux";
-import { editUser, getUserDetails } from "../../store/slices/UserSlice";
+import { getUserDetails } from "../../store/slices/UserSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -32,9 +32,7 @@ const ProfileView = () => {
 
   const handleEditUser = () => {
     console.log(userData._id);
-    dispatch(editUser(userData._id)).then((response) => {
-      navigate(`/edit/${response.payload.user._id}`);
-    });
+    navigate(`/edit/${userData._id}`);
   };
 
   return (
