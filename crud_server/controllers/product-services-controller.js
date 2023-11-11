@@ -13,7 +13,7 @@ class ProdController {
         name: req.body.name,
         description: req.body.description,
         category: req.body.category,
-        // images: req.file.filename,
+        images: req.file.filename,
         price: req.body.price,
         availability: req.body.availability,
         available_number: req.body.available_number,

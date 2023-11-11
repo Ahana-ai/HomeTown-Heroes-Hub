@@ -1,9 +1,10 @@
 import express from "express";
 import UserController from "../controllers/users-controller.js";
 import ProdController from "../controllers/product-services-controller.js";
-import authorize from "../middleware/authorize.js"
+import authorize from "../middleware/authorize.js";
 import multer from "multer";
 import path from "path";
+import PostController from "../controllers/posts-controller.js";
 const router = express.Router();
 
 // Setup file storage
@@ -25,6 +26,7 @@ const storage = multer.diskStorage({
 });
 
 const maxSize = 5 * 1024 * 1024;
+// const maxSize = 100 * 1024 * 1024;
 
 const upload = multer({
   storage: storage,
@@ -32,12 +34,13 @@ const upload = multer({
     if (
       file.mimetype == "image/png" ||
       file.mimetype == "image/jpg" ||
-      file.mimetype == "image/jpeg"
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "video/mp4"
     ) {
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+      return cb(new Error("Only .png, .jpg, .jpeg and .mp4 format allowed!"));
     }
   },
   limits: {
@@ -66,5 +69,11 @@ router.post("/create-product", ProdController.addProduct);
 router.get("/product/:id", ProdController.getDetails);
 router.put("/edit-product/:id", ProdController.editProdServ);
 router.put("/delete-product/:id", ProdController.deleteProdServ);
+
+// Post Data
+router.post("/create-post", upload.array("images", 5), PostController.addPost);
+router.get("/post-:id", PostController.getDetails);
+router.put("/edit-post/:id", PostController.editPost);
+router.put("/delete-post/:id", PostController.deletePost);
 
 export default router;
