@@ -35,7 +35,7 @@ export const addPost = createAsyncThunk(
   }
 );
 
-export const getDetails = createAsyncThunk(
+export const getPosts = createAsyncThunk(
   "details",
   async (id, { rejectWithValue }) => {
     try {
@@ -121,7 +121,7 @@ const postSlice = createSlice({
       };
     },
     // Fetch Post details
-    [getDetails.fulfilled]: (state, action) => {
+    [getPosts.fulfilled]: (state, action) => {
       return {
         ...state,
         post: action.payload,
@@ -135,7 +135,7 @@ const postSlice = createSlice({
         deletePostError: "",
       };
     },
-    [getDetails.pending]: (state, action) => {
+    [getPosts.pending]: (state, action) => {
       return {
         ...state,
         createPostStatus: "",
@@ -148,7 +148,7 @@ const postSlice = createSlice({
         deletePostError: "",
       };
     },
-    [getDetails.rejected]: (state, action) => {
+    [getPosts.rejected]: (state, action) => {
       return {
         ...state,
         createPostStatus: "",

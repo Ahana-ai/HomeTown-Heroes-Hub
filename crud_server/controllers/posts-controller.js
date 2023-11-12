@@ -8,10 +8,11 @@ class PostController {
    */
   async addPost(req, res) {
     try {
-      const { text, caption, likes, comments, shares } = req.body;
+      const { userId, text, caption, likes, comments, shares } = req.body;
       const images = req.files.map((file) => file.filename);
 
       const newPost = await Post.create({
+        userId,
         images,
         text,
         caption,
@@ -29,23 +30,21 @@ class PostController {
   }
 
   /**
-   * @method getDetails
-   * @description It will return the id of the object i.e. post
+   * @method getPosts
+   * @description It will return all the posts of a specific user
    */
-  async getDetails(req, res) {
+  async getPosts(req, res) {
     try {
-      const isPostExists = await Post.findOne({
-        id: req.params._id,
+      const posts = await Post.find({
+        userId: req.params.id,
         isDeleted: false,
       });
 
-      if (!isPostExists) {
-        return res.status(404).json({ error: "Post Not Found" });
+      if (posts.length === 0) {
+        return res.status(404).json({ error: "No Posts Found" });
       }
 
-      console.log(isPostExists._id);
-
-      return res.status(200).json(isPostExists);
+      return res.status(200).json(posts);
     } catch (error) {
       console.error("Error:", error.message);
       return res.status(500).json({ error: "Server Error! --> getDetails" });

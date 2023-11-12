@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema(
   {
+    userId: String,
     images: [String],
     text: String,
     caption: {
