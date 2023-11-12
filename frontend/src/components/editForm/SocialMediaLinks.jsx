@@ -2,18 +2,35 @@ import React, { useState } from "react";
 import { Box, TextField, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useFormikContext } from "formik";
 
-const SocialMediaLinksFormik = ({ label, name, type, required, fullWidth, sx }) => {
+const SocialMediaLinksFormik = ({ name, type, sx }) => {
   const [links, setLinks] = useState([""]);
+
+  // const addLink = () => {
+  //   setLinks([...links, ""]);
+  // };
+
+  // const removeLink = (index) => {
+  //   const updatedLinks = [...links];
+  //   updatedLinks.splice(index, 1);
+  //   setLinks(updatedLinks);
+  // };
+
+  const { values, setFieldValue } = useFormikContext();
+
+  const linksArray = Array.isArray(values[name]) ? values[name] : [];
 
   const addLink = () => {
     setLinks([...links, ""]);
+    setFieldValue(name, [...linksArray, ""]);
   };
 
   const removeLink = (index) => {
     const updatedLinks = [...links];
     updatedLinks.splice(index, 1);
     setLinks(updatedLinks);
+    setFieldValue(name, updatedLinks);
   };
 
   return (

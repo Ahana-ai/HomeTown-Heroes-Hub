@@ -8,12 +8,13 @@ import Testimonials from "./components/landingPage/Testimonials";
 import Registration from "./components/register_login/Registration";
 import Login from "./components/register_login/Login";
 import JumpingScrollIcon from "./components/JumpingScrollIcon";
-import ProfileView from "./components/profiles/ProfileView";
+import MyProfileView from "./components/profiles/MyProfileView";
 import FeedPost from "./components/feed/Feed";
 import MessagingComponent from "./components/message/Conversations";
 import Network from "./components/networks/Network";
 import Notification from "./components/notifications/Notification";
 import EditForm from "./components/editForm/EditForm";
+import Settings from "./components/settings/Settings"
 
 function App() {
   return (
@@ -26,12 +27,13 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile/:id" element={<ProfileView />} />
+        <Route path="/profile/:id" element={<MyProfileView />} />
         <Route path="/feed" element={<FeedPost />} />
         <Route path="/messages" element={<MessagingComponent />} />
         <Route path="/network" element={<Network />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/edit/:id" element={<EditForm />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       <Footer />
     </Router>

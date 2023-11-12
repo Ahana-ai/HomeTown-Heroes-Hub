@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   },
   prod_services: String,
   school_university_name: String,
-  social_media_links: String,
+  social_media_links: [String],
   profile_completion_score: {
     type: Number,
     // required: true,
