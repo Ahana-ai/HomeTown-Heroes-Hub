@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import {
   Box,
   Paper,
-  Typography,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  Divider,
-  Switch,
-  Select,
-  MenuItem,
   IconButton,
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -20,6 +15,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import AccountPreferenes from "./AccountPreferenes";
 
 const Settings = () => {
   const [selectedOption, setSelectedOption] = useState("account");
@@ -27,63 +23,7 @@ const Settings = () => {
   const renderContent = () => {
     switch (selectedOption) {
       case "account":
-        return (
-          <>
-            <Typography variant="h5" mb={3} textAlign="center">
-              Account Preferences
-            </Typography>
-            <Divider mb={3} />
-            <List>
-              <ListItem>
-                <ListItemText primary="Profile Information" />
-                <List>
-                  <ListItem>
-                    <ListItemText primary="Account Information" />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary="Analytics Data" />
-                  </ListItem>
-                </List>
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Display" />
-                <List>
-                  <ListItem>
-                    <ListItemText primary="Dark Mode" />
-                    <Switch /* Add switch state and onChange handler */ />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary="Language Preference" />
-                    <Select /* Add select state and onChange handler */>
-                      <MenuItem value="english">English</MenuItem>
-                      <MenuItem value="spanish">Spanish</MenuItem>
-                    </Select>
-                  </ListItem>
-                </List>
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="General Preferences" />
-                <List>
-                  <ListItem>
-                    <ListItemText primary="Autoplay Videos" />
-                    <Switch /* Add switch state and onChange handler */ />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary="Sound effects" />
-                    <Switch /* Add switch state and onChange handler */ />
-                  </ListItem>
-                  {/* Add more general preferences */}
-                </List>
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Deactivated Account" />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Delete Account" />
-              </ListItem>
-            </List>
-          </>
-        );
+        return <AccountPreferenes />;
       case "security":
         return (
           <>
@@ -125,7 +65,14 @@ const Settings = () => {
   };
 
   return (
-    <Box display="flex" minHeight="100vh" bgcolor="#f0f2f5">
+    <Box
+      display="flex"
+      minHeight="100vh"
+      bgcolor="#f0f2f5"
+      sx={{
+        mt: 15,
+      }}
+    >
       {/* Left Sidebar */}
       <Box width={250} bgcolor="#fff" p={2} boxShadow={2}>
         <List>
