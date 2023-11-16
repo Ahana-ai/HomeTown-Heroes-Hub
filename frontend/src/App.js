@@ -14,7 +14,8 @@ import MessagingComponent from "./components/message/Conversations";
 import Network from "./components/networks/Network";
 import Notification from "./components/notifications/Notification";
 import EditForm from "./components/editForm/EditForm";
-import Settings from "./components/settings/Settings"
+import Settings from "./components/settings/Settings";
+import AddPost from "./components/profiles/posts/AddPost";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/notifications" element={<Notification />} />
         <Route path="/edit/:id" element={<EditForm />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/add-post" element={<AddPost />} />
       </Routes>
       <Footer />
     </Router>

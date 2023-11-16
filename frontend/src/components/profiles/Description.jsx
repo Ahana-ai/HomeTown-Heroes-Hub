@@ -1,7 +1,10 @@
 import { Box, Avatar, Typography, Button, Divider } from "@mui/material";
 import cover from "../../images/bg_img.png";
+import { useNavigate } from "react-router-dom";
 
 const Description = ({ userData }) => {
+  const navigate = useNavigate();
+
   return (
     <Box
       sx={{
@@ -126,6 +129,9 @@ const Description = ({ userData }) => {
                 marginTop: 2,
                 mr: 5,
                 backgroundColor: "darkblue",
+              }}
+              onClick={() => {
+                navigate("/add-post");
               }}
             >
               Add Post

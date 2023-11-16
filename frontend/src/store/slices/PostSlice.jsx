@@ -26,7 +26,11 @@ export const addPost = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log(data);
-      const res = await axios.post(`${baseURL}/create-post`, data);
+      const res = await axios.post(`${baseURL}/create-post`, data, {
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      });
       console.log(res.data);
       return res.data;
     } catch (error) {

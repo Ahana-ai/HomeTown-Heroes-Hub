@@ -9,7 +9,13 @@ class PostController {
   async addPost(req, res) {
     try {
       const { userId, text, caption, likes, comments, shares } = req.body;
-      const images = req.files.map((file) => file.filename);
+      const images = req?.files?.map((file) => file?.filename);
+      console.log("Body: ", req.body);
+      console.log("File: ",req.file);
+
+      if (!images || images.length === 0) {
+        console.log("No images received or empty array");
+      }
 
       const newPost = await Post.create({
         userId,

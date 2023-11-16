@@ -64,3 +64,7 @@ code {
     transform: translateY(0px);
   }
 }
+
+.FileInput {
+  display: none;
+}

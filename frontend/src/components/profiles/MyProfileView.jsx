@@ -5,7 +5,7 @@ import { getUserDetails } from "../../store/slices/UserSlice";
 import { useParams } from "react-router-dom";
 import ActivityStatus from "./ActivityStatus";
 import Description from "./Description";
-import MyPosts from "./MyPosts";
+import MyPosts from "./posts/MyPosts";
 
 const ProfileView = () => {
   const dispatch = useDispatch();
@@ -39,10 +39,10 @@ const ProfileView = () => {
         <Grid item md={4} sm={12} xs={12}>
           <ActivityStatus userData={userData} />
         </Grid>
-        <Box>
-          <MyPosts />
-        </Box>
       </Grid>
+      <Box>
+        <MyPosts />
+      </Box>
     </Box>
   );
 };
