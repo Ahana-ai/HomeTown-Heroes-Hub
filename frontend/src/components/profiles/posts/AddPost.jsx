@@ -4,6 +4,7 @@ import {
   Button,
   Divider,
   FormControl,
+  ImageList,
   Input,
   InputLabel,
   Typography,
@@ -15,14 +16,16 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../../store/slices/PostSlice";
 import Swal from "sweetalert2";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import storage from "../../firebase";
+import { v4 } from "uuid";
 
 const AddPost = () => {
-  const initialValues = { caption: "", media: [] };
   const fileInputRef = useRef(null);
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [imageUploads, setImageUploads] = useState([]);
   const [user, setUserData] = useState({});
 
   useEffect(() => {
@@ -36,19 +39,30 @@ const AddPost = () => {
     getUserData();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
     const caption = formData.get("caption");
-    // const images = formData.getAll("images");
-    formData.append("images", selectedFiles)
 
-    const values = { caption, images: selectedFiles, userId: user?._id };
+    if (imageUploads.length === 0) {
+      toast.info("Please select at least one image!");
+      return;
+    }
 
-    dispatch(addPost(values))
-      .then((response) => {
-        console.log("Submitted:", response?.payload);
+    try {
+      const uploadedImages = await Promise.all(
+        imageUploads.map(async (file) => {
+          const imageRef = ref(storage, `images/${file.name + v4()}`);
+          await uploadBytes(imageRef, file);
+          const downloadUrl = await getDownloadURL(imageRef);
+          return downloadUrl;
+        })
+      );
+
+      const values = { caption, images: uploadedImages, userId: user?._id };
+
+      dispatch(addPost(values)).then((response) => {
+        console.log(response.payload);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -56,20 +70,21 @@ const AddPost = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-      })
-      .catch((error) => {
-        console.error("Error submitting post:", error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-          footer: '<a href="#">Why do I have this issue?</a>',
-        });
       });
 
-    // Reset the form after submission
-    e.target.reset();
-    setSelectedFiles([]);
+      // Reset the form after submission
+      e.target.reset();
+      setImageUploads([]);
+    } catch (error) {
+      console.error("Error submitting post:", error);
+
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
   };
 
   const handleFileButtonClick = () => {
@@ -80,20 +95,20 @@ const AddPost = () => {
     const files = event?.target?.files;
 
     if (files) {
-      setSelectedFiles(Array.from(files));
+      setImageUploads(Array.from(files));
+      toast.success("Images uploaded successfully!");
     } else {
       // Handle the case when files are undefined or null
-      alert("No files");
       console.error("No files selected");
     }
   };
 
   const removeSelectedFile = (index) => {
-    const updatedFiles = [...selectedFiles];
-    const removedFile = updatedFiles.splice(index, 1)[0];
-    setSelectedFiles(updatedFiles);
+    const updatedImageUploads = [...imageUploads];
+    updatedImageUploads.splice(index, 1);
+    setImageUploads(updatedImageUploads);
 
-    toast.success(`Removed: ${removedFile.name}`);
+    toast.success(`Removed image`);
   };
 
   return (
@@ -164,24 +179,22 @@ const AddPost = () => {
         </FormControl>
 
         {/* Display selected images */}
-        {selectedFiles?.length > 0 && (
+        {imageUploads?.length > 0 && (
           <Box sx={{ marginBottom: 2 }}>
             <Typography variant="body1" sx={{ fontWeight: "bold" }}>
               Selected Images:
             </Typography>
             <ul>
-              {selectedFiles?.map((file, index) => (
+              {imageUploads?.map((file, index) => (
                 <li key={index} style={{ marginBottom: "10px" }}>
                   <img
                     src={URL.createObjectURL(file)}
-                    alt={file.name}
                     style={{
                       maxWidth: "200px",
                       maxHeight: "200px",
                       marginRight: "10px",
                     }}
                   />
-                  <span>{file.name}</span>
                   <Button
                     variant="outlined"
                     color="secondary"

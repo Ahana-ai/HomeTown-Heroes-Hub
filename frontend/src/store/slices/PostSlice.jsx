@@ -26,11 +26,7 @@ export const addPost = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log(data);
-      const res = await axios.post(`${baseURL}/create-post`, data, {
-        headers: {
-          "content-type": "multipart/form-data",
-        },
-      });
+      const res = await axios.post(`${baseURL}/create-post`, data);
       console.log(res.data);
       return res.data;
     } catch (error) {
@@ -44,7 +40,7 @@ export const getPosts = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${baseURL}/post-${id}`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     } catch (error) {
       console.log(rejectWithValue(error.response));

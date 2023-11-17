@@ -71,7 +71,7 @@ router.put("/edit-product/:id", ProdController.editProdServ);
 router.put("/delete-product/:id", ProdController.deleteProdServ);
 
 // Post Data
-router.post("/create-post", upload.array("images", 5), PostController.addPost);
+router.post("/create-post", PostController.addPost);
 router.get("/post-:id", PostController.getPosts);
 router.put("/edit-post/:id", PostController.editPost);
 router.put("/delete-post/:id", PostController.deletePost);
