@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
+import SuggestedPeople from "./SuggestedPeople";
 
 const ActivityStatus = ({ userData }) => {
   const navigate = useNavigate();
@@ -94,20 +95,7 @@ const ActivityStatus = ({ userData }) => {
       </Box>
 
       {/* Suggested people */}
-      <Box sx={{ my: 2 }}>
-        <Typography variant="body2" sx={{ color: "text.secondary", mb: 1 }}>
-          Suggested People
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Chip label="John Doe" sx={{ mb: 2 }} />
-          <Chip label="Alice Twinkle" />
-        </Box>
-      </Box>
+      <SuggestedPeople />
 
       {/* Success rate */}
       <Box sx={{ my: 2 }}>

@@ -1,9 +1,83 @@
 import { Box, Avatar, Typography, Button, Divider } from "@mui/material";
 import cover from "../../images/bg_img.png";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import {
+  FaPlus,
+  FaShare,
+  FaUserPlus,
+  FaLink,
+  FaUsers,
+  FaUserFriends,
+  FaUserCheck,
+} from "react-icons/fa";
 
 const Description = ({ userData }) => {
   const navigate = useNavigate();
+
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+
+  const userIdFromLocalStorage = currentUser._id;
+
+  const isCurrentUser = userData._id === userIdFromLocalStorage;
+
+  const handleAddPostClick = () => {
+    navigate("/add-post");
+  };
+
+  const handleShareProfileClick = () => {
+    // Replace this with your actual logic for sharing the profile
+    Swal.fire({
+      icon: "info",
+      title: "Share Profile",
+      text: "Feature under development!",
+    });
+  };
+
+  const handleFollowClick = () => {
+    // Replace this with your actual logic for following the user
+    Swal.fire({
+      icon: "info",
+      title: "Follow",
+      text: "Feature under development!",
+    });
+  };
+
+  const handleConnectClick = () => {
+    // Replace this with your actual logic for connecting with the user
+    Swal.fire({
+      icon: "info",
+      title: "Connect",
+      text: "Feature under development!",
+    });
+  };
+
+  const handleMyFollowersClick = () => {
+    // Replace this with your actual logic for "My Followers"
+    Swal.fire({
+      icon: "info",
+      title: "My Followers",
+      text: "Feature under development!",
+    });
+  };
+
+  const handleMyFollowingClick = () => {
+    // Replace this with your actual logic for "My Following"
+    Swal.fire({
+      icon: "info",
+      title: "My Following",
+      text: "Feature under development!",
+    });
+  };
+
+  const handleMyConnectionsClick = () => {
+    // Replace this with your actual logic for "My Connections"
+    Swal.fire({
+      icon: "info",
+      title: "My Connections",
+      text: "Feature under development!",
+    });
+  };
 
   return (
     <Box
@@ -33,7 +107,8 @@ const Description = ({ userData }) => {
           display: "flex",
           flexDirection: "row",
           alignItems: "flex-start",
-          padding: 2,
+          padding: 8,
+          paddingBottom: 2,
           position: "relative",
         }}
       >
@@ -123,26 +198,92 @@ const Description = ({ userData }) => {
               justifyContent: "space-around",
             }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                marginTop: 2,
-                mr: 5,
-                backgroundColor: "darkblue",
-              }}
-              onClick={() => {
-                navigate("/add-post");
-              }}
-            >
-              Add Post
-            </Button>
+            {isCurrentUser ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  startIcon={<FaPlus />}
+                  sx={{
+                    marginTop: 2,
+                    mr: 5,
+                    backgroundColor: "darkblue",
+                  }}
+                  onClick={handleAddPostClick}
+                >
+                  Add Post
+                </Button>
 
-            <Button
-              variant="contained"
-              sx={{ marginTop: 2, backgroundColor: "darkblue" }}
-            >
-              Share Profile
-            </Button>
+                <Button
+                  variant="contained"
+                  startIcon={<FaShare />}
+                  sx={{ marginTop: 2, backgroundColor: "darkblue", mr: 5 }}
+                  onClick={handleShareProfileClick}
+                >
+                  Share Profile
+                </Button>
+
+                <Button
+                  variant="contained"
+                  startIcon={<FaUsers />}
+                  sx={{
+                    marginTop: 2,
+                    mr: 5,
+                    backgroundColor: "darkblue",
+                  }}
+                  onClick={handleMyFollowersClick}
+                >
+                  My Followers
+                </Button>
+
+                <Button
+                  variant="contained"
+                  startIcon={<FaUserFriends />}
+                  sx={{ marginTop: 2, backgroundColor: "darkblue", mr: 5 }}
+                  onClick={handleMyFollowingClick}
+                >
+                  My Following
+                </Button>
+
+                <Button
+                  variant="contained"
+                  startIcon={<FaUserCheck />}
+                  sx={{ marginTop: 2, backgroundColor: "darkblue" }}
+                  onClick={handleMyConnectionsClick}
+                >
+                  My Connections
+                </Button>
+              </Box>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  startIcon={<FaUserPlus />}
+                  sx={{
+                    marginTop: 2,
+                    mr: 5,
+                    backgroundColor: "darkblue",
+                  }}
+                  onClick={handleFollowClick}
+                >
+                  Follow
+                </Button>
+
+                <Button
+                  variant="contained"
+                  startIcon={<FaLink />}
+                  sx={{ marginTop: 2, backgroundColor: "darkblue" }}
+                  onClick={handleConnectClick}
+                >
+                  Connect
+                </Button>
+              </>
+            )}
           </Box>
         </Box>
 
@@ -201,6 +342,7 @@ const Description = ({ userData }) => {
         <Typography
           variant="h4"
           sx={{
+            mt: 2,
             marginLeft: 2,
             marginBottom: 2,
             textAlign: "center",
@@ -213,8 +355,8 @@ const Description = ({ userData }) => {
 
         <Box
           sx={{
-            pl: 3,
-            pr: 3,
+            pl: 5,
+            pr: 5,
           }}
         >
           {userData.role === "Athlete" ? (
@@ -223,6 +365,7 @@ const Description = ({ userData }) => {
                 variant="h6"
                 sx={{
                   mt: 2,
+                  mb: 2,
                   textTransform: "uppercase",
                   fontWeight: "700",
                   color: "darkblue",
@@ -249,6 +392,7 @@ const Description = ({ userData }) => {
                 variant="h6"
                 sx={{
                   mt: 2,
+                  mb: 2,
                   textTransform: "uppercase",
                   fontWeight: "700",
                   color: "darkblue",

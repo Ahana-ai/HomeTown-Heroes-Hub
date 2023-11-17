@@ -16,6 +16,7 @@ import Notification from "./components/notifications/Notification";
 import EditForm from "./components/editForm/EditForm";
 import Settings from "./components/settings/Settings";
 import AddPost from "./components/profiles/posts/AddPost";
+import OtherProfileView from "./components/profiles/OtherProfileView";
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
         <Route path="/testimonials" element={<Testimonials />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile/:id" element={<MyProfileView />} />
+        <Route path="/my-profile/:id" element={<MyProfileView />} />
+        <Route path="/profile/:id" element={<OtherProfileView />} />
         <Route path="/feed" element={<FeedPost />} />
         <Route path="/messages" element={<MessagingComponent />} />
         <Route path="/network" element={<Network />} />

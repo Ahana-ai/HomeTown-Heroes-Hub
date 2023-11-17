@@ -7,9 +7,11 @@ import { useDispatch } from "react-redux";
 import { getPosts } from "../../../store/slices/PostSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
 
 const MyPosts = () => {
   const dispatch = useDispatch();
+  const { id } = useParams(); // Extract the "id" from the URL params
 
   const settings = {
     dots: true,
@@ -34,7 +36,7 @@ const MyPosts = () => {
 
     const fetchUserPosts = () => {
       try {
-        dispatch(getPosts(user._id)).then((response) => {
+        dispatch(getPosts(id)).then((response) => {
           console.log("Response:", response);
 
           if (response.payload) {
@@ -55,10 +57,10 @@ const MyPosts = () => {
       }
     };
 
-    if (user._id) {
+    if (id) {
       fetchUserPosts();
     }
-  }, [dispatch, user._id]);
+  }, [dispatch, id]);
 
   return (
     <Box>

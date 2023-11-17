@@ -75,7 +75,7 @@ function Navbar() {
       navigate("/");
     } else if (setting === "Profile") {
       console.log(userData._id);
-      navigate(`/profile/${userData._id}`);
+      navigate(`/my-profile/${userData._id}`);
     } else {
       console.log(`Clicked on ${setting}`);
     }
