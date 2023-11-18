@@ -64,8 +64,6 @@ class PostController {
       const Id = req.params.id;
       const updates = req.body;
 
-      console.log("Body: ", req.body);
-
       // Validate if the Product/Services exists
       const existingPost = await Post.findById(Id);
       if (!existingPost || existingPost.isDeleted == true) {
