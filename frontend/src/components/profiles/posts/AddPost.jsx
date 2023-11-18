@@ -4,7 +4,6 @@ import {
   Button,
   Divider,
   FormControl,
-  ImageList,
   Input,
   InputLabel,
   Typography,
@@ -16,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addPost } from "../../../store/slices/PostSlice";
 import Swal from "sweetalert2";
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import storage from "../../firebase";
 import { v4 } from "uuid";
 
@@ -75,6 +74,7 @@ const AddPost = () => {
       // Reset the form after submission
       e.target.reset();
       setImageUploads([]);
+      navigate(`../profile/${user?._id}`)
     } catch (error) {
       console.error("Error submitting post:", error);
 
@@ -189,6 +189,7 @@ const AddPost = () => {
                 <li key={index} style={{ marginBottom: "10px" }}>
                   <img
                     src={URL.createObjectURL(file)}
+                    alt={'Uploaded Post ' + index}
                     style={{
                       maxWidth: "200px",
                       maxHeight: "200px",

@@ -42,19 +42,26 @@ const ProfileList = () => {
               color: "#000",
 
               ":hover": {
-                backgroundColor: "#FFF6E0",
+                backgroundColor: "#D8D9DA",
+                border: "1px solid black",
               },
             }}
           >
             <Avatar
               alt={profile.name}
               src={profile.avatarUrl}
-              sx={{ width: 40, height: 40, marginRight: 2 }}
+              sx={{
+                width: 40,
+                height: 40,
+                marginRight: 2,
+                border: "1px solid white",
+              }}
             />
             <Typography
               variant="body1"
               sx={{
                 fontWeight: "bold",
+                textTransform: "capitalize",
               }}
             >
               {profile.name}
