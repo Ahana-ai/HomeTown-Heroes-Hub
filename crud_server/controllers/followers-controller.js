@@ -10,6 +10,16 @@ class FollowerController {
     try {
       const { userId, followingId } = req.body;
 
+      let isFollowerExists = await user.findOne({
+        userId: req.body.userId,
+        followingId: req.body.followingId,
+        isDeleted: false,
+      });
+      if (isFollowerExists) {
+        res.status(200).json({ msg: "Follower already exists!" });
+        return;
+      }
+
       const newFollower = await Followers.create({
         userId,
         followingId,

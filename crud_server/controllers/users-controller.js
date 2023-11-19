@@ -11,7 +11,6 @@ class UserController {
    */
   async addUser(req, res) {
     try {
-      console.log(req);
       let isUserExists = await user.findOne({
         email: req.body.email,
         isDeleted: false,

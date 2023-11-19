@@ -10,6 +10,16 @@ class ConnectionController {
     try {
       const { userId, connectionId } = req.body;
 
+      let isConnectionExists = await user.findOne({
+        userId: req.body.userId,
+        connectionId: req.body.followingId,
+        isDeleted: false,
+      });
+      if (isConnectionExists) {
+        res.status(200).json({ msg: "Connection already exists!" });
+        return;
+      }
+
       const newConnection = await Connections.create({
         userId,
         connectionId,

@@ -1,6 +1,6 @@
 import { Box, Avatar, Typography, Button, Divider } from "@mui/material";
 import cover from "../../images/bg_img.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import {
   FaPlus,
@@ -11,11 +11,23 @@ import {
   FaUserFriends,
   FaUserCheck,
 } from "react-icons/fa";
+import MyFollowers from "../followers/MyFollowers";
+import { useState } from "react";
+import MyFollowing from "../followers/MyFollowing";
+import MyConnections from "../connections/MyConnections";
+import { addFollower } from "../../store/slices/FollowerSlice";
+import { useDispatch } from "react-redux";
+import { addConnection } from "../../store/slices/ConnectSlice";
 
 const Description = ({ userData }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [openFollowersModal, setOpenFollowersModal] = useState(false);
+  const [openFollowingModal, setOpenFollowingModal] = useState(false);
+  const [openConnectionModal, setOpenConnectionModal] = useState(false);
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
+  const { id } = useParams();
 
   const userIdFromLocalStorage = currentUser._id;
 
@@ -35,48 +47,71 @@ const Description = ({ userData }) => {
   };
 
   const handleFollowClick = () => {
-    // Replace this with your actual logic for following the user
-    Swal.fire({
-      icon: "info",
-      title: "Follow",
-      text: "Feature under development!",
+    const data = {
+      userid: currentUser._id,
+      followingId: id,
+    };
+    dispatch(addFollower(data)).then((response) => {
+      if (response.status === 201) {
+        Swal.fire({
+          icon: "info",
+          title: "Add Follower",
+          text: "Follower Added!",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Add Follower",
+          text: "Already a Follower!",
+        });
+      }
     });
   };
 
   const handleConnectClick = () => {
-    // Replace this with your actual logic for connecting with the user
-    Swal.fire({
-      icon: "info",
-      title: "Connect",
-      text: "Feature under development!",
+    const data = {
+      userid: currentUser._id,
+      connectionId: id,
+    };
+    dispatch(addConnection(data)).then((response) => {
+      if (response.status === 201) {
+        Swal.fire({
+          icon: "info",
+          title: "Add Connection",
+          text: "Connection Added!",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Add Connection",
+          text: "Already a Connection!",
+        });
+      }
     });
   };
 
   const handleMyFollowersClick = () => {
-    // Replace this with your actual logic for "My Followers"
-    Swal.fire({
-      icon: "info",
-      title: "My Followers",
-      text: "Feature under development!",
-    });
+    setOpenFollowersModal(true);
+  };
+
+  const handleCloseFollowersModal = () => {
+    setOpenFollowersModal(false);
   };
 
   const handleMyFollowingClick = () => {
-    // Replace this with your actual logic for "My Following"
-    Swal.fire({
-      icon: "info",
-      title: "My Following",
-      text: "Feature under development!",
-    });
+    setOpenFollowingModal(true);
+  };
+
+  const handleMyFollowingClose = () => {
+    setOpenFollowingModal(false);
   };
 
   const handleMyConnectionsClick = () => {
-    // Replace this with your actual logic for "My Connections"
-    Swal.fire({
-      icon: "info",
-      title: "My Connections",
-      text: "Feature under development!",
-    });
+    setOpenConnectionModal(true);
+  };
+
+  const handleMyConnectionClose = () => {
+    setOpenConnectionModal(false);
   };
 
   return (
@@ -137,7 +172,7 @@ const Description = ({ userData }) => {
             variant="h4"
             gutterBottom
             sx={{
-              mt: 8,
+              mt: 5,
               fontWeight: "700",
               fontStyle: "italic",
             }}
@@ -544,6 +579,18 @@ const Description = ({ userData }) => {
           </Box>
         </Box>
       </Box>
+      <MyFollowers
+        open={openFollowersModal}
+        handleClose={handleCloseFollowersModal}
+      />
+      <MyFollowing
+        open={openFollowingModal}
+        handleClose={handleMyFollowingClose}
+      />
+      <MyConnections
+        open={openConnectionModal}
+        handleClose={handleMyConnectionClose}
+      />
     </Box>
   );
 };
