@@ -1,8 +1,27 @@
 import mongoose from "mongoose";
 
+const CommentSchema = new mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const PostSchema = new mongoose.Schema(
   {
-    userId: String,
+    userId: {
+      type: String,
+      required: true,
+    },
     images: [String],
     text: String,
     caption: {
@@ -13,10 +32,7 @@ const PostSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    comments: {
-      type: Number,
-      default: 0,
-    },
+    comments: [CommentSchema], 
     shares: {
       type: Number,
       default: 0,
@@ -31,5 +47,6 @@ const PostSchema = new mongoose.Schema(
   }
 );
 
-const Post = mongoose.model("posts", PostSchema);
+const Post = mongoose.model("Post", PostSchema);
+
 export default Post;

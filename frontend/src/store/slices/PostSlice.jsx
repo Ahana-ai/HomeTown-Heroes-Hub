@@ -50,7 +50,7 @@ export const getPosts = createAsyncThunk(
 
 export const editPost = createAsyncThunk(
   "edit-post",
-  async (id, data, { rejectWithValue }) => {
+  async ({ id, data }, { rejectWithValue }) => {
     try {
       console.log("1: ", id, "2: ", data);
       const res = await axios.put(`${baseURL}/edit-post/${id}`, data);

@@ -29,16 +29,22 @@ const Feed = () => {
   };
 
   return (
-    <Box sx={{ mt: 15, ml: 20 }}>
+    <Box sx={{ mt: 15, ml: 2, mr: 2 }}>
       <IconButton
         onClick={toggleDrawer(true)}
-        sx={{ display: { sm: "block", md: "none" }, mb: 2 }}
+        sx={{ display: { md: "none" }, mb: 2 }}
       >
         <MenuIcon />
       </IconButton>
-      <Grid container spacing={5}>
-        <Grid item md={4} sm={8} sx={{ mr: 2, mb: 2 }}>
-          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={4} lg={3}>
+          {/* Drawer for small screens */}
+          <Drawer
+            anchor="left"
+            open={drawerOpen}
+            onClose={toggleDrawer(false)}
+            sx={{ display: { xs: "block", md: "none" } }}
+          >
             <List>
               <ListItem>
                 <ListItemIcon></ListItemIcon>
@@ -75,12 +81,16 @@ const Feed = () => {
               </ListItem>
             </List>
           </Drawer>
+          {/* LeftSection and RightSection for medium and large screens */}
           <Box
             sx={{
               display: {
-                md: "none",
-                lg: "inline",
+                xs: "none",
+                md: "block",
               },
+              marginLeft: "20px",
+              width: "100%",
+              height: "100%",
             }}
           >
             <LeftSection />
@@ -92,7 +102,8 @@ const Feed = () => {
             <RightSection />
           </Box>
         </Grid>
-        <Grid item md={6} sm={8} sx={{ mr: 2, mb: 2 }}>
+        <Grid item xs={12} md={6} sx={{ margin: "auto" }}>
+          {/* MiddleSection for all screens */}
           <MiddleSection />
         </Grid>
       </Grid>

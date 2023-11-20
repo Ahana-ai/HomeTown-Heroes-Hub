@@ -45,7 +45,7 @@ class PostController {
       });
 
       if (posts.length === 0) {
-        return res.status(404).json({ error: "No Posts Found" });
+        return res.status(200).json({ error: "No Posts Found" });
       }
 
       return res.status(200).json(posts);
@@ -55,34 +55,34 @@ class PostController {
     }
   }
 
-  /**
-   * @method editPost
-   * @description Editing the post data
-   */
-  async editPost(req, res) {
-    try {
-      const Id = req.params.id;
-      const updates = req.body;
+  // /**
+  //  * @method editPost
+  //  * @description Editing the post data
+  //  */
+  // async editPost(req, res) {
+  //   try {
+  //     const Id = req.params.id;
+  //     const updates = req.body;
 
-      // Validate if the Product/Services exists
-      const existingPost = await Post.findById(Id);
-      if (!existingPost || existingPost.isDeleted == true) {
-        return res.status(404).json({ error: "Post not found" });
-      }
+  //     // Validate if the Product/Services exists
+  //     const existingPost = await Post.findById(Id);
+  //     if (!existingPost || existingPost.isDeleted == true) {
+  //       return res.status(404).json({ error: "Post not found" });
+  //     }
 
-      // Update data
-      Object.assign(existingPost, updates);
-      await existingPost.save();
+  //     // Update data
+  //     Object.assign(existingPost, updates);
+  //     await existingPost.save();
 
-      return res.status(200).json({
-        msg: "Post updated successfully",
-        post: existingPost,
-      });
-    } catch (error) {
-      console.error("Error:", error.message);
-      return res.status(500).json({ error: "Server Error! --> editProdServ" });
-    }
-  }
+  //     return res.status(200).json({
+  //       msg: "Post updated successfully",
+  //       post: existingPost,
+  //     });
+  //   } catch (error) {
+  //     console.error("Error:", error.message);
+  //     return res.status(500).json({ error: "Server Error! --> editProdServ" });
+  //   }
+  // }
 
   /**
    * @method deletePost
@@ -117,6 +117,52 @@ class PostController {
       return res
         .status(500)
         .json({ error: "Server Error! --> deleteProdServ" });
+    }
+  }
+
+  /**
+   * @method editPost
+   * @description Editing the post data (including likes and comments)
+   */
+  async editPost(req, res) {
+    try {
+      const postId = req.params.id;
+      const { action, comment } = req.body;
+
+      // Validate if the Post exists
+      const existingPost = await Post.findById(postId);
+      if (!existingPost || existingPost.isDeleted) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+
+      // Handle different actions (like or comment)
+      if (action === "like") {
+        // Increment likes
+        existingPost.likes += 1;
+      } else if (action === "comment") {
+        // Add comment
+        if (!comment) {
+          return res.status(400).json({ error: "Comment text is required" });
+        }
+
+        existingPost.comments.push({
+          userId: req.user._id,
+          text: comment,
+        });
+      } else {
+        return res.status(400).json({ error: "Invalid action" });
+      }
+
+      // Save the updated post
+      const updatedPost = await existingPost.save();
+
+      return res.status(200).json({
+        msg: "Post updated successfully",
+        post: updatedPost,
+      });
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error! --> editPost" });
     }
   }
 }

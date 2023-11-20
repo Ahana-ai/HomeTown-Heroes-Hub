@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
-import SuggestedPeople from "./SuggestedPeople";
+import SuggestedPeople from "../feed/SuggestedPeople";
 
 const ActivityStatus = ({ userData }) => {
   const navigate = useNavigate();
