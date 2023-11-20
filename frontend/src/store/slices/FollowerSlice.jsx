@@ -42,6 +42,18 @@ export const getFollowers = createAsyncThunk(
   }
 );
 
+export const getFollowing = createAsyncThunk(
+  "following",
+  async (id, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(`${baseURL}/following-${id}`);
+      return res.data;
+    } catch (error) {
+      console.log(rejectWithValue(error.response));
+    }
+  }
+);
+
 export const deleteFollower = createAsyncThunk(
   "delete-follower",
   async (id, { rejectWithValue }) => {

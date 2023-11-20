@@ -52,7 +52,8 @@ const Description = ({ userData }) => {
       followingId: id,
     };
     dispatch(addFollower(data)).then((response) => {
-      if (response.status === 201) {
+      console.log(response);
+      if (response.meta.requestStatus === "fulfilled") {
         Swal.fire({
           icon: "info",
           title: "Add Follower",

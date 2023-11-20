@@ -40,8 +40,8 @@ class ConnectionController {
   async getConnections(req, res) {
     try {
       const connections = await Connections.find({
-        userId: req.params.id,
         isDeleted: false,
+        $or: [{ userId: req.params.id }, { connectionId: req.params.id }],
       });
 
       if (connections.length === 0) {

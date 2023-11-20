@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import { getFollowers, deleteFollower } from "../../store/slices/FollowerSlice";
+import { getFollowing, deleteFollower } from "../../store/slices/FollowerSlice";
 import Swal from "sweetalert2";
 import { getUserDetails } from "../../store/slices/UserSlice";
 
@@ -23,7 +23,7 @@ const MyFollowing = ({ open, handleClose }) => {
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    dispatch(getFollowers(currentUser._id))
+    dispatch(getFollowing(currentUser._id))
       .then((response) => {
         // Ensure the payload is an array before setting the state
         if (Array.isArray(response.payload)) {
@@ -66,7 +66,7 @@ const MyFollowing = ({ open, handleClose }) => {
         const updatedDetails = await Promise.all(
           followerDetails.map(async (follower) => {
             const userResponse = await dispatch(
-              getUserDetails(follower.followingId)
+              getUserDetails(follower.userId)
             );
             if (userResponse.payload) {
               return { ...follower, name: userResponse.payload.name };

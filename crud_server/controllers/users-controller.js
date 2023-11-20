@@ -15,7 +15,6 @@ class UserController {
         email: req.body.email,
         isDeleted: false,
       });
-      console.log(isUserExists);
       if (isUserExists) {
         res.status(200).json({ msg: "User already exists!" });
         return;
@@ -137,7 +136,6 @@ class UserController {
   async getDetails(req, res) {
     try {
       const { id } = req.params;
-      console.log(id);
 
       const isUserExists = await user.findOne({
         _id: id,
@@ -147,8 +145,6 @@ class UserController {
       if (!isUserExists) {
         return res.status(404).json({ error: "User Not Found" });
       }
-
-      console.log(isUserExists);
 
       return res.status(200).json(isUserExists);
     } catch (error) {
@@ -192,7 +188,6 @@ class UserController {
   async deleteUser(req, res) {
     try {
       const userId = req.params.id;
-      console.log(userId);
 
       // Validate if the user exists
       const existingUser = await user.findById(userId);
@@ -206,7 +201,6 @@ class UserController {
         { isDeleted: true },
         { new: true }
       );
-      console.log(updatedData);
 
       if (!updatedData) {
         return res.status(404).json({ error: "Data not found" });

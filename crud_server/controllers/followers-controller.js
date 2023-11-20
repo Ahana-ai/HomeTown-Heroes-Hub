@@ -10,14 +10,13 @@ class FollowerController {
     try {
       const { userId, followingId } = req.body;
 
-      let isFollowerExists = await user.findOne({
+      let isFollowerExists = await Followers.findOne({
         userId: req.body.userId,
         followingId: req.body.followingId,
         isDeleted: false,
       });
       if (isFollowerExists) {
-        res.status(200).json({ msg: "Follower already exists!" });
-        return;
+        return res.status(200).json({ msg: "Follower already exists!" });
       }
 
       const newFollower = await Followers.create({
@@ -30,6 +29,28 @@ class FollowerController {
       return res
         .status(500)
         .json({ "Server Error! -> addFollower": error.message });
+    }
+  }
+
+  /**
+   * @method getFollowing
+   * @description It will return all the posts of a specific user
+   */
+  async getFollowing(req, res) {
+    try {
+      const followers = await Followers.find({
+        followingId: req.params.id,
+        isDeleted: false,
+      });
+
+      if (followers.length === 0) {
+        return res.status(200).json({ error: "No Following Found" });
+      }
+
+      return res.status(200).json(followers);
+    } catch (error) {
+      console.error("Error:", error.message);
+      return res.status(500).json({ error: "Server Error! --> getFollowing" });
     }
   }
 

@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 const secretKey = process.env.SECRET_KEY;
 // Middleware function to check authorization
 const authorize = (req, res, next) => {
-  console.log(process.env.SECRET_KEY);
   const token = req.headers.authorization.split(" ")[1];
 
   if (!token) {

@@ -29,6 +29,7 @@ router.put("/delete-post/:id", PostController.deletePost);
 
 // Follower Data
 router.post("/add-follower", FollowersController.addFollower);
+router.get("/following-:id", FollowersController.getFollowing);
 router.get("/followers-:id", FollowersController.getFollowers);
 router.put("/delete-follower/:id", FollowersController.deleteFollower);
 
