@@ -2,6 +2,7 @@ import React from "react";
 import {
   Avatar,
   Box,
+  Divider,
   Paper,
   Table,
   TableBody,
@@ -20,10 +21,9 @@ const CombinedComponent = () => {
     {
       name: "Alice",
       avatar: "avatarAlice.jpg",
-      endorsement: 75,
       id: "alice123",
     },
-    { name: "Bob", avatar: "avatarBob.jpg", endorsement: 85, id: "bob456" },
+    { name: "Bob", avatar: "avatarBob.jpg", id: "bob456" },
     { name: "John Doe", avatarUrl: "john_avatar.jpg", id: "john789" },
     { name: "Alice Twinkle", avatarUrl: "alice_avatar.jpg", id: "alice456" },
   ];
@@ -58,25 +58,9 @@ const CombinedComponent = () => {
                 >
                   Name
                 </TableCell>
-                <TableCell
-                  sx={{
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Avatar
-                </TableCell>
-                <TableCell
-                  sx={{
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    wordBreak: "normal",
-                  }}
-                >
-                  Endorsement
-                </TableCell>
               </TableRow>
             </TableHead>
+            <Divider sx={{ width: "100%" }} />
             <TableBody>
               {combinedData.map((data, index) => (
                 <TableRow
@@ -84,14 +68,24 @@ const CombinedComponent = () => {
                   onClick={() => handleProfileClick(data.id)}
                   style={{ cursor: "pointer" }}
                 >
-                  <TableCell>{data.name}</TableCell>
-                  <TableCell>
+                  <TableCell
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-evenly",
+                      alignItems: "center",
+                    }}
+                  >
                     <Avatar
                       alt={data.name}
                       src={data.avatar || data.avatarUrl}
+                      sx={{
+                        mr: 2,
+                      }}
                     />
+                    {data.name}
                   </TableCell>
-                  <TableCell>{data.endorsement || "View Profile"}</TableCell>
+
+                  <TableCell>{"View Profile"}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

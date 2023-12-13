@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getFollowing } from "../../store/slices/FollowerSlice";
 import { getPosts, editPost } from "../../store/slices/PostSlice";
 import { getUserDetails } from "../../store/slices/UserSlice";
@@ -28,7 +28,6 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import EditIcon from "@mui/icons-material/Edit";
 
 const MiddleSection = () => {
   const dispatch = useDispatch();

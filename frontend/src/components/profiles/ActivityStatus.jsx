@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Chip,
   CircularProgress,
   Divider,
   Typography,
@@ -9,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import SuggestedPeople from "../feed/SuggestedPeople";
+import SuggestedProfileChanges from "./SuggestedProfileChanges";
 
 const ActivityStatus = ({ userData }) => {
   const navigate = useNavigate();
@@ -86,13 +86,7 @@ const ActivityStatus = ({ userData }) => {
       </Box>
 
       {/* Suggested changes */}
-      <Box sx={{ my: 2 }}>
-        <Typography variant="body2" sx={{ color: "text.secondary", mb: 1 }}>
-          Suggested Changes
-        </Typography>
-        <Chip label="Improve experience section" />
-        {/* Add more chips as needed */}
-      </Box>
+      <SuggestedProfileChanges />
 
       {/* Suggested people */}
       <SuggestedPeople />
