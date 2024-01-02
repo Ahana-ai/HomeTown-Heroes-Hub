@@ -12,6 +12,13 @@ import { SiThreads } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import Business from "../constants/HomeBusiness.js";
 
+const stepStyle = {
+  marginTop: "20px",
+  color: "#675B5B",
+  textAlign: "center",
+  lineHeight: "1.6",
+};
+
 const ForAthletes = () => {
   const fontStyle = {
     fontWeight: "bold",
@@ -46,35 +53,40 @@ const ForAthletes = () => {
           How It Works?
         </Typography>
         <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          1. Explore local businesses looking for athlete endorsements.
+        <Typography sx={stepStyle}>
+          1. Create an account to kickstart your athlete endorsement journey.
         </Typography>
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          2. Connect with businesses and negotiate endorsement terms.
+        <Typography sx={stepStyle}>
+          2. Log in to access your personalized dashboard and navigate the
+          platform.
         </Typography>
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          3. Showcase your portfolio and engage with your audience.
+        <Typography sx={stepStyle}>
+          3. Fill in your profile details to highlight your skills,
+          achievements, and interests.
+        </Typography>
+        <Typography sx={stepStyle}>
+          4. Upload high-quality pictures that showcase your athleticism and
+          personality.
+        </Typography>
+        <Typography sx={stepStyle}>
+          5. Explore and connect with local businesses actively seeking athlete
+          endorsements.
+        </Typography>
+        <Typography sx={stepStyle}>
+          6. Negotiate endorsement terms with interested businesses to secure
+          partnerships.
+        </Typography>
+        <Typography sx={stepStyle}>
+          7. Showcase your endorsement portfolio to attract more opportunities
+          and engagement.
+        </Typography>
+        <Typography sx={stepStyle}>
+          8. Actively engage with your audience and maintain a strong online
+          presence.
+        </Typography>
+        <Typography sx={stepStyle}>
+          9. Foster connections with fellow athletes and industry professionals
+          to expand your network.
         </Typography>
       </Box>
       <Box

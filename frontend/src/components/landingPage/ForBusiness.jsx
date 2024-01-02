@@ -12,6 +12,13 @@ import { SiThreads } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import Athletes from "../constants/HomeAthletes.js";
 
+const stepStyle = {
+  marginTop: "20px",
+  color: "#675B5B",
+  textAlign: "center",
+  lineHeight: "1.6",
+};
+
 const ForBusiness = () => {
   const fontStyle = {
     fontWeight: "bold",
@@ -46,38 +53,41 @@ const ForBusiness = () => {
           How It Works?
         </Typography>
         <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          1. Create a business profile showcasing your products, services, and
-          values.
+        <Typography sx={stepStyle}>
+          1. Craft an engaging athlete profile that highlights your skills,
+          achievements, and personal brand.
         </Typography>
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          2. Manage a product page with detailed descriptions, images, and
-          prices for athlete endorsements.
+        <Typography sx={stepStyle}>
+          2. Showcase your athletic prowess with a dynamic portfolio featuring
+          high-quality pictures and videos.
         </Typography>
-        <Typography
-          sx={{
-            marginTop: "20px",
-            color: "#675B5B",
-            textAlign: "center",
-            lineHeight: "1.6",
-          }}
-        >
-          3. View athlete portfolios, negotiate endorsement terms, and
-          collaborate seamlessly through the portal.
+        <Typography sx={stepStyle}>
+          3. Fill in your profile details to provide a comprehensive overview of
+          your strengths, interests, and values.
+        </Typography>
+        <Typography sx={stepStyle}>
+          4. Connect with businesses actively seeking athletes for endorsements
+          to explore potential partnerships.
+        </Typography>
+        <Typography sx={stepStyle}>
+          5. Negotiate endorsement terms, ensuring they align with your brand
+          and values.
+        </Typography>
+        <Typography sx={stepStyle}>
+          6. Collaborate seamlessly with businesses through the platform,
+          keeping communication clear and efficient.
+        </Typography>
+        <Typography sx={stepStyle}>
+          7. Regularly update your profile and portfolio to reflect your latest
+          achievements and activities.
+        </Typography>
+        <Typography sx={stepStyle}>
+          8. Actively engage with your audience, sharing insights into your
+          athletic journey and fostering a strong online presence.
+        </Typography>
+        <Typography sx={stepStyle}>
+          9. Build connections with fellow athletes to exchange experiences,
+          advice, and potential collaboration opportunities.
         </Typography>
       </Box>
       <Box
