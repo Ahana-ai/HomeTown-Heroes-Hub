@@ -59,7 +59,39 @@ const Testimonials = () => {
     </div>
   );
 
-  const settings = {
+
+  const testimonialSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+    ],
+  };
+
+  const companyTestimonialSettings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -110,13 +142,13 @@ const Testimonials = () => {
             fontFamily: "initial",
           }}
         >
-          What people say about us
+          What Companies say about us
         </Typography>
         <Slider
           style={{
             alignSelf: "center",
           }}
-          {...settings}
+          {...companyTestimonialSettings}
           centerMode
           centerPadding="60px"
         >
@@ -126,8 +158,7 @@ const Testimonials = () => {
                 borderRadius: "6px",
                 background:
                   "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(20,30,70,1) 100%)",
-                // backgroundColor: "#E4F1FF",
-                height: "350px",
+                height: "450px",
                 margin: "0 50px",
                 maxWidth: {
                   md: "330px",
@@ -199,11 +230,126 @@ const Testimonials = () => {
                 <Box
                   sx={{
                     backgroundColor: "#F5F5F5",
-                    // background: "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(234,219,200,1) 100%)",
                     padding: "10px",
                     borderRadius: 1,
                     margin: "5px",
-                    height: "140px",
+                    height: "250px",
+                  }}
+                >
+                  <img src={quoteIcon} alt="" width="30" />
+                  <Typography
+                    sx={{ color: "black", fontStyle: "italic" }}
+                    variant="body1"
+                  >
+                    {testimonial.quote}
+                  </Typography>
+                </Box>
+              </CardContent>
+            </Card>
+          ))}
+        </Slider>
+        <Typography
+          variant="h4"
+          sx={{
+            fontWeight: "bold",
+            mb: 4,
+            mt: 4,
+            textTransform: "uppercase",
+            fontFamily: "initial",
+          }}
+        >
+          What Students say about us
+        </Typography>
+        <Slider
+          style={{
+            alignSelf: "center",
+          }}
+          {...testimonialSettings}
+          centerMode
+          centerPadding="60px"
+        >
+          {testimonialData.map((testimonial) => (
+            <Card
+              sx={{
+                borderRadius: "6px",
+                background:
+                  "linear-gradient(180deg, rgba(241,239,239,1) 0%, rgba(20,30,70,1) 100%)",
+                height: "450px",
+                margin: "0 50px",
+                maxWidth: {
+                  md: "330px",
+                  sm: "300px",
+                  xs: "180px",
+                },
+              }}
+              elevation={4}
+            >
+              <CardContent
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={dummyFace}
+                    sx={{
+                      width: 90,
+                      height: 90,
+                      margin: "auto auto",
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      ml: 2,
+                      mb: 2,
+                      mt: 2,
+                    }}
+                  >
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "WindowFrame",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      {testimonial.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "black",
+                      }}
+                    >
+                      {testimonial.position}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontWeight: "bolder",
+                        color: "black",
+                      }}
+                    >
+                      {testimonial.company}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    backgroundColor: "#F5F5F5",
+                    padding: "10px",
+                    borderRadius: 1,
+                    margin: "5px",
+                    height: "250px",
                   }}
                 >
                   <img src={quoteIcon} alt="" width="30" />

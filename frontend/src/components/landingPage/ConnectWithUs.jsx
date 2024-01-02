@@ -10,7 +10,6 @@ const ConnectWithUs = () => {
   return (
     <Box
       sx={{
-        // backgroundColor: "#EADBC8",
         background:
           "linear-gradient(180deg, rgba(234,219,200,1) 15%, rgba(252,253,255,1) 95%)",
         py: { xs: 3, md: 5 },
@@ -63,7 +62,6 @@ const ConnectWithUs = () => {
               label="Your Mobile (optional)"
               variant="outlined"
               fullWidth
-              //   required
               type="mobile"
               sx={{
                 mb: 2,
@@ -88,23 +86,25 @@ const ConnectWithUs = () => {
                 },
               }}
             />
-            <TextField
-              label="Your Queries"
-              variant="outlined"
-              multiline
-              rows={4}
-              fullWidth
-              required
-              sx={{
-                mb: 2,
-                input: {
-                  "&:focus": {
-                    backgroundColor: "#F1EFEF",
-                  },
-                },
-              }}
-            />
           </Box>
+          <TextField
+            label="Your Queries"
+            variant="outlined"
+            multiline
+            rows={4}
+            fullWidth
+            required
+            sx={{
+              mb: 2,
+              display: "flex",
+              alignContent: "center",
+              input: {
+                "&:focus": {
+                  backgroundColor: "#F1EFEF",
+                },
+              },
+            }}
+          />
           <Button
             type="submit"
             variant="contained"
