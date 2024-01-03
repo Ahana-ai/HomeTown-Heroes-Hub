@@ -28,6 +28,8 @@ import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import { FaPlus } from "react-icons/fa";
+import AddPost from "../profiles/posts/AddPost";
 
 const MiddleSection = () => {
   const dispatch = useDispatch();
@@ -78,11 +80,12 @@ const MiddleSection = () => {
           }
           setAuthors(authorsData);
         } else {
-          toast.error("No followers Yet!");
+          // toast.error("No followers Yet!");
+          console.log("No Followers Yet!");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        toast.error("No Posts Found!");
+        // toast.error("No Posts Found!");
       }
     };
 
@@ -163,13 +166,36 @@ const MiddleSection = () => {
     nextArrow: <CustomNextArrow />,
   };
 
+  const [openAddPostModal, setOpenAddPostModal] = useState(false);
+
+  const handleAddPostClick = () => {
+    setOpenAddPostModal(true);
+  };
+
+  const handleCloseAddPostModal = () => {
+    setOpenAddPostModal(false);
+  };
+
   return (
     <Box
       sx={{
-        p: 2,
         height: "100%",
       }}
     >
+      <Box>
+        <Button
+          variant="contained"
+          startIcon={<FaPlus />}
+          sx={{
+            ml: 4,
+            mb: 2,
+            backgroundColor: "darkblue",
+          }}
+          onClick={handleAddPostClick}
+        >
+          Add Post
+        </Button>
+      </Box>
       {posts?.map((post, index) => (
         <Card
           key={index}
@@ -182,8 +208,8 @@ const MiddleSection = () => {
           <CardHeader
             avatar={
               <Avatar
-                alt={authors[post.author]?.name}
-                src={authors[post.author]?.avatar}
+                alt={authors[post.userId]?.name}
+                src={authors[post.userId]?.profile_image}
               />
             }
             action={
@@ -191,7 +217,13 @@ const MiddleSection = () => {
                 <MoreVertIcon />
               </IconButton>
             }
-            title={authors[post.author]?.name}
+            title={
+              <Box>
+                <Typography variant="subtitle1" fontWeight="bold" >
+                  {authors[post.userId]?.name}
+                </Typography>
+              </Box>
+            }
           />
           <Slider {...sliderSettings}>
             {post?.images?.map((image, imgIndex) => (
@@ -232,6 +264,7 @@ const MiddleSection = () => {
             </IconButton>
           </CardActions>
         </Card>
+
       ))}
 
       {/* Modal for editing comments */}
@@ -268,6 +301,24 @@ const MiddleSection = () => {
             }
           />
           <Button onClick={handleEditComment}>Save Comment</Button>
+        </Box>
+      </Modal>
+
+      {/* Add Post Modal */}
+      <Modal open={openAddPostModal} onClose={handleCloseAddPostModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            borderRadius: 3,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <AddPost />
         </Box>
       </Modal>
 

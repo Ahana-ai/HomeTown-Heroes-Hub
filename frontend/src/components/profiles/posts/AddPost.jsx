@@ -118,7 +118,7 @@ const AddPost = () => {
         margin: "20px auto",
         padding: 3,
         border: "1px solid #ccc",
-        borderRadius: 8,
+        borderRadius: 3,
         backgroundColor: "#fff",
         boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       }}
