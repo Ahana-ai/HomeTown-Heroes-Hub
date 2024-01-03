@@ -50,17 +50,22 @@ const AboutUs = () => {
                 alt="About Us"
                 style={{
                   width: "100%",
-                  height: "100%",
-                  maxHeight: 500,
+                  height: "auto",
                   borderRadius: 3,
                   marginBottom: 2,
+                  maxHeight: "300px",
                 }}
               />
 
               {/* Section Title */}
               <Typography
                 variant="h6"
-                sx={{ marginBottom: 2, fontWeight: "bold", fontSize: "1.8rem" }}
+                sx={{
+                  marginTop: 3,
+                  marginBottom: 2,
+                  fontWeight: "bold",
+                  fontSize: "1.8rem",
+                }}
               >
                 Our Mission
               </Typography>
@@ -83,7 +88,7 @@ const AboutUs = () => {
                 padding: 4,
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
+                alignItems: "center",
                 height: "100%",
                 background:
                   "linear-gradient(180deg, rgba(46,67,116,1) 3%, rgba(158,221,255,1) 49%, rgba(252,253,255,1) 100%)",
@@ -96,10 +101,10 @@ const AboutUs = () => {
                 alt="About Us"
                 style={{
                   width: "100%",
-                  height: "100%",
-                  maxHeight: 500,
+                  height: "auto",
                   borderRadius: 3,
                   marginBottom: 2,
+                  maxHeight: "300px",
                 }}
               />
 

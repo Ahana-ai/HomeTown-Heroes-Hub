@@ -45,7 +45,7 @@ const ForAthletes = () => {
             letterSpacing: "4.32px",
             color: "#675B5B",
             marginBottom: "20px",
-            fontStyle,
+            ...fontStyle,
             display: "flex",
             justifyContent: "center",
           }}
@@ -53,41 +53,15 @@ const ForAthletes = () => {
           How It Works?
         </Typography>
         <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
-        <Typography sx={stepStyle}>
-          1. Create an account to kickstart your athlete endorsement journey.
-        </Typography>
-        <Typography sx={stepStyle}>
-          2. Log in to access your personalized dashboard and navigate the
-          platform.
-        </Typography>
-        <Typography sx={stepStyle}>
-          3. Fill in your profile details to highlight your skills,
-          achievements, and interests.
-        </Typography>
-        <Typography sx={stepStyle}>
-          4. Upload high-quality pictures that showcase your athleticism and
-          personality.
-        </Typography>
-        <Typography sx={stepStyle}>
-          5. Explore and connect with local businesses actively seeking athlete
-          endorsements.
-        </Typography>
-        <Typography sx={stepStyle}>
-          6. Negotiate endorsement terms with interested businesses to secure
-          partnerships.
-        </Typography>
-        <Typography sx={stepStyle}>
-          7. Showcase your endorsement portfolio to attract more opportunities
-          and engagement.
-        </Typography>
-        <Typography sx={stepStyle}>
-          8. Actively engage with your audience and maintain a strong online
-          presence.
-        </Typography>
-        <Typography sx={stepStyle}>
-          9. Foster connections with fellow athletes and industry professionals
-          to expand your network.
-        </Typography>
+        <Typography sx={stepStyle}>1. Create an account to kickstart your athlete endorsement journey.</Typography>
+        <Typography sx={stepStyle}>2. Log in to access your personalized dashboard and navigate the platform.</Typography>
+        <Typography sx={stepStyle}>3. Fill in your profile details to highlight your skills, achievements, and interests.</Typography>
+        <Typography sx={stepStyle}>4. Upload high-quality pictures that showcase your athleticism and personality.</Typography>
+        <Typography sx={stepStyle}>5. Explore and connect with local businesses actively seeking athlete endorsements.</Typography>
+        <Typography sx={stepStyle}>6. Negotiate endorsement terms with interested businesses to secure partnerships.</Typography>
+        <Typography sx={stepStyle}>7. Showcase your endorsement portfolio to attract more opportunities and engagement.</Typography>
+        <Typography sx={stepStyle}>8. Actively engage with your audience and maintain a strong online presence.</Typography>
+        <Typography sx={stepStyle}>9. Foster connections with fellow athletes and industry professionals to expand your network.</Typography>
       </Box>
       <Box
         sx={{
@@ -102,7 +76,7 @@ const ForAthletes = () => {
             letterSpacing: "4.32px",
             color: "#675B5B",
             marginBottom: "20px",
-            fontStyle,
+            ...fontStyle,
           }}
         >
           How It Will Look?
@@ -112,8 +86,7 @@ const ForAthletes = () => {
       <Paper
         elevation={6}
         sx={{
-          background:
-            "linear-gradient(180deg, rgba(8,23,110,1) 0%, rgba(200,227,245,1) 82%, rgba(255,255,255,1) 96%)",
+          background: "linear-gradient(180deg, rgba(8,23,110,1) 0%, rgba(200,227,245,1) 82%, rgba(255,255,255,1) 96%)",
           padding: "50px",
           width: "75%",
           margin: "10px auto 0 auto",
@@ -135,7 +108,7 @@ const ForAthletes = () => {
               letterSpacing: "4.32px",
               color: "#675B5B",
               marginLeft: "20px",
-              fontStyle,
+              ...fontStyle,
             }}
           >
             Business Nearby
@@ -147,7 +120,6 @@ const ForAthletes = () => {
             }}
           />
         </Box>
-
         <Grid container spacing={4}>
           {Business.map((details, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
@@ -171,7 +143,7 @@ const ForAthletes = () => {
                   }}
                 />
                 <Typography
-                  variant="h6" // Used variant for consistent typography
+                  variant="h6"
                   sx={{
                     ...fontStyle,
                     fontSize: "1.3rem",

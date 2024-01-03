@@ -99,9 +99,16 @@ const AccountPreferenes = () => {
           margin: "auto",
         }}
       >
-        <ListItem>
+        {/* Profile Information */}
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <SettingsAccessibilityIcon
-            sx={{ color: "grey", mr: 2, fontSize: "2rem" }}
+            sx={{ color: "grey", mb: 2, fontSize: "2rem" }}
           />
           <ListItemText
             primary="Profile Information"
@@ -109,13 +116,16 @@ const AccountPreferenes = () => {
               fontWeight: "bold",
               textTransform: "uppercase",
               color: "darkblue",
+              mb: 1,
             }}
           />
-          <List>
+          {/* Account Information */}
+          <List sx={{ width: "80%" }}>
             <ListItem>
               <PersonIcon sx={{ color: "grey", mr: 2, fontSize: "2rem" }} />
               <ListItemText primary="Account Information" />
             </ListItem>
+            {/* Analytics Data */}
             <ListItem>
               <TimelineIcon sx={{ color: "grey", mr: 2, fontSize: "2rem" }} />
               <ListItemText primary="Analytics Data" />
@@ -123,17 +133,27 @@ const AccountPreferenes = () => {
           </List>
         </ListItem>
         <Divider mb={3} />
-        <ListItem>
-          <LaptopIcon sx={{ color: "grey", mr: 2, fontSize: "2rem" }} />
+
+        {/* Display */}
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <LaptopIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
           <ListItemText
             primary="Display"
             sx={{
               fontWeight: "bold",
               textTransform: "uppercase",
               color: "darkblue",
+              mb: 1,
             }}
           />
-          <List>
+          {/* Dark Mode and Language Preference */}
+          <List sx={{ width: "80%" }}>
             <ListItem>
               <ListItemText primary="Dark Mode" />
               <Switch /* Add switch state and onChange handler */ />
@@ -142,7 +162,7 @@ const AccountPreferenes = () => {
               <ListItemText primary="Language Preference" />
               <Select
                 defaultValue={"english"}
-                /* Add select state and onChange handler */
+              /* Add select state and onChange handler */
               >
                 <MenuItem value="english">English</MenuItem>
                 <MenuItem value="spanish">Spanish</MenuItem>
@@ -151,29 +171,41 @@ const AccountPreferenes = () => {
           </List>
         </ListItem>
         <Divider mb={3} />
-        <ListItem>
-          <FastForwardIcon sx={{ color: "grey", mr: 2, fontSize: "2rem" }} />
+
+        {/* General Preferences */}
+        <ListItem
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <FastForwardIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
           <ListItemText
             primary="General Preferences"
             sx={{
               fontWeight: "bold",
               textTransform: "uppercase",
               color: "darkblue",
+              mb: 1,
             }}
           />
-          <List>
+          {/* Autoplay Videos, Sound Effects, and more */}
+          <List sx={{ width: "80%" }}>
             <ListItem>
               <ListItemText primary="Autoplay Videos" />
               <Switch /* Add switch state and onChange handler */ />
             </ListItem>
             <ListItem>
-              <ListItemText primary="Sound effects" />
+              <ListItemText primary="Sound Effects" />
               <Switch /* Add switch state and onChange handler */ />
             </ListItem>
             {/* Add more general preferences */}
           </List>
         </ListItem>
         <Divider mb={3} />
+
+        {/* Deactivated Account */}
         <ListItem button>
           <CancelIcon sx={{ color: "darkred", mr: 2 }} />
           <ListItemText
@@ -186,6 +218,8 @@ const AccountPreferenes = () => {
           />
         </ListItem>
         <Divider mb={3} />
+
+        {/* Delete Account */}
         <ListItem button onClick={handleDelete}>
           <DeleteIcon sx={{ color: "darkred", mr: 2 }} />
           <ListItemText

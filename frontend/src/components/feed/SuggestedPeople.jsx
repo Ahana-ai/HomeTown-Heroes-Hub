@@ -13,28 +13,43 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CombinedComponent = () => {
   const navigate = useNavigate();
 
   const combinedData = [
     {
-      name: "Alice",
-      avatar: "avatarAlice.jpg",
-      id: "alice123",
+      name: "Alice", avatar: "avatarAlice.jpg",
     },
-    { name: "Bob", avatar: "avatarBob.jpg", id: "bob456" },
-    { name: "John Doe", avatarUrl: "john_avatar.jpg", id: "john789" },
-    { name: "Alice Twinkle", avatarUrl: "alice_avatar.jpg", id: "alice456" },
+    { name: "Bob", avatar: "avatarBob.jpg" },
+    { name: "John Doe", avatarUrl: "john_avatar.jpg" },
+    { name: "Alice Twinkle", avatarUrl: "alice_avatar.jpg" },
   ];
 
   const handleProfileClick = (profileId) => {
-    navigate(`../profile/${profileId}`);
+    if (profileId)
+      navigate(`../profile/${profileId}`);
+    else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "User not found!",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+    }
   };
 
   return (
     <Box mt={2}>
-      <Paper sx={{ p: 2 }} elevation={10}>
+      <Paper
+        sx={{
+          padding: 2,
+          borderRadius: 5,
+          boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
+        }}
+        elevation={10}
+      >
         <Typography
           variant="h6"
           gutterBottom
@@ -54,24 +69,23 @@ const CombinedComponent = () => {
                   sx={{
                     fontWeight: "bold",
                     textTransform: "uppercase",
+                    borderBottom: "2px solid #ccc",
                   }}
                 >
                   Name
                 </TableCell>
               </TableRow>
             </TableHead>
-            <Divider sx={{ width: "100%" }} />
             <TableBody>
               {combinedData.map((data, index) => (
                 <TableRow
                   key={index}
                   onClick={() => handleProfileClick(data.id)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", borderBottom: "1px solid #eee" }}
                 >
                   <TableCell
                     sx={{
                       display: "flex",
-                      justifyContent: "space-evenly",
                       alignItems: "center",
                     }}
                   >
@@ -79,12 +93,13 @@ const CombinedComponent = () => {
                       alt={data.name}
                       src={data.avatar || data.avatarUrl}
                       sx={{
-                        mr: 2,
+                        marginRight: 2,
+                        width: 40,
+                        height: 40,
                       }}
                     />
                     {data.name}
                   </TableCell>
-
                   <TableCell>{"View Profile"}</TableCell>
                 </TableRow>
               ))}

@@ -95,6 +95,7 @@ const ConnectWithUs = () => {
             fullWidth
             required
             sx={{
+              mt: 2,
               mb: 2,
               display: "flex",
               alignContent: "center",

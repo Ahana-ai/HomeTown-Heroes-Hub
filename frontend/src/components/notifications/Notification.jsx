@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import {
   Box,
   Button,
@@ -55,14 +55,22 @@ const NotificationComponent = () => {
       sx={{
         margin: "auto",
         textAlign: "center",
-        mt: 15,
+        mt: 14,
+        mb: 5,
         backgroundColor: "#fff",
         p: 3,
-        borderRadius: "10px",
+        borderRadius: 5,
         width: "60%",
+        boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 2,
+        }}
+      >
         <Button variant="contained" color="primary">
           My Posts
         </Button>
@@ -73,46 +81,34 @@ const NotificationComponent = () => {
           Notifications
         </Button>
       </Box>
-      <Divider
-        sx={{
-          mt: 2,
-        }}
-      />
-      <Box sx={{ mt: 3 }}>
+      <Divider />
+      <Box sx={{ mt: 2 }}>
         <Button variant="outlined" color="primary">
           Change Notification Settings
         </Button>
       </Box>
-      <Divider
-        sx={{
-          mt: 2,
-        }}
-      />
-      <Box sx={{ mt: 3 }}>
+      <Divider sx={{ mt: 2 }} />
+      <Box sx={{ mt: 2 }}>
         <Typography variant="h5" gutterBottom>
           Notifications
         </Typography>
-        <List>
+        <List sx={{ margin: "auto" }}>
           {notifications.map((notification) => (
-            <Box
-              key={notification.id}
-              sx={{
-                textAlign: "center",
-              }}
-            >
-              <ListItem
-                sx={{
-                  textAlign: "center",
-                }}
-              >
-                <Avatar sx={{ ml: "10%", mr: 0 }} />
+            <Fragment key={notification.id}>
+              <ListItem>
+                <Avatar
+                  src={notification.avatar}
+                  alt="Avatar"
+                  sx={{ marginLeft: "10%", marginRight: 7 }}
+                />
                 <ListItemText
                   primary={notification.message}
                   secondary={notification.time}
+                  sx={{ textAlign: "left" }}
                 />
               </ListItem>
               <Divider />
-            </Box>
+            </Fragment>
           ))}
         </List>
       </Box>

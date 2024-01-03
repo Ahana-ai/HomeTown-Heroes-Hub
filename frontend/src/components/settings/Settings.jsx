@@ -16,6 +16,11 @@ import CampaignIcon from "@mui/icons-material/Campaign";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import AccountPreferenes from "./AccountPreferenes";
+import SignInSecurityPage from "./SignInAndSecurity";
+import VisibilitySettings from "./VisibilitySettings";
+import DataPrivacySettings from "./DataPrivacy";
+import AdvertisingDataSettings from "./AdvertisingData";
+import NotificationSettings from "./NotificationSettings";
 
 const Settings = () => {
   const [selectedOption, setSelectedOption] = useState("account");
@@ -26,38 +31,23 @@ const Settings = () => {
         return <AccountPreferenes />;
       case "security":
         return (
-          <>
-            {/* Sign in & Security content */}
-            {/* ... */}
-          </>
+          <SignInSecurityPage />
         );
       case "visibility":
         return (
-          <>
-            {/* Visibility content */}
-            {/* ... */}
-          </>
+          <VisibilitySettings />
         );
       case "privacy":
         return (
-          <>
-            {/* Data Privacy content */}
-            {/* ... */}
-          </>
+          <DataPrivacySettings />
         );
       case "advertising":
         return (
-          <>
-            {/* Advertising Data content */}
-            {/* ... */}
-          </>
+          <AdvertisingDataSettings />
         );
       case "notifications":
         return (
-          <>
-            {/* Notifications content */}
-            {/* ... */}
-          </>
+          <NotificationSettings />
         );
       default:
         return null;

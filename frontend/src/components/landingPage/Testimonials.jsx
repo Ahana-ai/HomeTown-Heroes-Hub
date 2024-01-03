@@ -10,9 +10,14 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import testimonialData from "../constants/Testimonials";
+import {companyTestimonialData, studentTestimonialData} from "../constants/Testimonials";
 import quoteIcon from "../../images/quoteIcon.jpeg";
-import dummyFace from "../../images/dummyFace.jpeg";
+import company1 from "../../images/testimonials/company1.jpeg";
+import company2 from "../../images/testimonials/company2.jpg";
+import company3 from "../../images/testimonials/company3.jpg";
+import company4 from "../../images/testimonials/company4.jpg";
+import student1 from "../../images/testimonials/student1.jpg";
+import student2 from "../../images/testimonials/student2.jpg";
 
 const Testimonials = () => {
   const NextArrow = ({ onClick }) => (
@@ -122,6 +127,9 @@ const Testimonials = () => {
     ],
   };
 
+  const companyImages = [company1, company2, company3, company4];
+  const studentImages = [student1, student2, company3, company4];
+
   return (
     <Box
       sx={{
@@ -152,8 +160,9 @@ const Testimonials = () => {
           centerMode
           centerPadding="60px"
         >
-          {testimonialData.map((testimonial) => (
+          {companyTestimonialData.map((testimonial, index) => (
             <Card
+              key={index}
               sx={{
                 borderRadius: "6px",
                 background:
@@ -182,8 +191,8 @@ const Testimonials = () => {
                   }}
                 >
                   <Avatar
-                    alt="Remy Sharp"
-                    src={dummyFace}
+                    alt="Company Avatar"
+                    src={companyImages[index]}
                     sx={{
                       width: 90,
                       height: 90,
@@ -268,8 +277,9 @@ const Testimonials = () => {
           centerMode
           centerPadding="60px"
         >
-          {testimonialData.map((testimonial) => (
+          {studentTestimonialData.map((testimonial, index) => (
             <Card
+              key={index}
               sx={{
                 borderRadius: "6px",
                 background:
@@ -298,8 +308,8 @@ const Testimonials = () => {
                   }}
                 >
                   <Avatar
-                    alt="Remy Sharp"
-                    src={dummyFace}
+                    alt="Student Avatar"
+                    src={studentImages[index]}
                     sx={{
                       width: 90,
                       height: 90,

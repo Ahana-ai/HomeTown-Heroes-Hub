@@ -75,14 +75,16 @@ const Login = () => {
                 <Form>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <SelectFormik
-                      label="Select Role"
                       name="role"
                       fullWidth
                       sx={{ mb: 2 }}
+                      defaultValue="Select Role"  
                     >
+                      <MenuItem value="Select Role" disabled>Select Role</MenuItem>
                       <MenuItem value="Athlete">Athlete</MenuItem>
                       <MenuItem value="Business">Business</MenuItem>
                     </SelectFormik>
+
 
                     <TextFieldFormik
                       label="Email"

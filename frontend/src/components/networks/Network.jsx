@@ -7,8 +7,11 @@ import {
   Avatar,
   Divider,
   IconButton,
+  Typography,
 } from "@mui/material";
 import { CheckCircle, Cancel } from "@mui/icons-material";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Network = () => {
   const [invitations, setInvitations] = useState([
@@ -69,24 +72,29 @@ const Network = () => {
 
   const handleAccept = (invitationId) => {
     // Handle accepting the invitation
-    console.log(`Accepted invitation ${invitationId}`);
+    toast.success(`Accepted invitation ${invitationId}`, { position: "top-right" });
+    // You can add your logic here to update state or make an API call
   };
 
   const handleDecline = (invitationId) => {
     // Handle declining the invitation
-    console.log(`Declined invitation ${invitationId}`);
+    toast.error(`Declined invitation ${invitationId}`, { position: "top-right" });
+    // You can add your logic here to update state or make an API call
   };
 
   return (
     <Box
       sx={{
-        mt: 15,
-        ml: 10,
-        mr: 10,
+        mt: 14,
+        ml: 5,
+        mr: 5,
+        mb: 5,
         display: "flex",
         backgroundColor: "#fff",
         p: 3,
         textAlign: "center",
+        borderRadius: 5,
+        boxShadow: "0px 4px 16px rgba(0, 0, 0, 0.1)",
       }}
     >
       <Box
@@ -95,29 +103,31 @@ const Network = () => {
           width: "25%",
         }}
       >
-        <h2>Recently Visited</h2>
+        <Typography variant="h5" sx={{ marginBottom: 2 }}>Recently Visited</Typography>
         <List>
           {recentlyVisited.map((visited) => (
-            <ListItem key={visited.id}>
+            <ListItem key={visited.id} sx={{ padding: 1 }}>
               <ListItemText primary={visited.name} secondary={visited.type} />
             </ListItem>
           ))}
         </List>
       </Box>
       <Box sx={{ width: "75%" }}>
-        <h2>Invitations</h2>
+        <Typography variant="h5" sx={{ marginBottom: 2 }}>Invitations</Typography>
         <List>
           {invitations.map((invitation) => (
             <div key={invitation.id}>
-              <ListItem alignItems="flex-start">
+              <ListItem alignItems="flex-start" sx={{ padding: 2, alignItems: "center" }}>
                 <Avatar sx={{ mr: 2 }} />
                 <ListItemText
                   primary={invitation.name}
                   secondary={invitation.title}
+                  sx={{ flexGrow: 1 }}
                 />
                 <IconButton
                   color="primary"
                   onClick={() => handleAccept(invitation.id)}
+                  sx={{ marginLeft: "auto" }}
                 >
                   <CheckCircle />
                 </IconButton>
@@ -133,6 +143,7 @@ const Network = () => {
           ))}
         </List>
       </Box>
+      <ToastContainer />
     </Box>
   );
 };

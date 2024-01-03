@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Divider,
@@ -12,6 +13,10 @@ import { SiThreads } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 import Athletes from "../constants/HomeAthletes.js";
 
+const fontStyle = {
+  fontWeight: "bold",
+};
+
 const stepStyle = {
   marginTop: "20px",
   color: "#675B5B",
@@ -20,10 +25,6 @@ const stepStyle = {
 };
 
 const ForBusiness = () => {
-  const fontStyle = {
-    fontWeight: "bold",
-  };
-
   return (
     <Box sx={{ backgroundColor: "#FDE5D4", padding: "20px" }}>
       <Box
@@ -45,7 +46,7 @@ const ForBusiness = () => {
             letterSpacing: "4.32px",
             color: "#675B5B",
             marginBottom: "20px",
-            fontStyle,
+            ...fontStyle,
             display: "flex",
             justifyContent: "center",
           }}
@@ -53,42 +54,15 @@ const ForBusiness = () => {
           How It Works?
         </Typography>
         <Divider sx={{ width: "30%", backgroundColor: "#675B5B" }} />
-        <Typography sx={stepStyle}>
-          1. Craft an engaging athlete profile that highlights your skills,
-          achievements, and personal brand.
-        </Typography>
-        <Typography sx={stepStyle}>
-          2. Showcase your athletic prowess with a dynamic portfolio featuring
-          high-quality pictures and videos.
-        </Typography>
-        <Typography sx={stepStyle}>
-          3. Fill in your profile details to provide a comprehensive overview of
-          your strengths, interests, and values.
-        </Typography>
-        <Typography sx={stepStyle}>
-          4. Connect with businesses actively seeking athletes for endorsements
-          to explore potential partnerships.
-        </Typography>
-        <Typography sx={stepStyle}>
-          5. Negotiate endorsement terms, ensuring they align with your brand
-          and values.
-        </Typography>
-        <Typography sx={stepStyle}>
-          6. Collaborate seamlessly with businesses through the platform,
-          keeping communication clear and efficient.
-        </Typography>
-        <Typography sx={stepStyle}>
-          7. Regularly update your profile and portfolio to reflect your latest
-          achievements and activities.
-        </Typography>
-        <Typography sx={stepStyle}>
-          8. Actively engage with your audience, sharing insights into your
-          athletic journey and fostering a strong online presence.
-        </Typography>
-        <Typography sx={stepStyle}>
-          9. Build connections with fellow athletes to exchange experiences,
-          advice, and potential collaboration opportunities.
-        </Typography>
+        <Typography sx={stepStyle}>1. Create an engaging business profile to attract athletes for endorsements.</Typography>
+        <Typography sx={stepStyle}>2. Showcase your products and values through a dynamic product page.</Typography>
+        <Typography sx={stepStyle}>3. Fill in your business details for a comprehensive overview of your offerings.</Typography>
+        <Typography sx={stepStyle}>4. Connect with athletes actively seeking business endorsements.</Typography>
+        <Typography sx={stepStyle}>5. Negotiate endorsement terms ensuring alignment with your brand and values.</Typography>
+        <Typography sx={stepStyle}>6. Collaborate seamlessly with athletes through the platform.</Typography>
+        <Typography sx={stepStyle}>7. Regularly update your product page to showcase new products and offerings.</Typography>
+        <Typography sx={stepStyle}>8. Actively engage with your audience, maintaining a strong online presence.</Typography>
+        <Typography sx={stepStyle}>9. Build connections with fellow businesses and industry professionals for networking opportunities.</Typography>
       </Box>
       <Box
         sx={{
@@ -103,7 +77,7 @@ const ForBusiness = () => {
             letterSpacing: "4.32px",
             color: "#675B5B",
             marginBottom: "20px",
-            fontStyle,
+            ...fontStyle,
           }}
         >
           How It Will Look?
@@ -136,7 +110,7 @@ const ForBusiness = () => {
               letterSpacing: "4.32px",
               color: "#675B5B",
               marginLeft: "20px",
-              fontStyle,
+              ...fontStyle,
             }}
           >
             Athletes Nearby
@@ -172,7 +146,7 @@ const ForBusiness = () => {
                   }}
                 />
                 <Typography
-                  variant="h6" // Used variant for consistent typography
+                  variant="h6"
                   sx={{
                     ...fontStyle,
                     fontSize: "1.3rem",

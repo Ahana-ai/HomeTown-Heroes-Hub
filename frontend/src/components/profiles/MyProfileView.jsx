@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "../../store/slices/UserSlice";
 import { useParams } from "react-router-dom";
@@ -41,6 +41,7 @@ const ProfileView = () => {
         </Grid>
       </Grid>
       <Box>
+        <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "center", textTransform: "uppercase" }}>My Posts</Typography>
         <MyPosts />
       </Box>
     </Box>

@@ -1,4 +1,4 @@
-const testimonialData = [
+const companyTestimonialData = [
   {
     id: 1,
     quote:
@@ -32,4 +32,43 @@ const testimonialData = [
   },
 ];
 
-export default testimonialData;
+const studentTestimonialData = [
+  {
+    id: 1,
+    quote:
+      "This platform has been a game-changer for my academic journey! The user-friendly interface and valuable resources have greatly enhanced my learning experience. It's a one-stop solution for all my educational needs, and I highly recommend it to fellow students.",
+    name: "Alice Johnson",
+    position: "Student",
+    university: "ABC University",
+    location: "City A, State",
+  },
+  {
+    id: 2,
+    quote:
+      "I've used various educational platforms, but this one stands out for its interactive learning materials and engaging courses. The diverse range of subjects and the flexibility it offers make it an ideal choice for students seeking quality education.",
+    name: "Bob Smith",
+    position: "Student",
+    university: "XYZ College",
+    location: "City B, State",
+  },
+  {
+    id: 3,
+    quote:
+      "The regular updates and new features added to the platform show a commitment to providing students with the best learning tools. The platform's responsiveness and dedication to user feedback contribute to creating a positive and dynamic learning environment.",
+    name: "Eva Martinez",
+    position: "Student",
+    university: "123 University",
+    location: "City C, State",
+  },
+  {
+    id: 4,
+    quote:
+      "As a student concerned about collaboration and networking, this platform has exceeded my expectations. The community features and opportunities for interaction with peers and professors have enriched my academic experience.",
+    name: "Chris Williams",
+    position: "Student",
+    university: "University of Tech",
+    location: "City D, State",
+  },
+];
+
+export { companyTestimonialData, studentTestimonialData };
