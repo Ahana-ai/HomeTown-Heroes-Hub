@@ -85,7 +85,7 @@ const EditForm = () => {
   };
 
   return (
-    <Container sx={{ margin: "130px auto 0 auto" }}>
+    <Container sx={{ margin: "20px auto 0 auto" }}>
       <Paper
         elevation={5}
         sx={{

@@ -1,4 +1,4 @@
-import { Box, Avatar, Typography, Button, Divider } from "@mui/material";
+import { Box, Avatar, Typography, Button, Divider, Modal } from "@mui/material";
 import cover from "../../images/bg_img.png";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -18,10 +18,12 @@ import MyConnections from "../connections/MyConnections";
 import { addFollower } from "../../store/slices/FollowerSlice";
 import { useDispatch } from "react-redux";
 import { addConnection } from "../../store/slices/ConnectSlice";
+import AddPost from "./posts/AddPost";
 
 const Description = ({ userData }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [openAddPostModal, setOpenAddPostModal] = useState(false);
   const [openFollowersModal, setOpenFollowersModal] = useState(false);
   const [openFollowingModal, setOpenFollowingModal] = useState(false);
   const [openConnectionModal, setOpenConnectionModal] = useState(false);
@@ -34,11 +36,14 @@ const Description = ({ userData }) => {
   const isCurrentUser = userData._id === userIdFromLocalStorage;
 
   const handleAddPostClick = () => {
-    navigate("/add-post");
+    setOpenAddPostModal(true);
+  };
+
+  const handleCloseAddPostModal = () => {
+    setOpenAddPostModal(false);
   };
 
   const handleShareProfileClick = () => {
-    // Replace this with your actual logic for sharing the profile
     Swal.fire({
       icon: "info",
       title: "Share Profile",
@@ -191,10 +196,7 @@ const Description = ({ userData }) => {
               marginTop: { sm: "10px", xs: "20px" },
             }}
           >
-            {/* {userData.bio} */}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            eos consequatur voluptate magnam fugiat officiis incidunt debitis
-            expedita commodi. Perferendis!
+            {userData.bio ? userData.bio : "Add Bio to make your profile attractive"}
           </Typography>
 
           <Typography
@@ -207,8 +209,7 @@ const Description = ({ userData }) => {
               fontWeight: "600",
             }}
           >
-            {/* {userData.location} */}
-            Kolkata, West Bengal, India
+            {userData.location ? userData.location : "Add Location to make your profile attractive"}
           </Typography>
           <Typography
             variant="body2"
@@ -220,11 +221,9 @@ const Description = ({ userData }) => {
               fontWeight: "600",
             }}
           >
-            {/* {userData.connections} */}
-            500+ connections
+            {userData.connections ? userData.connections : "Add Connections"}
             <span style={{ margin: "15px" }}>.</span>
-            {/* {userData.followers} */}
-            1k followers
+            {userData.followers ? userData.followers : "Add Followers"}
           </Typography>
 
           <Box
@@ -274,7 +273,7 @@ const Description = ({ userData }) => {
                   }}
                   onClick={handleMyFollowersClick}
                 >
-                  My Followers
+                  People who Follow Me
                 </Button>
 
                 <Button
@@ -283,7 +282,7 @@ const Description = ({ userData }) => {
                   sx={{ marginTop: 2, backgroundColor: "darkblue", mr: 5 }}
                   onClick={handleMyFollowingClick}
                 >
-                  My Following
+                  People I Follow
                 </Button>
 
                 <Button
@@ -329,14 +328,14 @@ const Description = ({ userData }) => {
             marginRight: 5,
             position: "absolute",
             top: {
-              sm: 90,
-              xs: 120,
+              sm: 100,
+              xs: 140,
             },
             left: {
-              lg: 650,
-              md: 600,
+              lg: 500,
+              md: 450,
               sm: 400,
-              xs: 15,
+              xs: 60,
             },
           }}
         >
@@ -350,8 +349,7 @@ const Description = ({ userData }) => {
                 color: "darkblue",
               }}
             >
-              {/* {userData.university} */}
-              Mexican University
+              {userData.university ? userData.university : "Add University"}
             </Typography>
           ) : (
             <Typography
@@ -416,12 +414,7 @@ const Description = ({ userData }) => {
                   color: "#6C5F5B",
                 }}
               >
-                {/* {userData.talents} */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                deserunt similique consectetur voluptate eum sed expedita
-                praesentium dolorem eius voluptas alias fugiat porro dolore
-                consequuntur fuga nam blanditiis ad incidunt voluptatem facere
-                numquam excepturi, modi aspernatur culpa? Quaerat.
+                {userData.talents ? userData.talents : "Add your Talents"}
               </Typography>
 
               <Typography
@@ -443,12 +436,7 @@ const Description = ({ userData }) => {
                   color: "#6C5F5B",
                 }}
               >
-                {/* {userData.acheivements} */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                deserunt similique consectetur voluptate eum sed expedita
-                praesentium dolorem eius voluptas alias fugiat porro dolore
-                consequuntur fuga nam blanditiis ad incidunt voluptatem facere
-                numquam excepturi, modi aspernatur culpa? Quaerat.
+                {userData.achievements ? userData.achievements : "Add your achievements"}
               </Typography>
             </Box>
           ) : (
@@ -469,14 +457,10 @@ const Description = ({ userData }) => {
               <Typography
                 sx={{
                   color: "#6C5F5B",
+                  textAlign: "center",
                 }}
               >
-                {/* {userData.prod_services} */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                deserunt similique consectetur voluptate eum sed expedita
-                praesentium dolorem eius voluptas alias fugiat porro dolore
-                consequuntur fuga nam blanditiis ad incidunt voluptatem facere
-                numquam excepturi, modi aspernatur culpa? Quaerat.
+                {userData.prod_services ? userData.prod_services : "Add your products & services to attract more people"}
               </Typography>
 
               <Typography
@@ -495,14 +479,10 @@ const Description = ({ userData }) => {
               <Typography
                 sx={{
                   color: "#6C5F5B",
+                  textAlign: "center",
                 }}
               >
-                {/* {userData.acheivements} */}
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
-                deserunt similique consectetur voluptate eum sed expedita
-                praesentium dolorem eius voluptas alias fugiat porro dolore
-                consequuntur fuga nam blanditiis ad incidunt voluptatem facere
-                numquam excepturi, modi aspernatur culpa? Quaerat.
+                {userData.achievements ? userData.achievements : "Add your achievements"}
               </Typography>
             </Box>
           )}
@@ -552,8 +532,7 @@ const Description = ({ userData }) => {
                 textAlign: "center",
               }}
             >
-              {/* {userData.email} */}
-              Lorem ipsum dolor sit amet.
+              {userData.email ? userData.email : "Add your email"}
             </Typography>
 
             <Typography
@@ -575,11 +554,29 @@ const Description = ({ userData }) => {
                 textAlign: "center",
               }}
             >
-              {/* {userData.social_media_links} */}
+              {userData.social_media_links}
             </Typography>
           </Box>
         </Box>
       </Box>
+      {/* Add Post Modal */}
+      <Modal open={openAddPostModal} onClose={handleCloseAddPostModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            borderRadius: 8,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <AddPost />
+        </Box>
+      </Modal>
+
       <MyFollowers
         open={openFollowersModal}
         handleClose={handleCloseFollowersModal}

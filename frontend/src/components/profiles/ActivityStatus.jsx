@@ -3,19 +3,31 @@ import {
   Button,
   CircularProgress,
   Divider,
+  Modal,
   Typography,
+  styled,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import SuggestedPeople from "../feed/SuggestedPeople";
 import SuggestedProfileChanges from "./SuggestedProfileChanges";
+import { useState } from "react";
+import EditForm from "../editForm/EditForm";
+
+const ScrollableBox = styled(Box)(({ theme }) => ({
+  overflowY: "auto",
+  maxHeight: "80vh",
+}));
 
 const ActivityStatus = ({ userData }) => {
-  const navigate = useNavigate();
+
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   const handleEditUser = () => {
-    console.log(userData._id);
-    navigate(`/edit/${userData._id}`);
+    setOpenEditModal(true);
+  };
+
+  const handleCloseEditModal = () => {
+    setOpenEditModal(false);
   };
 
   return (
@@ -107,6 +119,23 @@ const ActivityStatus = ({ userData }) => {
           </Typography>
         </Box>
       </Box>
+      {/* Edit Profile Modal */}
+      <Modal open={openEditModal} onClose={handleCloseEditModal}>
+        <ScrollableBox
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "80%",
+            bgcolor: "background.paper",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <EditForm onClose={handleCloseEditModal} userData={userData} />
+        </ScrollableBox>
+      </Modal>
     </Box>
   );
 };

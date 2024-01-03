@@ -115,7 +115,7 @@ const AddPost = () => {
     <Box
       sx={{
         maxWidth: 600,
-        margin: "130px auto 20px auto",
+        margin: "20px auto",
         padding: 3,
         border: "1px solid #ccc",
         borderRadius: 8,

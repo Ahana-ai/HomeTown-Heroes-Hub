@@ -53,7 +53,7 @@ const NotificationComponent = () => {
   return (
     <Box
       sx={{
-        margin: "0 10%",
+        margin: "auto",
         textAlign: "center",
         mt: 15,
         backgroundColor: "#fff",
@@ -105,7 +105,7 @@ const NotificationComponent = () => {
                   textAlign: "center",
                 }}
               >
-                <Avatar />
+                <Avatar sx={{ ml: "10%", mr: 0 }} />
                 <ListItemText
                   primary={notification.message}
                   secondary={notification.time}
