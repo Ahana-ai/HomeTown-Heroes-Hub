@@ -3,7 +3,7 @@ import { InputLabel, Select } from "@mui/material";
 
 const SelectFormik = ({ label, name, children, ...rest }) => {
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
       <InputLabel id={`label-${name}`}>{label}</InputLabel>
       <Field as={Select} labelId={`label-${name}`} name={name} {...rest}>
         {children}

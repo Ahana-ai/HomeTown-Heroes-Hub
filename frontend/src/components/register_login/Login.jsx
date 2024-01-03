@@ -77,8 +77,8 @@ const Login = () => {
                     <SelectFormik
                       name="role"
                       fullWidth
-                      sx={{ mb: 2 }}
-                      defaultValue="Select Role"  
+                      sx={{ mb: 2, textAlign: "left" }}
+                      defaultValue="Select Role"
                     >
                       <MenuItem value="Select Role" disabled>Select Role</MenuItem>
                       <MenuItem value="Athlete">Athlete</MenuItem>

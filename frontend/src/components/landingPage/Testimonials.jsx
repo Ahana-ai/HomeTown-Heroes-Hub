@@ -10,7 +10,7 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import {companyTestimonialData, studentTestimonialData} from "../constants/Testimonials";
+import { companyTestimonialData, studentTestimonialData } from "../constants/Testimonials";
 import quoteIcon from "../../images/quoteIcon.jpeg";
 import company1 from "../../images/testimonials/company1.jpeg";
 import company2 from "../../images/testimonials/company2.jpg";
@@ -85,9 +85,18 @@ const Testimonials = () => {
         },
       },
       {
-        breakpoint: 1500,
+        breakpoint: 1100,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -116,9 +125,18 @@ const Testimonials = () => {
         },
       },
       {
-        breakpoint: 1500,
+        breakpoint: 1100,
         settings: {
           slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
