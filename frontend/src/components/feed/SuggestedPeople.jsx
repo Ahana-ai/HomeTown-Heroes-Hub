@@ -23,8 +23,8 @@ const CombinedComponent = () => {
       name: "Alice", avatar: "avatarAlice.jpg",
     },
     { name: "Bob", avatar: "avatarBob.jpg" },
-    { name: "John Doe", avatarUrl: "john_avatar.jpg" },
-    { name: "Alice Twinkle", avatarUrl: "alice_avatar.jpg" },
+    { name: "John Doe", avatarUrl: "john_avatar.jpg", id: "654e161c167c96d3b1e86115" },
+    { name: "Alice Twinkle", avatarUrl: "alice_avatar.jpg", id: "659b9c1a4584a3dce63032f7" },
   ];
 
   const handleProfileClick = (profileId) => {

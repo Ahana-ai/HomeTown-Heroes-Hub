@@ -196,76 +196,85 @@ const MiddleSection = () => {
           Add Post
         </Button>
       </Box>
-      {posts?.map((post, index) => (
-        <Card
-          key={index}
-          sx={{
-            mb: 2,
-            borderRadius: "10px",
-            overflow: "hidden",
-          }}
-        >
-          <CardHeader
-            avatar={
-              <Avatar
-                alt={authors[post.userId]?.name}
-                src={authors[post.userId]?.profile_image}
-              />
-            }
-            action={
-              <IconButton>
-                <MoreVertIcon />
+      {posts.length === 0 ? (
+        <Typography variant="body2" color="text.secondary" sx={{
+          fontSize: "1.5em",
+          fontStyle: "italic"
+        }}>
+          Follow people to see their posts in the feed.
+        </Typography>
+      ) : (
+        posts?.map((post, index) => (
+          <Card
+            key={index}
+            sx={{
+              mb: 2,
+              borderRadius: "10px",
+              overflow: "hidden",
+            }}
+          >
+            <CardHeader
+              avatar={
+                <Avatar
+                  alt={authors[post.userId]?.name}
+                  src={authors[post.userId]?.profile_image}
+                />
+              }
+              action={
+                <IconButton>
+                  <MoreVertIcon />
+                </IconButton>
+              }
+              title={
+                <Box>
+                  <Typography variant="subtitle1" fontWeight="bold" >
+                    {authors[post.userId]?.name}
+                  </Typography>
+                </Box>
+              }
+            />
+            <Slider {...sliderSettings}>
+              {post?.images?.map((image, imgIndex) => (
+                <CardMedia
+                  key={imgIndex}
+                  component="img"
+                  height="300"
+                  width="100%"
+                  image={image}
+                  alt={`Post Image ${imgIndex + 1}`}
+                />
+              ))}
+            </Slider>
+            <CardContent>
+              <Typography variant="body2" color="text.secondary">
+                {post.caption}
+              </Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton
+                aria-label="like"
+                onClick={() => handleLike(post._id)}
+                sx={{ color: post.isLiked ? "red" : "inherit" }}
+              >
+                <FavoriteIcon />
+                {post.likes}
               </IconButton>
-            }
-            title={
-              <Box>
-                <Typography variant="subtitle1" fontWeight="bold" >
-                  {authors[post.userId]?.name}
-                </Typography>
-              </Box>
-            }
-          />
-          <Slider {...sliderSettings}>
-            {post?.images?.map((image, imgIndex) => (
-              <CardMedia
-                key={imgIndex}
-                component="img"
-                height="300"
-                width="100%"
-                image={image}
-                alt={`Post Image ${imgIndex + 1}`}
-              />
-            ))}
-          </Slider>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {post.caption}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton
-              aria-label="like"
-              onClick={() => handleLike(post._id)}
-              sx={{ color: post.isLiked ? "red" : "inherit" }}
-            >
-              <FavoriteIcon />
-              {post.likes}
-            </IconButton>
-            <IconButton
-              aria-label="comment"
-              onClick={() => handleComment(post)}
-            >
-              <ChatBubbleIcon />
-              {post.comments}
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-              {post.shares}
-            </IconButton>
-          </CardActions>
-        </Card>
+              <IconButton
+                aria-label="comment"
+                onClick={() => handleComment(post)}
+              >
+                <ChatBubbleIcon />
+                {post.comments}
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+                {post.shares}
+              </IconButton>
+            </CardActions>
+          </Card>
 
-      ))}
+        ))
+      )}
 
       {/* Modal for editing comments */}
       <Modal

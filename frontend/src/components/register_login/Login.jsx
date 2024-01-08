@@ -7,17 +7,20 @@ import {
   Typography,
 } from "@mui/material";
 import login from "../../images/Login.jpg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import TextFieldFormik from "./formikComponents/TextArea";
 import SelectFormik from "./formikComponents/Select";
 import { loginUser } from "../../store/slices/UserSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
 
   const handleSubmit = (values) => {
     dispatch(loginUser(values)).then((response) => {
@@ -27,6 +30,18 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(userDetails));
       navigate("/feed");
       window.location.reload();
+    }).catch((error) => {
+      if (user.loginUserStatus !== "fulfilled") {
+        toast.error('Incorrect email or password', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     });
   };
 
@@ -119,6 +134,7 @@ const Login = () => {
           </Box>
         </Grid>
       </Grid>
+      <ToastContainer />
     </Container>
   );
 };

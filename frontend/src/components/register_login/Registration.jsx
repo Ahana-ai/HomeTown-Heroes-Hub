@@ -77,7 +77,7 @@ const Registration = () => {
                   name: "",
                   email: "",
                   password: "",
-                  role: "",
+                  role: "Select Role",
                   age: 0,
                   location: "",
                   acheivement: "",
@@ -93,11 +93,13 @@ const Registration = () => {
                 <Form>
                   <Box sx={{ display: "flex", flexDirection: "column" }}>
                     <SelectFormik
-                      label="Select Role"
                       name="role"
                       fullWidth
-                      sx={{ mb: 2 }}
+                      sx={{ mb: 2, textAlign: "left" }}
                     >
+                      <MenuItem value="Select Role" disabled>
+                        Select Role
+                      </MenuItem>
                       <MenuItem value="Athlete">Athlete</MenuItem>
                       <MenuItem value="Business">Business</MenuItem>
                     </SelectFormik>

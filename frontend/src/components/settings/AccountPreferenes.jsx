@@ -107,7 +107,7 @@ const AccountPreferenes = () => {
             flexDirection: "column",
           }}
         >
-          <SettingsAccessibilityIcon
+          {/* <SettingsAccessibilityIcon
             sx={{ color: "grey", mb: 2, fontSize: "2rem" }}
           />
           <ListItemText
@@ -118,7 +118,7 @@ const AccountPreferenes = () => {
               color: "darkblue",
               mb: 1,
             }}
-          />
+          /> */}
           {/* Account Information */}
           <List sx={{ width: "80%" }}>
             <ListItem>
@@ -142,7 +142,7 @@ const AccountPreferenes = () => {
             flexDirection: "column",
           }}
         >
-          <LaptopIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
+          {/* <LaptopIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
           <ListItemText
             primary="Display"
             sx={{
@@ -151,7 +151,7 @@ const AccountPreferenes = () => {
               color: "darkblue",
               mb: 1,
             }}
-          />
+          /> */}
           {/* Dark Mode and Language Preference */}
           <List sx={{ width: "80%" }}>
             <ListItem>
@@ -180,7 +180,7 @@ const AccountPreferenes = () => {
             flexDirection: "column",
           }}
         >
-          <FastForwardIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
+          {/* <FastForwardIcon sx={{ color: "grey", mb: 2, fontSize: "2rem" }} />
           <ListItemText
             primary="General Preferences"
             sx={{
@@ -189,7 +189,7 @@ const AccountPreferenes = () => {
               color: "darkblue",
               mb: 1,
             }}
-          />
+          /> */}
           {/* Autoplay Videos, Sound Effects, and more */}
           <List sx={{ width: "80%" }}>
             <ListItem>

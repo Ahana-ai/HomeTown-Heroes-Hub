@@ -21,7 +21,7 @@ export const addFollower = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log(data);
-      const res = await axios.Follower(`${baseURL}/add-follower`, data);
+      const res = await axios.post(`${baseURL}/add-follower`, data);
       console.log(res.data);
       return res.data;
     } catch (error) {
