@@ -101,6 +101,16 @@ const Features = () => {
         }}
       >
         Features We Offer
+        <span
+          style={{
+            fontSize: "1rem",
+            fontWeight: "normal",
+            marginLeft: "10px",
+            fontStyle: "italic",
+          }}
+        >
+          (Coming Soon)
+        </span>
       </Typography>
       <Container>
         <Slider {...sliderSettings} centerMode centerPadding="60px">

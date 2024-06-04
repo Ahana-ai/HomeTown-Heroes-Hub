@@ -293,7 +293,7 @@ function Navbar() {
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User Avatar" src="" />
+                    <Avatar alt="User Avatar" src={userData.profile_image} />
                   </IconButton>
                 </Tooltip>
                 {/* User Settings Menu */}

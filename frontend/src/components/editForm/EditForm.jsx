@@ -7,7 +7,7 @@ import {
   MenuItem,
   Paper,
 } from "@mui/material";
-import { Formik, Form, useFormikContext } from "formik";
+import { Formik, Form, Field, useFormikContext } from "formik";
 import * as Yup from "yup";
 import SelectFormik from "../register_login/formikComponents/Select";
 import TextFieldFormik from "../register_login/formikComponents/TextArea";
@@ -41,48 +41,21 @@ const EditForm = () => {
       .positive("Invalid age")
       .integer("Invalid age"),
     location: Yup.string().required("Location is required"),
+    talents: Yup.string().when("role", {
+      is: "Athlete",
+      then: Yup.string().required("Talents are required for Athlete"),
+    }),
+    school_university_name: Yup.string().when("role", {
+      is: "Athlete",
+      then: Yup.string().required("School/University Name is required for Athlete"),
+    }),
+    prod_services: Yup.string().when("role", {
+      is: "Business",
+      then: Yup.string().required("Products & Services are required for Business"),
+    }),
+    achievements: Yup.string(),
+    // Add more fields as needed
   });
-
-  const RoleSpecificFields = () => {
-    const { values } = useFormikContext();
-
-    return (
-      <>
-        {values.role === "Athlete" && (
-          <>
-            <TextFieldFormik
-              label="Talents"
-              name="talents"
-              type="text"
-              required
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-
-            <TextFieldFormik
-              label="School - University Name"
-              name="school_university_name"
-              type="text"
-              required
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-          </>
-        )}
-
-        {values.role === "Business" && (
-          <TextFieldFormik
-            label="Products & Services"
-            name="prod_services"
-            type="text"
-            required
-            fullWidth
-            sx={{ mb: 2 }}
-          />
-        )}
-      </>
-    );
-  };
 
   return (
     <Container sx={{ margin: "20px auto 0 auto" }}>
@@ -134,43 +107,40 @@ const EditForm = () => {
                 sx={{ mb: 2 }}
               />
 
-              <TextFieldFormik
-                label="Email"
-                name="email"
-                type="email"
-                required
-                fullWidth
-                sx={{ mb: 2 }}
-              />
+              {/* Other fields go here */}
 
-              <TextFieldFormik
-                label="Bio"
-                name="bio"
-                type="text"
-                required
-                fullWidth
-                sx={{ mb: 2 }}
-              />
+              {values.role === "Athlete" && (
+                <>
+                  <TextFieldFormik
+                    label="Talents"
+                    name="talents"
+                    type="text"
+                    required
+                    fullWidth
+                    sx={{ mb: 2 }}
+                  />
 
-              <TextFieldFormik
-                label="Location"
-                name="location"
-                type="text"
-                required
-                fullWidth
-                sx={{ mb: 2 }}
-              />
+                  <TextFieldFormik
+                    label="School - University Name"
+                    name="school_university_name"
+                    type="text"
+                    required
+                    fullWidth
+                    sx={{ mb: 2 }}
+                  />
+                </>
+              )}
 
-              <TextFieldFormik
-                label="Acheivements"
-                name="acheivements"
-                type="text"
-                required
-                fullWidth
-                sx={{ mb: 2 }}
-              />
-
-              <RoleSpecificFields />
+              {values.role === "Business" && (
+                <TextFieldFormik
+                  label="Products & Services"
+                  name="prod_services"
+                  type="text"
+                  required
+                  fullWidth
+                  sx={{ mb: 2 }}
+                />
+              )}
 
               <Typography>Social Media Links</Typography>
               <SocialMediaLinksFormik />

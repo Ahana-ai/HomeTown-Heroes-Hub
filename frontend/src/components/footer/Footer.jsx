@@ -35,7 +35,7 @@ const Footer = () => {
             Twitter
           </Button>
         </Box>
-        <Typography>Copyright ©2040, HHH. All rights reserved.</Typography>
+        <Typography>Copyright ©2024, HHH. All rights reserved.</Typography>
       </Box>
     </>
   );
