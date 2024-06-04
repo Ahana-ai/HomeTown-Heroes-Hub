@@ -27,6 +27,8 @@ const Description = ({ userData }) => {
   const [openFollowersModal, setOpenFollowersModal] = useState(false);
   const [openFollowingModal, setOpenFollowingModal] = useState(false);
   const [openConnectionModal, setOpenConnectionModal] = useState(false);
+  const [openCoverEditModal, setOpenCoverEditModal] = useState(false);
+  const [openProfileEditModal, setOpenProfileEditModal] = useState(false);
 
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const { id } = useParams();
@@ -53,21 +55,20 @@ const Description = ({ userData }) => {
 
   const handleFollowClick = () => {
     const data = {
-      userid: currentUser._id,
+      userId: currentUser._id,
       followingId: id,
     };
+    console.log(data);
     dispatch(addFollower(data)).then((response) => {
       console.log(response);
       if (response.meta.requestStatus === "fulfilled") {
         Swal.fire({
           icon: "info",
-          title: "Add Follower",
           text: "Follower Added!",
         });
       } else {
         Swal.fire({
           icon: "error",
-          title: "Add Follower",
           text: "Already a Follower!",
         });
       }
@@ -83,13 +84,13 @@ const Description = ({ userData }) => {
       if (response.status === 201) {
         Swal.fire({
           icon: "info",
-          title: "Add Connection",
+          // title: "Add Connection",
           text: "Connection Added!",
         });
       } else {
         Swal.fire({
           icon: "error",
-          title: "Add Connection",
+          // title: "Add Connection",
           text: "Already a Connection!",
         });
       }
@@ -134,14 +135,37 @@ const Description = ({ userData }) => {
       }}
     >
       {/* Cover Photo */}
-      <img
-        src={cover}
-        alt="cover"
-        style={{
-          height: "350px",
-          objectFit: "cover",
+      <Box
+        sx={{
+          position: "relative",
         }}
-      />
+      >
+        <img
+          src={cover}
+          alt="cover"
+          style={{
+            height: "350px",
+            objectFit: "cover",
+            width: "100%", // Ensure the image covers the entire width
+          }}
+        />
+        {isCurrentUser && (
+          <Button
+            variant="contained"
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              backgroundColor: "darkblue",
+              color: "#fff",
+            }}
+            onClick={() => setOpenCoverEditModal(true)}
+          >
+            Edit Cover
+          </Button>
+        )}
+      </Box>
 
       <Box
         sx={{
@@ -162,17 +186,39 @@ const Description = ({ userData }) => {
           }}
         >
           {/* Profile Picture */}
-          <Avatar
-            alt="Profile Picture"
-            src={userData.profile_image} // Use user data for the profile picture URL
+          <Box
             sx={{
-              width: 120,
-              height: 120,
-              border: "3px solid #fff",
-              position: "absolute",
-              top: -60,
+              position: "relative",
             }}
-          />
+          >
+            <Avatar
+              alt="Profile Picture"
+              src={userData.profile_image}
+              sx={{
+                width: 120,
+                height: 120,
+                border: "3px solid #fff",
+                position: "absolute",
+                top: -90,
+              }}
+            />
+            {isCurrentUser && (
+              <Button
+                variant="contained"
+                sx={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "darkblue",
+                  color: "#fff",
+                }}
+                onClick={() => setOpenProfileEditModal(true)}
+              >
+                Edit Profile Picture
+              </Button>
+            )}
+          </Box>
 
           <Typography
             variant="h4"
@@ -196,7 +242,15 @@ const Description = ({ userData }) => {
               marginTop: { sm: "10px", xs: "20px" },
             }}
           >
-            {userData.bio ? userData.bio : "Add Bio to make your profile attractive"}
+            {isCurrentUser ? (
+              userData.bio ? (
+                userData.bio
+              ) : (
+                "Add Bio to make your profile attractive"
+              )
+            ) : (
+              ""
+            )}
           </Typography>
 
           <Typography
@@ -209,7 +263,15 @@ const Description = ({ userData }) => {
               fontWeight: "600",
             }}
           >
-            {userData.location ? userData.location : "Add Location to make your profile attractive"}
+            {isCurrentUser ? (
+              userData.location ? (
+                userData.location
+              ) : (
+                "Add Location to make your profile attractive"
+              )
+            ) : (
+              "No Location Data Available"
+            )}
           </Typography>
           <Typography
             variant="body2"
@@ -221,9 +283,25 @@ const Description = ({ userData }) => {
               fontWeight: "600",
             }}
           >
-            {userData.connections ? userData.connections : "Add Connections"}
+            {isCurrentUser ? (
+              userData.connections ? (
+                userData.connections
+              ) : (
+                "Add Connections to make your profile attractive"
+              )
+            ) : (
+              "No Connections Yet"
+            )}
             <span style={{ margin: "15px" }}>.</span>
-            {userData.followers ? userData.followers : "Add Followers"}
+            {isCurrentUser ? (
+              userData.followers ? (
+                userData.followers
+              ) : (
+                "Add Followers to make your profile attractive"
+              )
+            ) : (
+              "No Followers Yet"
+            )}
           </Typography>
 
           <Box
@@ -349,7 +427,15 @@ const Description = ({ userData }) => {
                 color: "darkblue",
               }}
             >
-              {userData.university ? userData.university : "Add University"}
+              {isCurrentUser ? (
+                userData.university ? (
+                  userData.university
+                ) : (
+                  "Add University to make your profile attractive"
+                )
+              ) : (
+                ""
+              )}
             </Typography>
           ) : (
             <Typography
@@ -412,32 +498,20 @@ const Description = ({ userData }) => {
               <Typography
                 sx={{
                   color: "#6C5F5B",
-                }}
-              >
-                {userData.talents ? userData.talents : "Add your Talents"}
-              </Typography>
-
-              <Typography
-                variant="h6"
-                sx={{
-                  mt: 2,
-                  mb: 2,
-                  textTransform: "uppercase",
-                  fontWeight: "700",
-                  color: "darkblue",
                   textAlign: "center",
                 }}
               >
-                Acheivements:
+                {isCurrentUser ? (
+                  userData.talents ? (
+                    userData.talents
+                  ) : (
+                    "Add Your Talent to make your profile attractive"
+                  )
+                ) : (
+                  "No Data Yet"
+                )}
               </Typography>
 
-              <Typography
-                sx={{
-                  color: "#6C5F5B",
-                }}
-              >
-                {userData.achievements ? userData.achievements : "Add your achievements"}
-              </Typography>
             </Box>
           ) : (
             <Box>
@@ -460,103 +534,119 @@ const Description = ({ userData }) => {
                   textAlign: "center",
                 }}
               >
-                {userData.prod_services ? userData.prod_services : "Add your products & services to attract more people"}
-              </Typography>
-
-              <Typography
-                variant="h6"
-                sx={{
-                  mt: 2,
-                  textTransform: "uppercase",
-                  fontWeight: "700",
-                  color: "darkblue",
-                  textAlign: "center",
-                }}
-              >
-                Acheivements:
-              </Typography>
-
-              <Typography
-                sx={{
-                  color: "#6C5F5B",
-                  textAlign: "center",
-                }}
-              >
-                {userData.achievements ? userData.achievements : "Add your achievements"}
+                {isCurrentUser ? (
+                  userData.prod_services ? (
+                    userData.prod_services
+                  ) : (
+                    "Add your product & services to make your profile attractive"
+                  )
+                ) : (
+                  "No Data Available Yet"
+                )}
               </Typography>
             </Box>
           )}
         </Box>
+        <Typography
+          variant="h6"
+          sx={{
+            mt: 2,
+            mb: 2,
+            textTransform: "uppercase",
+            fontWeight: "700",
+            color: "darkblue",
+            textAlign: "center",
+          }}
+        >
+          Acheivements:
+        </Typography>
 
-        <Divider sx={{ width: "100%", margin: "30px 0px" }} />
+        <Typography
+          sx={{
+            color: "#6C5F5B",
+            textAlign: "center",
+          }}
+        >
+          {isCurrentUser ? (
+            userData.achievements ? (
+              userData.achievements
+            ) : (
+              "Add Your Achievements to make your profile attractive"
+            )
+          ) : (
+            "No Data Yet"
+          )}
+        </Typography>
+      </Box>
+
+      <Divider sx={{ width: "100%", margin: "30px 0px" }} />
+
+      <Box
+        sx={{
+          margin: "10px",
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{
+            marginLeft: 2,
+            textAlign: "center",
+            textTransform: "uppercase",
+            fontWeight: "bolder",
+          }}
+        >
+          Contact Information
+        </Typography>
 
         <Box
           sx={{
-            margin: "10px",
+            pl: 3,
+            pr: 3,
           }}
         >
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
-              marginLeft: 2,
-              textAlign: "center",
+              mt: 2,
               textTransform: "uppercase",
-              fontWeight: "bolder",
+              fontWeight: "700",
+              color: "darkblue",
+              textAlign: "center",
             }}
           >
-            Contact Information
+            Email:
           </Typography>
 
-          <Box
+          <Typography
             sx={{
-              pl: 3,
-              pr: 3,
+              color: "#6C5F5B",
+              textAlign: "center",
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                mt: 2,
-                textTransform: "uppercase",
-                fontWeight: "700",
-                color: "darkblue",
-                textAlign: "center",
-              }}
-            >
-              Email:
-            </Typography>
+            {userData.email ? userData.email : "Add your email"}
+          </Typography>
 
-            <Typography
-              sx={{
-                color: "#6C5F5B",
-                textAlign: "center",
-              }}
-            >
-              {userData.email ? userData.email : "Add your email"}
-            </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              mt: 2,
+              textTransform: "uppercase",
+              fontWeight: "700",
+              color: "darkblue",
+              textAlign: "center",
+            }}
+          >
+            Social Media Links:
+          </Typography>
 
-            <Typography
-              variant="h6"
-              sx={{
-                mt: 2,
-                textTransform: "uppercase",
-                fontWeight: "700",
-                color: "darkblue",
-                textAlign: "center",
-              }}
-            >
-              Social Media Links:
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "#6C5F5B",
-                textAlign: "center",
-              }}
-            >
-              {userData.social_media_links}
-            </Typography>
-          </Box>
+          <Typography
+            sx={{
+              color: "#6C5F5B",
+              textAlign: "center",
+            }}
+          >
+            {userData.social_media_links}
+          </Typography>
         </Box>
       </Box>
       {/* Add Post Modal */}
@@ -589,7 +679,42 @@ const Description = ({ userData }) => {
         open={openConnectionModal}
         handleClose={handleMyConnectionClose}
       />
-    </Box>
+      {/* Edit Cover Photo Modal */}
+      <Modal open={openCoverEditModal} onClose={() => setOpenCoverEditModal(false)}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            borderRadius: 3,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          Feature Under Development!
+        </Box>
+      </Modal>
+
+      {/* Edit Profile Picture Modal */}
+      <Modal open={openProfileEditModal} onClose={() => setOpenProfileEditModal(false)}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            bgcolor: "background.paper",
+            borderRadius: 3,
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          Feature Under Development!
+        </Box>
+      </Modal>
+    </Box >
   );
 };
 

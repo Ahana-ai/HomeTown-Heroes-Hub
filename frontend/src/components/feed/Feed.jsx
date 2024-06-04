@@ -102,7 +102,7 @@ const Feed = () => {
             <RightSection />
           </Box>
         </Grid>
-        <Grid item xs={12} md={6} sx={{ ml: 5 }}>
+        <Grid item xs={12} md={6} sx={{ marginLeft: "auto", marginRight: "auto" }}>
           {/* MiddleSection for all screens */}
           <MiddleSection />
         </Grid>

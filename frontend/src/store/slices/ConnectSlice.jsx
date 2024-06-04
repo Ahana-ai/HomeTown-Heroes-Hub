@@ -21,7 +21,7 @@ export const addConnection = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       console.log(data);
-      const res = await axios.Connection(`${baseURL}/add-connection`, data);
+      const res = await axios.post(`${baseURL}/add-connection`, data);
       console.log(res.data);
       return res.data;
     } catch (error) {
