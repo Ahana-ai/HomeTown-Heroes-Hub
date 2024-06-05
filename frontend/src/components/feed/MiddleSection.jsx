@@ -35,7 +35,7 @@ const MiddleSection = () => {
   const dispatch = useDispatch();
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const userId = currentUser._id;
-  const [like,setLike]=useState(false);
+  const [like, setLike] = useState(0);
   const [authors, setAuthors] = useState({});
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -94,7 +94,8 @@ const MiddleSection = () => {
 
   const handleLike = async (postId) => {
     try {
-      setLike(!like)
+      if (like == 0) setLike(1);
+      else setLike(0);
       // Dispatch action to edit post likes
       await dispatch(editPost({ id: postId, data: { action: "like" } }));
     } catch (error) {
@@ -198,10 +199,14 @@ const MiddleSection = () => {
         </Button>
       </Box>
       {posts.length === 0 ? (
-        <Typography variant="body2" color="text.secondary" sx={{
-          fontSize: "1.5em",
-          fontStyle: "italic"
-        }}>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{
+            fontSize: "1.5em",
+            fontStyle: "italic",
+          }}
+        >
           Follow people to see their posts in the feed.
         </Typography>
       ) : (
@@ -228,7 +233,7 @@ const MiddleSection = () => {
               }
               title={
                 <Box>
-                  <Typography variant="subtitle1" fontWeight="bold" >
+                  <Typography variant="subtitle1" fontWeight="bold">
                     {authors[post.userId]?.name}
                   </Typography>
                 </Box>
@@ -255,10 +260,11 @@ const MiddleSection = () => {
               <IconButton
                 aria-label="like"
                 onClick={() => handleLike(post._id)}
-                sx={{ color: like ? "red" : "inherit" }}
+                sx={{ color: like === 0 ? "inherit" : "red" }}
               >
                 <FavoriteIcon />
-                {post.likes}
+                {/* {post.likes} */}
+                {like}
               </IconButton>
               <IconButton
                 aria-label="comment"
@@ -273,7 +279,6 @@ const MiddleSection = () => {
               </IconButton>
             </CardActions>
           </Card>
-
         ))
       )}
 
