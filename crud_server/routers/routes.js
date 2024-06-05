@@ -5,6 +5,7 @@ import authorize from "../middleware/authorize.js";
 import PostController from "../controllers/posts-controller.js";
 import FollowersController from "../controllers/followers-controller.js";
 import ConnectionsController from "../controllers/connections-controller.js";
+import { addFeedback } from "../controllers/feedback-controller.js";
 const router = express.Router();
 
 // User Data
@@ -37,5 +38,7 @@ router.put("/delete-follower/:id", FollowersController.deleteFollower);
 router.post("/add-connection", ConnectionsController.addConnection);
 router.get("/connections-:id", ConnectionsController.getConnections);
 router.put("/delete-connection/:id", ConnectionsController.deleteConnection);
+
+router.post('/feedback',addFeedback)
 
 export default router;

@@ -35,7 +35,7 @@ const MiddleSection = () => {
   const dispatch = useDispatch();
   const currentUser = JSON.parse(localStorage.getItem("user"));
   const userId = currentUser._id;
-
+  const [like,setLike]=useState(false);
   const [authors, setAuthors] = useState({});
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -94,6 +94,7 @@ const MiddleSection = () => {
 
   const handleLike = async (postId) => {
     try {
+      setLike(!like)
       // Dispatch action to edit post likes
       await dispatch(editPost({ id: postId, data: { action: "like" } }));
     } catch (error) {
@@ -254,7 +255,7 @@ const MiddleSection = () => {
               <IconButton
                 aria-label="like"
                 onClick={() => handleLike(post._id)}
-                sx={{ color: post.isLiked ? "red" : "inherit" }}
+                sx={{ color: like ? "red" : "inherit" }}
               >
                 <FavoriteIcon />
                 {post.likes}

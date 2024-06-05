@@ -31,6 +31,7 @@ const Login = () => {
       navigate("/feed");
       window.location.reload();
     }).catch((error) => {
+      console.log("object")
       if (user.loginUserStatus !== "fulfilled") {
         toast.error('Incorrect email or password', {
           position: 'top-right',

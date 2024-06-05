@@ -31,31 +31,31 @@ const EditForm = () => {
     });
   };
 
-  const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required"),
-    bio: Yup.string().required("Bio is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
-    role: Yup.string().required("Role is required"),
-    age: Yup.number()
-      .required("Age is required")
-      .positive("Invalid age")
-      .integer("Invalid age"),
-    location: Yup.string().required("Location is required"),
-    talents: Yup.string().when("role", {
-      is: "Athlete",
-      then: Yup.string().required("Talents are required for Athlete"),
-    }),
-    school_university_name: Yup.string().when("role", {
-      is: "Athlete",
-      then: Yup.string().required("School/University Name is required for Athlete"),
-    }),
-    prod_services: Yup.string().when("role", {
-      is: "Business",
-      then: Yup.string().required("Products & Services are required for Business"),
-    }),
-    achievements: Yup.string(),
-    // Add more fields as needed
-  });
+  // const validationSchema = Yup.object().shape({
+  //   name: Yup.string().required("Name is required"),
+  //   bio: Yup.string().required("Bio is required"),
+  //   email: Yup.string().email("Invalid email").required("Email is required"),
+  //   role: Yup.string().required("Role is required"),
+  //   age: Yup.number()
+  //     .required("Age is required")
+  //     .positive("Invalid age")
+  //     .integer("Invalid age"),
+  //   location: Yup.string().required("Location is required"),
+  //   talents: Yup.string().when("role", {
+  //     is: "Athlete",
+  //     then: Yup.string().required("Talents are required for Athlete"),
+  //   }),
+  //   school_university_name: Yup.string().when("role", {
+  //     is: "Athlete",
+  //     then: Yup.string().required("School/University Name is required for Athlete"),
+  //   }),
+  //   prod_services: Yup.string().when("role", {
+  //     is: "Business",
+  //     then: Yup.string().required("Products & Services are required for Business"),
+  //   }),
+  //   achievements: Yup.string(),
+  //   // Add more fields as needed
+  // });
 
   return (
     <Container sx={{ margin: "20px auto 0 auto" }}>
@@ -83,7 +83,7 @@ const EditForm = () => {
         </Typography>
         <Formik
           initialValues={initialValues}
-          validationSchema={validationSchema}
+          // validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           <Form>
@@ -109,7 +109,7 @@ const EditForm = () => {
 
               {/* Other fields go here */}
 
-              {values.role === "Athlete" && (
+              {/* {values.role === "Athlete" && (
                 <>
                   <TextFieldFormik
                     label="Talents"
@@ -140,7 +140,7 @@ const EditForm = () => {
                   fullWidth
                   sx={{ mb: 2 }}
                 />
-              )}
+              )} */}
 
               <Typography>Social Media Links</Typography>
               <SocialMediaLinksFormik />
